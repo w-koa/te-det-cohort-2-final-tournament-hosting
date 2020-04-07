@@ -39,7 +39,7 @@ public class TournamentController {
 	public String displayRegisterNewTournament(@RequestParam String role) {
 		
 		//if(role == "admin" || role == "organizer") {
-		// let them register }
+		// let them register a new tournament }
 		
 		return "registerNewTournament";
 	}
@@ -48,12 +48,20 @@ public class TournamentController {
 	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.POST)
 	public String processRegisterNewTournament() {
 		
+		// Register a new tournament here. Should take in a tournament object to save to DB.
+		
+		// Tournament newTournamentRegistration = tournament;
+		// tournamentDAO.registerNewTournament(newTournamentRegistration);
+		
+		
 		return "redirect:/newTournamentSuccess";
 	}
 	
 	// Redirect page. Informs user that registration was successful, this page should do other useful stuff.
 	@RequestMapping(path="/newTournamentSuccess", method = RequestMethod.GET)
 	public String displayNewTournamentSuccess() {
+		
+		// Maybe a link to manage tournament details. Dashboard sort of view? Allow edits and invitations to tournament.
 		
 		return "newTournamentSuccess";
 	}
