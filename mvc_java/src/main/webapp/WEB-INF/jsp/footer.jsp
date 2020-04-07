@@ -1,7 +1,7 @@
 		</div>
 		
 		<footer>
-			Copyright 2016 Critter Inc.
+			Copyright 2020 Ultimate Tournament Hosting Inc.
 		</footer>
 	</body>
 </html>
