@@ -23,6 +23,13 @@ public class TournamentController {
 		return "tournaments";
 	}
 	
+	// SAMPLE ONLY GET RID OF THIS LATER
+	@RequestMapping(path="/tournaments/dummyDetail", method = RequestMethod.GET)
+	public String displayDummyTournamentDetail() {
+		return "tournamentDetail";
+	}
+	
+	
 	// Display tournament detail page
 	@RequestMapping(path="/tournaments/detail", method = RequestMethod.GET)
 	public String displayTournamentDetail(@RequestParam int tournamentId, ModelMap map) {
