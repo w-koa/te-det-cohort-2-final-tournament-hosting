@@ -37,10 +37,7 @@ points_scored integer
 DROP TABLE IF EXISTS team_tournament;
 Create Table team_tournament (
 tournament_id integer,
-team_id integer,
-ranking integer,
-wins integer,
-losses integer
+team_id integer
 );
 
 
