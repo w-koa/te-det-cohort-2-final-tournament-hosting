@@ -2,6 +2,9 @@
 	--site-black: #211d1a;
 	--site-neon-green: #18d810;
 	--site-white: #fcf8f7;
+	--site-peep-green: #95e090;
+	--site-peep-pink: #f294d7;
+	--site-peep-blue: #5cc4e0;
 }
 html {
 	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/uglylaser.jpg) no-repeat center center fixed;
@@ -41,16 +44,22 @@ nav a {
 nav li {
 	list-style: none;
 }
+.navbar-nav .ml-auto li {
+	float: right;
+}
+.form-group label {
+	color: var(--site-peep-green);
+}
 
 h1 {
-	color: var(--site-neon-green);
+	color: var(--site-peep-green);
 }
 
 h2 {
 	color: var(--site-white);
 }
 h4 {
-	color: var(--site-neon-green);
+	color: var(--site-peep-green);
 }
 p {
 	color: var(--site-white);
@@ -70,7 +79,7 @@ table tr {
 table th {
 	background-color: var(--site-black);
 	text-align: center;
-	color: var(--site-neon-green);
+	color: var(--site-peep-green);
 }
 table td {
 	text-align: center;
