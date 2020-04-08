@@ -42,7 +42,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#"> <c:url var="homePageHref"
-				value="/" /> <c:url var="imgSrc" value="/img/placeholder.png" /> <a
+				value="/" /> <c:url var="imgSrc" value="/img/logobunnyjoust.png" /> <a
 			href="${homePageHref}"><img src="${imgSrc}" class="img-fluid"
 				style="height: 50px;" /></a>
 		</a>
