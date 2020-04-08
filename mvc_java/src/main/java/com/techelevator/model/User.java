@@ -6,22 +6,25 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
 public class User {
+	private String userID;
 	private String userName;
-	
-	@Size(min=10, message="Password too short, must be at least 10")
-	@Pattern.List({
+		@Size(min=10, message="Password too short, must be at least 10")
+		@Pattern.List({
 		@Pattern(regexp=".*[a-z].*", message="Must have a lower case"),
 		@Pattern(regexp=".*[A-Z].*", message="Must have a capital")
-	})
-	
+	})	
 	private String password;
 	private String role;
-	@Email
+		@Email
 	private String email;
-	
-	
 	private String confirmPassword;
 	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -31,15 +34,11 @@ public class User {
 	public String getUserName() {
 		return userName;
 	}
-	/**
-	 * @return the role
-	 */
+	
 	public String getRole() {
 		return role;
 	}
-	/**
-	 * @param role the role to set
-	 */
+
 	public void setRole(String role) {
 		this.role = role;
 	}
@@ -58,4 +57,5 @@ public class User {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+
 }
