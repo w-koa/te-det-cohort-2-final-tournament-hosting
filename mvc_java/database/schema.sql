@@ -27,7 +27,7 @@ loser_id integer default '0'
 
 DROP TABLE IF EXISTS player;
 Create Table player (
-Player_id integer primary key,
+Player_id integer,
 team_id integer,
 ranking integer,
 points_scored integer
@@ -36,7 +36,7 @@ points_scored integer
 
 DROP TABLE IF EXISTS team_tournament;
 Create Table team_tournament (
-tournament_id integer primary key,
+tournament_id integer,
 team_id integer,
 ranking integer,
 wins integer,
