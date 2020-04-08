@@ -13,10 +13,6 @@ html {
 html, body {
   height: 100%;
 }
-body {
-  display: flex;
-  flex-direction: column;
-}
 .content {
   flex: 1 0 auto;
 }
@@ -35,8 +31,15 @@ body {
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: cover;
-	
+	background-size: cover;	
+	display: flex;
+  	flex-direction: column;
+}
+nav a {
+	padding: 16px;
+}
+nav li {
+	list-style: none;
 }
 
 h1 {
