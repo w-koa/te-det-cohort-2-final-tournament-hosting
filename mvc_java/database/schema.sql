@@ -55,7 +55,7 @@ captain_id integer
 DROP TABLE IF EXISTS tournament;
 Create Table tournament (
 tournament_id serial primary key,
-tournament_name varchar (50),
+tournament_name varchar (150),
 organizer_id integer,
 game_id integer,
 tournament_type varchar (30) default 'single',
