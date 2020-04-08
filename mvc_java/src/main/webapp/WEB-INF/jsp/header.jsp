@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Critter</title>
+<title>ULTIMATE TOURNAMENT HOSTING</title>
 <c:url var="bootstrapCss" value="/css/bootstrap.min.css" />
 <c:url var="siteCss" value="/css/site.css" />
 
@@ -41,11 +41,16 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#"> 
-			<c:url var="homePageHref" value="/" />
-			<c:url var="imgSrc" value="/img/placeholder.png" /> 
-			<a href="${homePageHref}"><img src="${imgSrc}" class="img-fluid" style="height: 50px;" /></a>
+		<a class="navbar-brand" href="#"> <c:url var="homePageHref"
+				value="/" /> <c:url var="imgSrc" value="/img/placeholder.png" /> <a
+			href="${homePageHref}"><img src="${imgSrc}" class="img-fluid"
+				style="height: 50px;" /></a>
 		</a>
+		<c:url var="tournamentsPageURL" value="/tournaments" />
+		<a href="${tournamentsPageURL}">Tournaments</a>
+		<c:url var="teamsPageURL" value="/teams" />
+		<a href="${teamsPageURL }">Teams</a>
+
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -60,25 +65,31 @@
 
 				<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/users/${currentUser}" />
-					<li class="nav-item"><a class="nav-link" href="${dashboardHref}">Private Messages</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${dashboardHref}">Private Messages</a></li>
 					<c:url var="newMessageHref"
 						value="/users/${currentUser}/messages/new" />
-					<li class="nav-item"><a class="nav-link" href="${newMessageHref}">New Message</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${newMessageHref}">New Message</a></li>
 					<c:url var="sentMessagesHref"
 						value="/users/${currentUser}/messages" />
-					<li class="nav-item"><a class="nav-link" href="${sentMessagesHref}">Sent Messages</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${sentMessagesHref}">Sent Messages</a></li>
 					<c:url var="changePasswordHref"
 						value="/users/${currentUser}/changePassword" />
-					<li class="nav-item"><a class="nav-link" href="${changePasswordHref}">Change Password</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${changePasswordHref}">Change Password</a></li>
 				</c:if>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<c:choose>
 					<c:when test="${empty currentUser}">
 						<c:url var="newUserHref" value="/users/new" />
-						<li class="nav-item"><a class="nav-link" href="${newUserHref}">Sign Up</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${newUserHref}">Sign Up</a></li>
 						<c:url var="loginHref" value="/login" />
-						<li class="nav-item"><a class="nav-link" href="${loginHref}">Log In</a></li>
+						<li class="nav-item"><a class="nav-link" href="${loginHref}">Log
+								In</a></li>
 					</c:when>
 					<c:otherwise>
 						<c:url var="logoutAction" value="/logout" />
