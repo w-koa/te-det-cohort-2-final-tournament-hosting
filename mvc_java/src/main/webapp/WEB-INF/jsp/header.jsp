@@ -101,14 +101,14 @@
 						<form id="logoutForm" action="${logoutAction}" method="POST">
 							<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 						</form>
-						<li class="nav-item"><a id="logoutLink" href="#">Log Out</a></li>
+						<li class="nav-item"><a id="logoutLink" href="#">Log Out:  ${currentUserName}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
 		</div>
 	</nav>
 
-	<c:if test="${not empty currentUserName}">
+<%-- 	<c:if test="${not empty currentUserName}">
 		<p id="currentUser">Current User: ${currentUserName}</p>
-	</c:if>
+	</c:if>--%>
 	<div class="container">
