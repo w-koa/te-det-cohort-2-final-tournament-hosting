@@ -3,6 +3,13 @@
 	--site-neon-green: #18d810;
 	--site-white: #fcf8f7;
 }
+html {
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/uglylaser.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
 html, body {
   height: 100%;
 }
@@ -19,11 +26,17 @@ body {
 footer {
 	color: grey;
 	margin-top: auto;
+	padding-top: 20px;
 	margin-bottom: 20px;
 }
 
 body {
-	background-color: var(--site-black);
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/uglylaser.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
 }
 
 h1 {
@@ -75,4 +88,11 @@ ul li {
 }
 ol li {
 	color: var(--site-white);
+}
+
+#allTournamentInfoBlock {
+	display: flex;
+}
+#tournamentInfoTextBlock {
+	margin-right: 40px;
 }
