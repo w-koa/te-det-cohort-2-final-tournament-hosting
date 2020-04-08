@@ -59,7 +59,7 @@ tournament_name varchar (50),
 organizer_id integer,
 game_id integer,
 tournament_type varchar (30) default 'single',
-description varchar (2000)
+description varchar (5000)
 );
 
 
@@ -85,6 +85,10 @@ max_team_size integer
 
 alter table player
 add constraint teamID_to_teamteamID foreign key (team_id) references team (team_id);
+
+
+alter table player
+add constraint playerID_appuserID foreign key (player_id) references app_user (id);
 
 
 alter table team
