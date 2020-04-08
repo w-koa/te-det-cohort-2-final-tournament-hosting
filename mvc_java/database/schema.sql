@@ -19,9 +19,9 @@ team_id_1 integer,
 team_id_2 integer,
 location varchar (100),
 date date,
-time integer,
-winner_id integer,
-loser_id integer
+time varchar (30),
+winner_id integer default '0',
+loser_id integer default '0'
 );
 
 
@@ -58,7 +58,7 @@ tournament_id serial primary key,
 tournament_name varchar (50),
 organizer_id integer,
 game_id integer,
-tournament_type varchar (30),
+tournament_type varchar (30) default 'single',
 description varchar (2000)
 );
 
@@ -95,7 +95,7 @@ alter table tournament
 add constraint organizerID_appuserID foreign key (organizer_id) references app_user (id);
 
 
-alter table tournament
+Alter table tournament
 add constraint gameID_gametypeGameID foreign key (game_id) references game_type (game_id);
 
 
