@@ -46,10 +46,7 @@
 			href="${homePageHref}"><img src="${imgSrc}" class="img-fluid"
 				style="height: 50px;" /></a>
 		</a>
-		<c:url var="tournamentsPageURL" value="/tournaments" />
-		<a href="${tournamentsPageURL}">Tournaments</a>
-		<c:url var="teamsPageURL" value="/teams" />
-		<a href="${teamsPageURL }">Teams</a>
+
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -62,7 +59,15 @@
 			<ul class="navbar-nav mr-auto">
 				<c:url var="homePageHref" value="/" />
 				<li class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></li>
-
+		<c:url var="tournamentsPageURL" value="/tournaments" />
+		<li>
+		<a href="${tournamentsPageURL}">Tournaments</a>
+		</li>
+		
+		<c:url var="teamsPageURL" value="/teams" />
+		<li>
+		<a href="${teamsPageURL }">Teams</a>
+		</li>
 		<%-- 		<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/users/${currentUser}" />
 					<li class="nav-item"><a class="nav-link"
