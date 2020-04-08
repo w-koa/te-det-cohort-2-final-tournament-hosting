@@ -69,7 +69,7 @@ id serial Primary Key,
 user_name varchar (50),
 password varchar (50),
 email varchar (50),
-role integer,
+role varchar (2),
 salt varchar (255)
 );
 
