@@ -63,7 +63,7 @@
 				<c:url var="homePageHref" value="/" />
 				<li class="nav-item"><a class="nav-link" href="${homePageHref}">Home</a></li>
 
-				<c:if test="${not empty currentUser}">
+		<%-- 		<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/users/${currentUser}" />
 					<li class="nav-item"><a class="nav-link"
 						href="${dashboardHref}">Private Messages</a></li>
@@ -79,7 +79,7 @@
 						value="/users/${currentUser}/changePassword" />
 					<li class="nav-item"><a class="nav-link"
 						href="${changePasswordHref}">Change Password</a></li>
-				</c:if>
+				</c:if>--%>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<c:choose>
@@ -103,7 +103,7 @@
 		</div>
 	</nav>
 
-	<c:if test="${not empty currentUser}">
-		<p id="currentUser">Current User: ${currentUser}</p>
+	<c:if test="${not empty currentUserName}">
+		<p id="currentUser">Current User: ${currentUserName}</p>
 	</c:if>
 	<div class="container">
