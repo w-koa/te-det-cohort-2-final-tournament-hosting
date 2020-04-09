@@ -73,6 +73,83 @@ public class MatchUp {
 	public void setLoserId(String loserId) {
 		this.loserId = loserId;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((gameId == null) ? 0 : gameId.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((loserId == null) ? 0 : loserId.hashCode());
+		result = prime * result + ((matchUpId == null) ? 0 : matchUpId.hashCode());
+		result = prime * result + ((teamId1 == null) ? 0 : teamId1.hashCode());
+		result = prime * result + ((teamId2 == null) ? 0 : teamId2.hashCode());
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		result = prime * result + ((tournamentId == null) ? 0 : tournamentId.hashCode());
+		result = prime * result + ((winnerId == null) ? 0 : winnerId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MatchUp other = (MatchUp) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (gameId == null) {
+			if (other.gameId != null)
+				return false;
+		} else if (!gameId.equals(other.gameId))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (loserId == null) {
+			if (other.loserId != null)
+				return false;
+		} else if (!loserId.equals(other.loserId))
+			return false;
+		if (matchUpId == null) {
+			if (other.matchUpId != null)
+				return false;
+		} else if (!matchUpId.equals(other.matchUpId))
+			return false;
+		if (teamId1 == null) {
+			if (other.teamId1 != null)
+				return false;
+		} else if (!teamId1.equals(other.teamId1))
+			return false;
+		if (teamId2 == null) {
+			if (other.teamId2 != null)
+				return false;
+		} else if (!teamId2.equals(other.teamId2))
+			return false;
+		if (time == null) {
+			if (other.time != null)
+				return false;
+		} else if (!time.equals(other.time))
+			return false;
+		if (tournamentId == null) {
+			if (other.tournamentId != null)
+				return false;
+		} else if (!tournamentId.equals(other.tournamentId))
+			return false;
+		if (winnerId == null) {
+			if (other.winnerId != null)
+				return false;
+		} else if (!winnerId.equals(other.winnerId))
+			return false;
+		return true;
+	}
 	
 	
 }
