@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.techelevator.model.UserModel.User;
+
 
 @Component
 public class JDBCTeamDAO implements TeamDAO {
@@ -32,7 +34,7 @@ public class JDBCTeamDAO implements TeamDAO {
 		return team;
 	}
 	
-	// Helper Just in case id is not auto-generated
+	// Helper Just in case id is not auto-generated. 
 	private int getNextTeamId() {
 		String sqlCurrentIdMax = "SELECT NEXTVAL(team_team_id_seq)";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlCurrentIdMax);
@@ -94,6 +96,44 @@ public class JDBCTeamDAO implements TeamDAO {
 		}
 		return team;
 	}
+	
+	// Helper method to set captain info
+	private User mapRowToCaptain(SqlRowSet row) {
+		User captain = new User();
+		captain.setUserID(row.getString("id"));
+		captain.setUserName(row.getString("user_name"));
+		captain.setEmail(row.getString("email"));
+		
+		return captain;
+		
+	}
+	@Override
+	public List<User> getAllTeamCaptains() {
+		
+		List<User> allCaptains = new ArrayList<>();
+		
+		String sqlGetAllCaptains = "SELECT * FROM app_user JOIN team ON team.captain_id = app_user.id";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetAllCaptains);
+		while (results.next()) {
+			allCaptains.add(mapRowToCaptain(results));
+		}
+		return allCaptains;
+	}
+
+	@Override
+	public User getCaptainByTeamId(int teamId) {
+		
+		User captain = new User();
+		
+		String sqlGetCaptainByTeamId = "SELECT * FROM app_user JOIN team ON team.captain_id = app_user.id "
+				+ "WHERE team_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetCaptainByTeamId, teamId);
+		if (results.next()) {
+			captain = mapRowToCaptain(results);
+		}
+		
+		return captain;
+	}
 
 	@Override
 	public void updateTeam(Team team) {
@@ -106,5 +146,7 @@ public class JDBCTeamDAO implements TeamDAO {
 		String sqlDeleteTeam = "DELETE FROM team WHERE team_id = ?";
 		jdbcTemplate.update(sqlDeleteTeam, id);
 	}
+
+
 
 }

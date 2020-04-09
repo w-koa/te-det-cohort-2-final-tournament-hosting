@@ -5,18 +5,24 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
+import com.techelevator.model.TeamModel.JDBCTeamDAO;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 public class JdbcTeamDaoTest {
+
 	/* Using this particular implementation of DataSource so that
 	 * every database interaction is part of the same database
 	 * session and hence the same database transaction */
 	private static SingleConnectionDataSource dataSource;
+	
+	private JDBCTeamDAO teamDAO;
 	
 	/* Before any tests are run, this method initializes the datasource for testing. */
 	@BeforeClass
@@ -29,6 +35,14 @@ public class JdbcTeamDaoTest {
 		 * returned by this DataSource. This allows us to rollback
 		 * any changes after each test */
 		dataSource.setAutoCommit(false);
+	}
+	
+	@Before
+	public void setup() {
+		String sqlInsertTeam = "Insert into team (team_id, team_name, captain_id) values ('54321', 'Fake Team', '654321')";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sqlInsertTeam);
+		teamDAO = new JDBCTeamDAO(dataSource);
 	}
 	
 	/* After all tests have finished running, this method will close the DataSource */
@@ -57,6 +71,7 @@ public class JdbcTeamDaoTest {
 
 	@Test
 	public void testCreateTeam() {
+		
 		fail("Not yet implemented");
 	}
 
@@ -67,6 +82,7 @@ public class JdbcTeamDaoTest {
 
 	@Test
 	public void testGetTeamById() {
+
 		fail("Not yet implemented");
 	}
 
