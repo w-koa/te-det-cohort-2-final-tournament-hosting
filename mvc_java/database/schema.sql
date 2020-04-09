@@ -10,6 +10,9 @@ drop table game_type;  */
 
 BEGIN;
 
+
+DROP TABLE IF EXISTS game_type;
+
 DROP TABLE IF EXISTS match_up;
 Create Table match_up (
 match_up_id serial primary key,
