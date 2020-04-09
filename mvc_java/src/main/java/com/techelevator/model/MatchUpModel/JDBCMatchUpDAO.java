@@ -84,10 +84,10 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		return losses;
 	}
 
-	@Override
-	public void getMatchUpsByTournamentId(list){
+//	@Override
+//	public void getMatchUpsByTournamentId(list){
 		
-}
+//}
 	@Override
 	public boolean update(MatchUp matchUp) {
 		
