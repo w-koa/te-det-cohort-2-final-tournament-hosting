@@ -32,7 +32,11 @@ public class TeamController {
 		return "teamDetail";
 	}
 	
-	
+	@RequestMapping(path="/teams/dummyDetail", method = RequestMethod.GET)
+	public String displayTeamDummyPage() {
+		
+		return "teamDetail";
+	}
 	
 	
 }
