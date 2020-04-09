@@ -20,17 +20,24 @@
 <div id="allTeamInfoBlock">
 	<div id="teamInfoTextBlock" class="">
 		<div id="teamMembers" class="teamMembers">
-			<h2>Team Members ($ofMembers)</h2>
+			<h2><c:out value="Team Members (${teamMembers.size()})"/></h2>
 			
 			<table class="table table-hover table-striped">
 				<tr>
 					<th>Team Member</th>
-					<th>Current Tournament?</th>
+					<th>Current Tournament?</th> <!-- we don't have a current tourney attribute -->
 					<th>Wins</th>
 					<th>Losses</th>
 				</tr>
 
 				<!-- foreach loop if members are private then skip -->
+				<c:forEach var="member" items="${teamMembers}">
+					<td><c:out value="${member.userName}"/></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					
+				</c:forEach>
 				<tr>
 					<td>Crimson</td>
 					<td>Ultimate PingPong League Singles</td>
@@ -59,12 +66,26 @@
 					<th>Game</th>
 					<th>Type</th>
 					<th>Location</th>
-					<th>Start Date</th>
+					<th>Date</th>
 					<th>Organizer</th>
-					<th>Status</th>
 				</tr>
 
 				<!-- ForEach -->
+				
+				<c:forEach var="tournament" items="registeredTournaments">
+				<tr>
+					<c:url var="tournamentURL" value="/tournaments/details?id=${tournament.id}"/>
+					<td><a href="${tournamentURL }"><c:out value="${tournament.name}"/></a></td>
+					<td><c:out value="${tournament.gameId}"/></td>
+					<td><c:out value="${tournament.type}"/></td>
+					<td>Add location</td>
+					<td>Add Date</td>
+					<c:url var="organizerPageURL" value="/organizers/?id=${tournament.organizerId}"/>
+					<td><c:out value="${tournament.organizerId }"/></td>
+					
+				</tr>
+				
+				</c:forEach>
 				<tr>
 
 					<c:url var="tournamentDetail" value="/tournaments/detail?=id" />
@@ -78,7 +99,6 @@
 					<c:url var="organizerDetail" value="/organizers/detail?=id" />
 					<td>10/10/2020</td>
 					<td>Smash Melee Union</td>
-					<td>Completed</td>
 				</tr>
 				<tr>
 					<c:url var="tournamentDetail" value="/tournaments/detail?=id" />
@@ -92,7 +112,6 @@
 					<c:url var="organizerDetail" value="/organizers/detail?=id" />
 					<td>10/10/2019</td>
 					<td>Smash Melee Union</td>
-					<td>Completed</td>
 				</tr>
 			</table>
 		</div>

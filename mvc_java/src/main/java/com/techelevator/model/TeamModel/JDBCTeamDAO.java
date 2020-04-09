@@ -133,6 +133,22 @@ public class JDBCTeamDAO implements TeamDAO {
 		return captain;
 	}
 
+	@Override
+	public List<User> getMembersByTeamId(int teamId) {
+		List<User> teamMembers = new ArrayList<>();
+		
+		String sqlGetTeamMembersByTeamId = "SELECT id, user_name FROM app_user JOIN player ON player.player_id = "
+				+ "app_user.id WHERE player.team_id = ?";
+		
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetTeamMembersByTeamId, teamId);
+		while (results.next()) {
+			User member = new User();
+			member.setUserName(results.getString("user_name"));
+			teamMembers.add(member);
+		}
+		return teamMembers;
+		
+	}
 	public int getTeamCount() {
 		String sqlGetTeamCount = "select count(team_id) as cnt from team";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetTeamCount);
