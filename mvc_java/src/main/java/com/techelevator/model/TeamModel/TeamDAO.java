@@ -21,5 +21,7 @@ public interface TeamDAO {
 	
 	// Destroy
 	public void deleteTeam(int id);
+
+	public int getTeamCount();
 	
 }

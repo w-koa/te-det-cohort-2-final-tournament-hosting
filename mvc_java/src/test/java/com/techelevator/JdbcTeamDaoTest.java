@@ -3,9 +3,11 @@ package com.techelevator;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 import com.techelevator.model.TeamModel.JDBCTeamDAO;
+import com.techelevator.model.TeamModel.Team;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -65,11 +67,6 @@ public class JdbcTeamDaoTest {
 	}
 
 	@Test
-	public void testJDBCTeamDAO() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testCreateTeam() {
 		
 		fail("Not yet implemented");
@@ -77,7 +74,8 @@ public class JdbcTeamDaoTest {
 
 	@Test
 	public void testGetAllTeams() {
-		fail("Not yet implemented");
+		List<Team> teamList = teamDAO.getAllTeams();
+		assertEquals(teamList.size(), teamDAO.getTeamCount());
 	}
 
 	@Test

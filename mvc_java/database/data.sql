@@ -103,24 +103,6 @@ insert into app_user (user_name, email, password, role, salt) values ('jmcartan2
 
 
 
-insert into game_type (game_type, min_team_size, max_team_size) values ('chess',1, 3);
-insert into game_type (game_type, min_team_size, max_team_size) values ('euchre', 1, 4);
-insert into game_type (game_type, min_team_size, max_team_size) values ('pool', 1, 2);
-insert into game_type (game_type, min_team_size, max_team_size) values ('hockey', 6, 15);
-insert into game_type (game_type, min_team_size, max_team_size) values ('chess', 1, 2);
-insert into game_type (game_type, min_team_size, max_team_size) values ('bridge', 1, 4);
-insert into game_type (game_type, min_team_size, max_team_size) values ('ping pong', 1, 3);
-insert into game_type (game_type, min_team_size, max_team_size) values ('football', 11, 25);
-insert into game_type (game_type, min_team_size, max_team_size) values ('golf', 1, 4);
-insert into game_type (game_type, min_team_size, max_team_size) values ('curling', 3, 8);
-insert into game_type (game_type, min_team_size, max_team_size) values ('wrestling', 1, 4);
-insert into game_type (game_type, min_team_size, max_team_size) values ('baseball', 9, 40);
-insert into game_type (game_type, min_team_size, max_team_size) values ('basketball', 5, 20);
-
-
-
-
-
 insert into team (team_name, captain_id) values ('Topicblab', 35);
 insert into team (team_name, captain_id) values ('Thoughtbridge', 36);
 insert into team (team_name, captain_id) values ('Twimm', 44);
