@@ -88,6 +88,10 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 	}
 
 	@Override
+	public void getMatchUpsByTournamentId(list){
+		
+}
+	@Override
 	public List <MatchUp> getMatchUpsByTournamentId(String tournamentId){
 		List <MatchUp> matchUps = new ArrayList<>();
 		String sql = "SELECT * FROM match_up WHERE tournament_id = ?";
@@ -99,6 +103,7 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		return matchUps;
 	}
 
+>>>>>>> b3fb8f530f68ef2b72326259833c3df07f2f5995
 	@Override
 	public boolean update(MatchUp matchUp) {
 		

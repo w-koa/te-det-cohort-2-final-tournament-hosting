@@ -45,7 +45,20 @@ public class JDBCTournamentDAO implements TournamentDAO{
 					);
 			return true;
 	}
-
+	@Override
+	public List<Tournament> getAllTournaments() {
+		List <Tournament> tournaments= new ArrayList<>();
+		String sql = "SELECT * FROM tournament";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while (results.next()) {
+			Tournament tournament = mapTournament(results);
+			tournaments.add(tournament);
+		}
+		return tournaments;
+	
+	}
+	
+	
 	@Override
 	public Tournament getTournamentByID(String id) {
 		Tournament tournament = new Tournament();
@@ -77,7 +90,7 @@ public class JDBCTournamentDAO implements TournamentDAO{
 		List <Tournament> tournaments= new ArrayList<>();
 		String sql = "SELECT * FROM tournament JOIN team_tournament ON tournament.tournament_id = team_tournament.tournament_id "
 				+ "WHERE team_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, teamId);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(teamId));
 		while (results.next()) {
 			Tournament tournament = mapTournament(results);
 			tournaments.add(tournament);
@@ -123,6 +136,8 @@ public List <Tournament> topXTournamentsByPlayerCount (String limit){
 		jdbcTemplate.update(sql, tournament.getId());
 		return true;
 	}
+
+
 
 	
 

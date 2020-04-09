@@ -17,7 +17,6 @@
 		<tr>
 			<th></th> <!-- Placeholder for team avatar/logo? -->
 			<th>Name</th>
-			<th>Team Leader</th>
 			<th>Current Tournament</th>
 			<th>Game</th>
 			<th>Tournament Ranking</th>
@@ -27,13 +26,29 @@
 			<th>Team Website</th>
 		</tr>
 		<!-- <c:forEach var="team" items="allTeams"> -->
+		
+		<c:forEach var="team" items="${allTeams}">
+			<tr>
+				<c:url var="teamDetail" value="/teams/detail?id=${team.id}"/>
+				<td></td> <!-- Empty for now. Team Logo placeholder -->
+				<td><a href="${teamDetail}"><c:out value="${team.name}"/></a></td>
+				<td>Current?</td>
+				<td>Game</td>
+				<td>Ranking</td>
+				<td>Wins</td>
+				<td>Losses</td>
+				<td>Ties</td>
+				<td>${team.name}.com</td>
+			</tr>
+		</c:forEach>
+		
 			<tr>
 				<c:url var="teamDetail" value="/teams/detail?=id"/> <!-- Sample to use click either logo or team name
 				as link -->
 				<td>teamLogo.jpg</td>
 				<td>Super L33T Team</td>
 				<td>L33tMan</td>
-				<c:url var="tournamentDetail" value="/tournaments/detail?=id"/>
+				<c:url var="tournamentDetail" value="/tournaments/detail?id=${team.id}"/>
 				<td>Smash Melee Championship 2020</td>
 				<c:url var="gameDetail" value="/games/detail?=id"/>
 				<td>Super Smash Bros. Melee</td>

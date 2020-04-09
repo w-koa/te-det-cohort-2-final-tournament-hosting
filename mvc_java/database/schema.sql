@@ -54,9 +54,12 @@ Create Table tournament (
 tournament_id serial primary key,
 tournament_name varchar (150),
 organizer_id integer,
-game_id integer,
+date date,
+location varchar (30),
+game varchar (30),
 tournament_type varchar (30) default 'single',
 description varchar (5000)
+tagged_desc varchar (5000)
 );
 
 
@@ -71,13 +74,6 @@ salt varchar (255)
 );
 
 
-DROP TABLE IF EXISTS game_type;
-Create Table game_type (
-game_id serial primary key,
-game_type varchar (30),
-min_team_size integer,
-max_team_size integer
-);
 
 
 alter table player

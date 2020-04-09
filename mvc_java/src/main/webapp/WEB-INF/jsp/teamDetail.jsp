@@ -7,11 +7,11 @@
 </div>
 
 <div>
-	<h1>The Red Team</h1>
-	<h2>Leader: Red</h2>
+	<h1>${team.name}</h1>
+	<h2>Leader: ${teamLeader.userName}</h2>
 	<!-- Leader can appoint new leader if more than one member of Team -->
 	<label for="temp">Website: </label>
-	<a href="#" id="temp">Red Team Official</a>
+	<a href="#" id="temp">${team.name}.com</a>
 </div>
 <div id="teamSearchBar" class="col-md-8">
 	<input class="form-control" type="text" name="searchBar" placeholder="Search for team members or registered tournaments"/>

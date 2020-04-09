@@ -14,6 +14,8 @@
 <div id="allTournamentInfoBlock">
 	<div id="tournamentInfoTextBlock" class="">
 		<div class="tournamentDetails">
+		
+			<%-- 
 			<h2>Tournament Details</h2>
 
 			<h4>Where</h4>
@@ -46,6 +48,7 @@
 		</div>
 		<div class="tournamentSchedule">
 			<h2>Schedule</h2>
+			--%>
 			<!-- maybe some sort of embedded calendar... ? -->
 
 		</div>
