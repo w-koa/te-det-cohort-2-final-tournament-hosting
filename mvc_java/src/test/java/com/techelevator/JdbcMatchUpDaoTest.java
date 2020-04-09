@@ -12,11 +12,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
+import com.techelevator.model.MatchUpModel.JDBCMatchUpDAO;
+
 public class JdbcMatchUpDaoTest {
 	/* Using this particular implementation of DataSource so that
 	 * every database interaction is part of the same database
 	 * session and hence the same database transaction */
 	private static SingleConnectionDataSource dataSource;
+	
+	private JDBCMatchUpDAO matchUpDAO;
 	
 	/* Before any tests are run, this method initializes the datasource for testing. */
 	@BeforeClass
