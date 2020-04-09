@@ -58,7 +58,7 @@ date date,
 location varchar (30),
 game varchar (30),
 tournament_type varchar (30) default 'single',
-description varchar (5000)
+description varchar (5000),
 tagged_desc varchar (5000)
 );
 
@@ -72,8 +72,6 @@ email varchar (50),
 role varchar (2),
 salt varchar (255)
 );
-
-
 
 
 alter table player
@@ -90,14 +88,6 @@ add constraint captainID_appuserID foreign key (captain_id) references app_user 
 
 alter table tournament
 add constraint organizerID_appuserID foreign key (organizer_id) references app_user (id);
-
-
-Alter table tournament
-add constraint gameID_gametypeGameID foreign key (game_id) references game_type (game_id);
-
-
-alter table match_up
-add constraint gameID_gametypegameID foreign key (game_id) references game_type (game_id);
 
 
 Alter table match_up
