@@ -1,41 +1,41 @@
 package com.techelevator.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
+import com.techelevator.model.TournamentModel.Tournament;
+
 @Controller
 public class TournamentController {
 	
-	//@Autowired
-	//JDBCTournamentDAO tournamentDAO
+	@Autowired
+	JDBCTournamentDAO tournamentDAO;
 	
 	
 	// Display all tournaments
 	@RequestMapping(path="/tournaments", method = RequestMethod.GET)
 	public String displayTournaments(ModelMap map) {
 		
-		//List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
-		//map.addAttribute("allTournaments", allTournaments);
+		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
+		map.addAttribute("tournaments", allTournaments);
 		
 		return "tournaments";
 	}
 	
-	// SAMPLE ONLY GET RID OF THIS LATER
-	@RequestMapping(path="/tournaments/dummyDetail", method = RequestMethod.GET)
-	public String displayDummyTournamentDetail() {
-		return "tournamentDetail";
-	}
-	
-	
-	// Display tournament detail page
-	@RequestMapping(path="/tournaments/detail", method = RequestMethod.GET)
-	public String displayTournamentDetail(@RequestParam int tournamentId, ModelMap map) {
 		
-		//Tournament tournament = tournamentDAO.getTournamentById();
-		//map.addAttribute("tournament", tournament);
+	// Display tournament detail page
+	@RequestMapping(path="/tournament/detail", method = RequestMethod.GET)
+	public String displayTournamentDetail(@RequestParam String tournamentId, ModelMap map) {
+		
+	Tournament tournament = tournamentDAO.getTournamentByID(tournamentId);
+	map.addAttribute("tournament", tournament);
 		
 		return "tournamentDetail";
 	}
@@ -45,10 +45,10 @@ public class TournamentController {
 	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.GET)
 	public String displayRegisterNewTournament(@RequestParam String role) {
 		
-		//if(role == "admin" || role == "organizer") {
-		// let them register a new tournament }
+		if(Integer.parseInt(role) >= 3) {
+		 return "createTournament"; }
 		
-		return "registerNewTournament";
+		return "/";
 	}
 
 	// Post/Redirect

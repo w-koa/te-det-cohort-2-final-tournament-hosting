@@ -40,7 +40,7 @@
 </script>
 
 <c:url var="formAction" value="/users" />
-<form:form method="POST" action="${formAction}" modelAttribute="survey">
+<form:form method="POST" action="${formAction}" modelAttribute="user">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
 <%--
 	HARD CODED ROLE VALUE PASSES TO DB
