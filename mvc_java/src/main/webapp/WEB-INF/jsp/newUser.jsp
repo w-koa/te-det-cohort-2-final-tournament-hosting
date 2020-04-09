@@ -42,7 +42,7 @@
 <c:url var="formAction" value="/users" />
 <form:form method="POST" action="${formAction}" modelAttribute="survey">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
-<input type="hidden" name="role" value="3"/>
+<%--<input type="hidden" name="role" value="3"/>  --%>
 	<div class="row">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
@@ -64,7 +64,7 @@
 				<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />	
 			</div>
 			
-	<%-- 	  	<div class="form-group">
+	  	<div class="form-group">
 				<label for="role">Role: </label>
 				<form:select name="role" path="role">
 				<option value="3">Organizer</option>
@@ -72,7 +72,7 @@
 				<option value="1">Player</option>
 				<option	value="1">Fan</option>                                 
 			</form:select>
-			</div> --%>
+			</div>
 			<button type="submit" class="btn btn-primary">Create User</button>
 		</div>
 		

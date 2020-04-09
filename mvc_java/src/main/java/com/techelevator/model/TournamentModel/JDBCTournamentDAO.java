@@ -1,5 +1,8 @@
 package com.techelevator.model.TournamentModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,48 +59,64 @@ public class JDBCTournamentDAO implements TournamentDAO{
 	}
 
 	@Override
-	public Tournament getTournamentByOrganizer(String organizerId) {
-		Tournament tournament = new Tournament();
+	public List <Tournament> getTournamentByOrganizer(String organizerId) {
+		List <Tournament> tournaments= new ArrayList<>();
 		String sql = "SELECT * FROM tournament WHERE organizer_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, organizerId);
 		while (results.next()) {
-			tournament = mapTournament(results);
+			Tournament tournament = mapTournament(results);
+			tournaments.add(tournament);
 		}
-		return tournament;
+		return tournaments;
 	
 	}
 	
 
 	@Override
-	public Tournament getTournamentByTeam(String teamId) {
-		Tournament tournament = new Tournament();
+	public List <Tournament> getTournamentByTeam(String teamId) {
+		List <Tournament> tournaments= new ArrayList<>();
 		String sql = "SELECT * FROM tournament JOIN team_tournament ON tournament.tournament_id = team_tournament.tournament_id "
 				+ "WHERE team_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, teamId);
 		while (results.next()) {
-			tournament = mapTournament(results);
+			Tournament tournament = mapTournament(results);
+			tournaments.add(tournament);
 		}
-		return tournament;
+		return tournaments;
 		  
 	}
 
 	@Override
-	public Tournament getTournamentByGameId(String gameId) {
-		Tournament tournament = new Tournament();
+	public List <Tournament> getTournamentByGameId(String gameId) {
+		List <Tournament> tournaments= new ArrayList<>();
 		String sql = "SELECT * FROM tournament WHERE game_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
 		while (results.next()) {
-			tournament = mapTournament(results);
+			Tournament tournament = mapTournament(results);
+			tournaments.add(tournament);
 		}
-		return tournament;
+		return tournaments;
 	}
-
+@Override  // INCOMPLETE
+public List <Tournament> topXTournamentsByPlayerCount (String limit){
+	List <Tournament> tournaments= new ArrayList<>();
+	String sql = "SELECT *  FROM tournament WHERE game_id = ?";
+	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, limit);
+	while (results.next()) {
+		Tournament tournament = mapTournament(results);
+		tournaments.add(tournament);
+	}
+	return tournaments;
+}
+	
+	
 	@Override
 	public boolean update(Tournament tournament) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	
 	@Override
 	public boolean delete(Tournament tournament) {
 		String sql = "DELETE FROM tournament WHERE tournament_id = ?";
