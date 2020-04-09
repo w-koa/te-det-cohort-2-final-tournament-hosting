@@ -40,9 +40,11 @@
 </script>
 
 <c:url var="formAction" value="/users" />
-<form:form method="POST" action="${formAction}" modelAttribute="survey">
+<form:form method="POST" action="${formAction}" modelAttribute="user">
 <input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}"/>
-<%--<input type="hidden" name="role" value="3"/>  --%>
+<%--
+	HARD CODED ROLE VALUE PASSES TO DB
+<input type="hidden" name="role" value="3"/>  --%>
 	<div class="row">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
@@ -63,7 +65,8 @@
 				<label for="confirmPassword">Confirm Password: </label>
 				<input type="password" id="confirmPassword" name="confirmPassword" placeHolder="Re-Type Password" class="form-control" />	
 			</div>
-			
+	<%-- Error when passed as dropdown. Tried multiple path names. hardcode on line 44
+	works --%>		
 	  	<div class="form-group">
 				<label for="role">Role: </label>
 				<form:select name="role" path="role">

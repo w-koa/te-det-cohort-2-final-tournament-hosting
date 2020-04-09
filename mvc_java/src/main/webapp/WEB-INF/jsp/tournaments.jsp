@@ -22,19 +22,20 @@
 			<th>Organizer</th>
 			<th>Status</th> <!-- Ongoing, Completed, Open for Registration? Can use to filter tournaments -->
 		</tr>
-		<!-- <c:forEach var="tournament" items="allTournaments"> -->
+		<c:forEach var="tournament" items="${tournaments}"> 
 			<tr>
-				<c:url var="tournamentDetail" value="/tournaments/detail?=id"/> <!-- Sample to use -->
-				<td>Smash Melee Championship 2020</td> <!--  make this into a clickable thing -->
-				<c:url var="gameDetail" value="/games/detail?=id"/>
-				<td>Super Smash Bros. Melee</td>
-				<td>Single</td>
-				<td>The Internets</td>
+				<c:url var="tournamentDetail" value="/tournament/detail">
+				<c:param value="${tournament.id}" name="tournamentId" /></c:url><!-- Sample to use -->
+			
+				<td><a href="${tournamentDetail}"><c:out value="${tournament.name}"/> </a></td> <!--  make this into a clickable thing -->
+				<td><c:out value="${tournament.gameId}"/></td>
+				<td><c:out value="${tournament.type}"/></td>
+				<td>ADD LOC TO TABLES</td>
 				<c:url var="organizerDetail" value="/organizers/detail?=id"/>
-				<td>Smash Melee Union</td>
-				<td>Completed</td> 
+				<td><c:out value="${tournament.organizerId}"/></td>
+				<td>ADD DATE TO TABLES</td> 
 			</tr>
-		<!-- </c:forEach> -->
+		</c:forEach>
 	</table>
 </div>
 
