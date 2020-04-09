@@ -1,5 +1,8 @@
 package com.techelevator.model.MatchUpModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +87,17 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		return losses;
 	}
 
-
+	@Override
+	public List <MatchUp> getMatchUpsByTournamentId(String tournamentId){
+		List <MatchUp> matchUps = new ArrayList<>();
+		String sql = "SELECT * FROM match_up WHERE tournament_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, tournamentId);
+		while (results.next()) {
+			MatchUp matchUp = mapMatchUp(results);
+			matchUps.add(matchUp);
+		}
+		return matchUps;
+	}
 
 	@Override
 	public boolean update(MatchUp matchUp) {
