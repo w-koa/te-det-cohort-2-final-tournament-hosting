@@ -40,9 +40,11 @@ public class TeamController {
 		String idString = Integer.toString(id);
 		Team team = teamDAO.getTeamById(id);
 		User teamLeader = teamDAO.getCaptainByTeamId(id);
+		List<User> teamMembers = teamDAO.getMembersByTeamId(id);
 		List<Tournament> registeredTournaments = tournamentDAO.getTournamentByTeam(idString);
 		map.addAttribute("team", team);
 		map.addAttribute("teamLeader", teamLeader);
+		map.addAttribute("teamMembers", teamLeader);
 		map.addAttribute("registeredTournaments", registeredTournaments);
 		return "teamDetail";
 	}
