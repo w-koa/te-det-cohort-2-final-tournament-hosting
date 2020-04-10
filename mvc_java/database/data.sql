@@ -148,7 +148,6 @@ insert into team (team_name, captain_id) values ('Zoomzone', 9);
 
 
 
-insert into tournament (tournament_name, organizer_id, date, location, game, tournament_type, description) values ('Four Sons', 5, '2020/10/30', '0 Vahlen Street', 'Assassin’s Creed', 'single', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.');
 insert into tournament (tournament_name, organizer_id, date, location, game, tournament_type, description) values ('Goya in Bordeaux (Goya en Burdeos)', 1, '2020/05/02', '841 Corscot Pass', 'Assassin’s Creed', 'single', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.');
 insert into tournament (tournament_name, organizer_id, date, location, game, tournament_type, description) values ('Peculiarities of the National Hunt (Osobennosti natsionalnoy okhoty) ', 7, '2020/07/16', '580 Coleman Place', 'Age of Empires', 'single', 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.');
 insert into tournament (tournament_name, organizer_id, date, location, game, tournament_type, description) values ('Man of a Thousand Faces', 2, '2020/07/20', '55649 Rieder Way', 'Baldur’s Gate', 'single', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.');

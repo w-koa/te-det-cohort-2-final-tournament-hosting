@@ -26,7 +26,6 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		tourney.setId(row.getString("tournament_id"));
 		tourney.setName(row.getString("tournament_name"));
 		tourney.setOrganizerId(row.getString("organizer_id"));
-		System.out.println(row.getString("date"));
 		tourney.setDate(LocalDate.parse(row.getString("date")));
 		tourney.setLocation(row.getString("location"));
 		tourney.setGame(row.getString("game"));
