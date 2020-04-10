@@ -26,15 +26,11 @@
 				<tr>
 					<th>Team Member</th>
 					<th>Current Tournament?</th> <!-- we don't have a current tourney attribute -->
-					<th>Wins</th>
-					<th>Losses</th>
 				</tr>
 
 				<!-- foreach loop if members are private then skip -->
 				<c:forEach var="member" items="${teamMembers}">
 					<td><c:out value="${member.userName}"/></td>
-					<td></td>
-					<td></td>
 					<td></td>
 					
 				</c:forEach>
@@ -76,7 +72,7 @@
 				<tr>
 					<c:url var="tournamentURL" value="/tournaments/details?id=${tournament.id}"/>
 					<td><a href="${tournamentURL }"><c:out value="${tournament.name}"/></a></td>
-					<td><c:out value="${tournament.gameId}"/></td>
+					<td><c:out value="${tournament.gameId}"/></td> <%--Get actual game names --%>
 					<td><c:out value="${tournament.type}"/></td>
 					<td>Add location</td>
 					<td>Add Date</td>

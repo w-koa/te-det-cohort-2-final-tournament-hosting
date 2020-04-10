@@ -44,7 +44,7 @@ public class TeamController {
 		List<Tournament> registeredTournaments = tournamentDAO.getTournamentByTeam(idString);
 		map.addAttribute("team", team);
 		map.addAttribute("teamLeader", teamLeader);
-		map.addAttribute("teamMembers", teamLeader);
+		map.addAttribute("teamMembers", teamMembers);
 		map.addAttribute("registeredTournaments", registeredTournaments);
 		return "teamDetail";
 	}
