@@ -62,35 +62,34 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 	@Override
 	public Integer getWinsByTeam(String teamId) {
 		String sql = "SELECT COUNT(winner_id) FROM match_up WHERE winner_id = ?";
-		Integer wins = jdbcTemplate.queryForObject(sql,  Integer.class, teamId);
+		Integer wins = jdbcTemplate.queryForObject(sql, Integer.class, teamId);
 		return wins;
 	}
 
 	@Override
 	public Integer getLossesByTeam(String teamId) {
 		String sql = "SELECT COUNT(loser_id) FROM match_up WHERE loser_id = ?";
-		Integer losses = jdbcTemplate.queryForObject(sql,  Integer.class, teamId);
+		Integer losses = jdbcTemplate.queryForObject(sql, Integer.class, teamId);
 		return losses;
 	}
 
 	@Override
 	public Integer getTournamentWinsByTeam(String teamId, String tournamentId) {
 		String sql = "SELECT COUNT(winner_id) FROM match_up WHERE winner_id = ? and tournament_id =?";
-		Integer wins = jdbcTemplate.queryForObject(sql,  Integer.class, teamId, tournamentId);
+		Integer wins = jdbcTemplate.queryForObject(sql, Integer.class, teamId, tournamentId);
 		return wins;
 	}
 
 	@Override
 	public Integer getTournamentLossesByTeam(String teamId, String tournamentId) {
 		String sql = "SELECT COUNT(loser_id) FROM match_up WHERE loser_id = ? and tournament_id =?";
-		Integer losses = jdbcTemplate.queryForObject(sql,  Integer.class, teamId, tournamentId);
+		Integer losses = jdbcTemplate.queryForObject(sql, Integer.class, teamId, tournamentId);
 		return losses;
 	}
 
-
 	@Override
-	public List <MatchUp> getMatchUpsByTournamentId(String tournamentId){
-		List <MatchUp> matchups = new ArrayList<>();
+	public List<MatchUp> getMatchUpsByTournamentId(String tournamentId) {
+		List<MatchUp> matchups = new ArrayList<>();
 		String sql = "SELECT * FROM match_up WHERE tournament_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(tournamentId));
 		while (results.next()) {
@@ -102,7 +101,7 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 
 	@Override
 	public boolean update(MatchUp matchUp) {
-		
+
 		return false;
 	}
 

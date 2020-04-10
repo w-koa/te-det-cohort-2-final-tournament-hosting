@@ -40,16 +40,6 @@ public class JdbcTeamDaoTest {
 		teamDAO = new JDBCTeamDAO(dataSource);
 	}
 
-	@AfterClass
-	public static void closeDataSource() throws SQLException {
-		dataSource.destroy();
-	}
-
-	@After
-	public void rollback() throws SQLException {
-		dataSource.getConnection().rollback();
-	}
-	
 
 	@Test
 	public void testCreateTeam() {

@@ -29,17 +29,6 @@ public class JdbcMatchUpDaoTest {
 		dataSource.setAutoCommit(false);
 	}
 	
-	@AfterClass
-	public static void closeDataSource() throws SQLException {
-		dataSource.destroy();
-	}
-
-	@After
-	public void rollback() throws SQLException {
-		dataSource.getConnection().rollback();
-	}
-	
-
 	@Test
 	public void testCreateMatchup() {
 		fail("Not yet implemented");

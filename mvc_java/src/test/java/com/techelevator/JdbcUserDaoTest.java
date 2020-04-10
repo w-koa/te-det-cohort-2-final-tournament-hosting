@@ -31,29 +31,22 @@ public class JdbcUserDaoTest {
 		dataSource.setAutoCommit(false);
 	}
 
-	@AfterClass
-	public static void closeDataSource() throws SQLException {
-		dataSource.destroy();
-	}
-
-	@After
-	public void rollback() throws SQLException {
-		dataSource.getConnection().rollback();
-	}
 
 	@Test
 	public void testSaveUser() {
 		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
-//		User user = (User) userDAO.getUserByUserName("timtheuser");
-//		assertEquals(user.getUserName(), "timtheuser");
-//		assertEquals(user.getEmail(), "tim@email.com");
-//		assertEquals(user.getRole(), "1");
+		User user = (User) userDAO.getUserByUserName("timtheuser");
+		assertEquals(user.getUserName(), "timtheuser");
+		assertEquals(user.getEmail(), "tim@email.com");
+		assertEquals(user.getRole(), "1");
 	}
 
 	@Test
 	public void testSearchForUsernameAndPassword() {
-
-		fail("Not yet implemented");
+		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		User user = userDAO.searchForUsernameAndPassword("timtheuser", "timspassword");
+		assertEquals(user.getUserName(), "timtheuser");
+		assertEquals(user.getPassword(), "timspassword");
 	}
 
 	@Test
