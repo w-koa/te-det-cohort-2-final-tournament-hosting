@@ -26,6 +26,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		tourney.setId(row.getString("tournament_id"));
 		tourney.setName(row.getString("tournament_name"));
 		tourney.setOrganizerId(row.getString("organizer_id"));
+		System.out.println(row.getString("date"));
 		tourney.setDate(LocalDate.parse(row.getString("date")));
 		tourney.setLocation(row.getString("location"));
 		tourney.setGame(row.getString("game"));
@@ -37,10 +38,10 @@ public class JDBCTournamentDAO implements TournamentDAO {
 
 	@Override
 	public boolean create(Tournament newTournament) {
-		String sql = "INSERT INTO tournament (tournament_name, organizer_id, game_id, tournament_type, description)"
-				+ "VALUES (?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, newTournament.getName(), newTournament.getOrganizerId(), newTournament.getGame(),
-				newTournament.getType(), newTournament.getDescription());
+		String sql = "INSERT INTO tournament (tournament_name, organizer_id, date, game, tournament_type, description)"
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, newTournament.getName(), Integer.parseInt(newTournament.getOrganizerId()),
+				newTournament.getDate(), newTournament.getGame(), newTournament.getType(), newTournament.getDescription());
 		return true;
 	}
 
