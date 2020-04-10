@@ -90,14 +90,14 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 
 	@Override
 	public List <MatchUp> getMatchUpsByTournamentId(String tournamentId){
-		List <MatchUp> matchUps = new ArrayList<>();
+		List <MatchUp> matchups = new ArrayList<>();
 		String sql = "SELECT * FROM match_up WHERE tournament_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, tournamentId);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(tournamentId));
 		while (results.next()) {
-			MatchUp matchUp = mapMatchUp(results);
-			matchUps.add(matchUp);
+			MatchUp matchup = mapMatchUp(results);
+			matchups.add(matchup);
 		}
-		return matchUps;
+		return matchups;
 	}
 
 	@Override

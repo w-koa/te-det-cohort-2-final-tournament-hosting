@@ -67,7 +67,7 @@ public class JDBCTournamentDAO implements TournamentDAO{
 	public Tournament getTournamentByID(String id) {
 		Tournament tournament = new Tournament();
 		String sql = "SELECT * FROM tournament WHERE tournament_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(id));
 		while (results.next()) {
 			tournament = mapTournament(results);
 		}
@@ -79,7 +79,7 @@ public class JDBCTournamentDAO implements TournamentDAO{
 	public List <Tournament> getTournamentByOrganizer(String organizerId) {
 		List <Tournament> tournaments= new ArrayList<>();
 		String sql = "SELECT * FROM tournament WHERE organizer_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, organizerId);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(organizerId));
 		while (results.next()) {
 			Tournament tournament = mapTournament(results);
 			tournaments.add(tournament);
@@ -104,10 +104,10 @@ public class JDBCTournamentDAO implements TournamentDAO{
 	}
 
 	@Override
-	public List <Tournament> getTournamentByGameId(String gameId) {
+	public List <Tournament> getTournamentByGame(String game) {
 		List <Tournament> tournaments= new ArrayList<>();
-		String sql = "SELECT * FROM tournament WHERE game_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
+		String sql = "SELECT * FROM tournament WHERE game = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, game);
 		while (results.next()) {
 			Tournament tournament = mapTournament(results);
 			tournaments.add(tournament);
@@ -117,7 +117,7 @@ public class JDBCTournamentDAO implements TournamentDAO{
 @Override  // INCOMPLETE
 public List <Tournament> topXTournamentsByPlayerCount (String limit){
 	List <Tournament> tournaments= new ArrayList<>();
-	String sql = "SELECT *  FROM tournament WHERE game_id = ?";
+	String sql = "SELECT *  FROM tournament WHERE game = ?";
 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, limit);
 	while (results.next()) {
 		Tournament tournament = mapTournament(results);

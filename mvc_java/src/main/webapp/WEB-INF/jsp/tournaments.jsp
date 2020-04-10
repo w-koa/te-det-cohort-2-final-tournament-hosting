@@ -28,12 +28,12 @@
 				<c:param value="${tournament.id}" name="tournamentId" /></c:url><!-- Sample to use -->
 			
 				<td><a href="${tournamentDetail}"><c:out value="${tournament.name}"/> </a></td> <!--  make this into a clickable thing -->
-				<td><c:out value="${tournament.gameId}"/></td>
+				<td><c:out value="${tournament.game}"/></td>
 				<td><c:out value="${tournament.type}"/></td>
-				<td>ADD LOC TO TABLES</td>
+				<td><c:out value="${tournament.location}"/></td>
 				<c:url var="organizerDetail" value="/organizers/detail?=id"/>
 				<td><c:out value="${tournament.organizerId}"/></td>
-				<td>ADD DATE TO TABLES</td> 
+				<td><c:out value="${tournament.date}"/></td> 
 			</tr>
 		</c:forEach>
 	</table>

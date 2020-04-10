@@ -257,17 +257,17 @@ insert into tournament (tournament_name, organizer_id, date, location, game, tou
 
 
 
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (6, 5, 2, 4, '2970 Truax Avenue', '2020/12/24', '20:17', 2, 4);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (3, 1, 7, 4, '907 Novick Pass', '2020/09/21', '12:55', 7, 4);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (7, 6, 8, 5, '7 Amoth Drive', '2020/10/21', '11:57', 5, 8);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (23, 1, 1, 10, '35 Mosinee Drive', '2020/12/19', '14:58', 10, 1);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (20, 9, 4, 9, '19548 Crest Line Pass', '2020/10/20', '1:07', 4, 9);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (8, 8, 3, 1, '2318 Cambridge Pass', '2020/04/22', '2:37', 1, 3);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (22, 9, 10, 2, '3016 Goodland Way', '2020/06/12', '3:53', 2, 10);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (11, 10, 7, 6, '846 Upham Circle', '2020/10/14', '14:59', 6, 7);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (9, 10, 6, 2, '43 Mitchell Road', '2020/09/12', '8:52', 2, 6);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (14, 2, 10, 2, '3546 Vahlen Alley', '2020/05/02', '14:04', 10, 2);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (17, 8, 3, 7, '968 Sunfield Alley', '2020/11/23', '20:50', 3, 7);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 5, 2, 4, '2970 Truax Avenue', '2020/12/24', '20:17', 2, 4);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 1, 7, 4, '907 Novick Pass', '2020/09/21', '12:55', 7, 4);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 6, 8, 5, '7 Amoth Drive', '2020/10/21', '11:57', 5, 8);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 1, 1, 10, '35 Mosinee Drive', '2020/12/19', '14:58', 10, 1);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 9, 4, 9, '19548 Crest Line Pass', '2020/10/20', '1:07', 4, 9);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 8, 3, 1, '2318 Cambridge Pass', '2020/04/22', '2:37', 1, 3);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 9, 10, 2, '3016 Goodland Way', '2020/06/12', '3:53', 2, 10);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 10, 7, 6, '846 Upham Circle', '2020/10/14', '14:59', 6, 7);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 10, 6, 2, '43 Mitchell Road', '2020/09/12', '8:52', 2, 6);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 2, 10, 2, '3546 Vahlen Alley', '2020/05/02', '14:04', 10, 2);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 8, 3, 7, '968 Sunfield Alley', '2020/11/23', '20:50', 3, 7);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (21, 11, 1, 9, '4 Sage Park', '2020/11/18', '17:09', 1, 9);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (13, 1, 10, 3, '18 2nd Park', '2020/09/19', '4:20', 10, 3);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (22, 6, 1, 5, '90 Homewood Avenue', '2020/09/30', '7:39', 5, 1);
@@ -287,7 +287,7 @@ insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, da
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (24, 1, 3, 1, '35 Lunder Circle', '2020/12/28', '1:29', 1, 3);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (3, 4, 5, 7, '6 Pierstorff Circle', '2020/10/06', '2:58', 5, 7);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (14, 6, 6, 9, '3114 Maryland Avenue', '2020/11/27', '8:40', 6, 9);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (17, 6, 9, 10, '30550 Oxford Street', '2020/11/12', '15:26', 9, 10);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 6, 9, 10, '30550 Oxford Street', '2020/11/12', '15:26', 9, 10);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (18, 10, 5, 1, '2794 Arizona Street', '2020/10/04', '2:01', 5, 1);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (20, 8, 8, 9, '43997 Tony Center', '2020/11/06', '21:51', 8, 9);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (9, 1, 10, 7, '8970 Forest Dale Junction', '2020/08/12', '20:34', 10, 7);
@@ -296,7 +296,7 @@ insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, da
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (23, 4, 9, 2, '38276 Melody Junction', '2020/12/16', '12:09', 2, 9);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (8, 10, 2, 3, '225 Service Place', '2020/11/10', '12:45', 3, 2);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (2, 3, 1, 7, '6 Bluejay Court', '2020/08/13', '5:40', 1, 7);
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (12, 9, 10, 9, '45056 Coleman Trail', '2020/11/12', '1:33', 9, 10);
+insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 9, 10, 9, '45056 Coleman Trail', '2020/11/12', '1:33', 9, 10);
 
 
 
@@ -389,5 +389,40 @@ insert into team_tournament (tournament_id, team_id) values (18, 21);
 insert into team_tournament (tournament_id, team_id) values (25, 2);
 insert into team_tournament (tournament_id, team_id) values (11, 7);
 insert into team_tournament (tournament_id, team_id) values (6, 28);
+
+UPDATE tournament 
+SET tagged_desc = '<h2>Tournament Details</h2>
+
+			<h4>Where</h4>
+			<p>The Internets</p>
+			<h4>When</h4>
+			<p>The Day before tomorrow</p>
+			<h4>Format</h4>
+			<p>Single Elimination 1v1, 3 Stock, No items</p>
+
+		</div>
+		<div class="tournamentRules">
+			<h2>Rules</h2>
+			<!--  for each to display rules? -->
+			<ul>
+				<li>Don not talk about fight club</li>
+				<li>Don not. Talk. About. Fight Club.</li>
+				<li>No smoking</li>
+				<li>You have to shower and wear deodorant</li>
+			</ul>
+		</div>
+		<div class="tournamentPrizes">
+			<h2>Prizes</h2>
+
+			<ol>
+				<li>Bragging rights, maybe some money</li>
+				<li>You didnt get third</li>
+				<li>You placed, so thats something</li>
+				<li>Fourth place huh...</li>
+			</ol>
+		</div>
+		<div class="tournamentSchedule">
+			<h2>Schedule</h2>'
+WHERE tournament_id = 1;
 commit;
 

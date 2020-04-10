@@ -9,7 +9,7 @@ public interface TournamentDAO {
 	public List <Tournament> getAllTournaments();
 	public List <Tournament> getTournamentByOrganizer (String organizerId);
 	public List <Tournament> getTournamentByTeam (String teamId);
-	public List <Tournament> getTournamentByGameId(String gameId);
+	public List <Tournament> getTournamentByGame (String game);
 	public List <Tournament> topXTournamentsByPlayerCount (String limit);
 	public boolean update (Tournament tournament);
 	public boolean delete (Tournament tournament);

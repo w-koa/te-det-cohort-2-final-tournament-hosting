@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.techelevator.model.MatchUpModel.JDBCMatchUpDAO;
+import com.techelevator.model.MatchUpModel.MatchUp;
 import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
 import com.techelevator.model.TournamentModel.Tournament;
 
@@ -17,7 +19,8 @@ public class TournamentController {
 	
 	@Autowired
 	JDBCTournamentDAO tournamentDAO;
-	
+	@Autowired
+	JDBCMatchUpDAO matchUpDAO;
 	
 	// Display all tournaments
 	@RequestMapping(path="/tournaments", method = RequestMethod.GET)
@@ -36,6 +39,8 @@ public class TournamentController {
 		
 	Tournament tournament = tournamentDAO.getTournamentByID(tournamentId);
 	map.addAttribute("tournament", tournament);
+	List <MatchUp> matchups = matchUpDAO.getMatchUpsByTournamentId(tournamentId);
+	map.addAttribute("matchups", matchups);
 		
 		return "tournamentDetail";
 	}

@@ -7,14 +7,14 @@
 </div>
 
 <div>
-	<h1>Smash Melee Championships 2020</h1>
-	<h2>Hosted by: Smash Melee League</h2>
+	<h1>${tournament.name }</h1>
+	<h2>Hosted by: ${tournament.organizerId}</h2>
 	<!-- link to organizer -->
 </div>
 <div id="allTournamentInfoBlock">
 	<div id="tournamentInfoTextBlock" class="">
 		<div class="tournamentDetails">
-		
+		${tournament.taggedDesc}
 			<%-- 
 			<h2>Tournament Details</h2>
 
@@ -98,16 +98,22 @@
 					class="table table-hover table-striped">
 					<tr>
 						<th>Matchup</th>
+						<th>Location</th>
+						<th>Time</th>
 						<th>Winner</th>
 					</tr>
+					<c:forEach var="matchup" items="${matchups}"> 
 					<tr>
-						<td>L33tTeam vs. NewbPwners</td>
-						<td>L33tTeam</td>
+						<td><c:out value = "${matchup.teamId1}"/> VS. <c:out value = "${matchup.teamId2}"/></td>
+						<td><c:out value = "${matchup.location}"/></td>
+						<td><c:out value = "${matchup.date}"/> @<c:out value = "${matchup.time}"/></td>
+						<td>
+						<c:if test="${matchup.winnerId} != 0">
+						<c:out value= "${matchup.winnerId}"/>
+						</c:if></td>
+							
 					</tr>
-					<tr>
-						<td>Cats vs. Doges</td>
-						<td>Doges</td>
-					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
