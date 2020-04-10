@@ -10,12 +10,13 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 import com.techelevator.model.UserModel.JDBCUserDAO;
+import com.techelevator.model.UserModel.User;
 
 public class JdbcUserDaoTest {
-
 
 	private static SingleConnectionDataSource dataSource;
 
@@ -40,22 +41,18 @@ public class JdbcUserDaoTest {
 		dataSource.getConnection().rollback();
 	}
 
-	protected DataSource getDataSource() {
-		return dataSource;
-	}
-
-	@Test
-	public void testJDBCUserDAO() {
-		fail("Not yet implemented");
-	}
-
 	@Test
 	public void testSaveUser() {
-		fail("Not yet implemented");
+		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		User user = (User) userDAO.getUserByUserName("timtheuser");
+		assertEquals(user.getUserName(), "timtheuser");
+		assertEquals(user.getEmail(), "tim@email.com");
+		assertEquals(user.getRole(), "1");
 	}
 
 	@Test
 	public void testSearchForUsernameAndPassword() {
+
 		fail("Not yet implemented");
 	}
 

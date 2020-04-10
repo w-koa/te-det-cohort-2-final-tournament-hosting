@@ -12,7 +12,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
+import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
+
 public class JdbcTournamentDaoTest {
+	
+	private JDBCTournamentDAO tournamentDAO;
 
 	private static SingleConnectionDataSource dataSource;
 	
@@ -32,20 +36,6 @@ public class JdbcTournamentDaoTest {
 	@After
 	public void rollback() throws SQLException {
 		dataSource.getConnection().rollback();
-	}
-	
-	protected DataSource getDataSource() {
-		return dataSource;
-	}
-	
-	@Test
-	public void testJDBCTournamentDAO() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMapTournament() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -75,11 +65,6 @@ public class JdbcTournamentDaoTest {
 
 	@Test
 	public void testTopXTournamentsByPlayerCount() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUpdate() {
 		fail("Not yet implemented");
 	}
 

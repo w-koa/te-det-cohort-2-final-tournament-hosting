@@ -50,9 +50,6 @@ public class JdbcTeamDaoTest {
 		dataSource.getConnection().rollback();
 	}
 	
-	protected DataSource getDataSource() {
-		return dataSource;
-	}
 
 	@Test
 	public void testCreateTeam() {
@@ -78,10 +75,19 @@ public class JdbcTeamDaoTest {
 	}
 
 	@Test
-	public void testUpdateTeam() {
+	public void testGetAllTeamCaptains() {
+		fail("Not yet implemented");
+	}
+	@Test
+	public void testGetTeamCount() {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testGetCaptainsByTeamId() {
+		fail("Not yet implemented");
+	}
+	
 	@Test
 	public void testDeleteTeam() {
 		fail("Not yet implemented");

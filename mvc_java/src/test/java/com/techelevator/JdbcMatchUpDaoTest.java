@@ -39,9 +39,6 @@ public class JdbcMatchUpDaoTest {
 		dataSource.getConnection().rollback();
 	}
 	
-	protected DataSource getDataSource() {
-		return dataSource;
-	}
 
 	@Test
 	public void testCreateMatchup() {
@@ -75,11 +72,6 @@ public class JdbcMatchUpDaoTest {
 
 	@Test
 	public void testGetMatchUpsByTournamentId() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUpdate() {
 		fail("Not yet implemented");
 	}
 
