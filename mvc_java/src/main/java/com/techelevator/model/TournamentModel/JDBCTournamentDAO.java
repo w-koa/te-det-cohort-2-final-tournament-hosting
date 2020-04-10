@@ -1,5 +1,6 @@
 package com.techelevator.model.TournamentModel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +29,12 @@ public class JDBCTournamentDAO implements TournamentDAO{
 		tourney.setId(row.getString("tournament_id"));
 		tourney.setName(row.getString("tournament_name"));
 		tourney.setOrganizerId(row.getString("organizer_id"));
-		tourney.setGameId(row.getString("game_id"));
+		tourney.setDate(LocalDate.parse(row.getString("date")));
+		tourney.setLocation(row.getString("location"));
+		tourney.setGame(row.getString("game"));
 		tourney.setType(row.getString("tournament_type"));
 		tourney.setDescription(row.getString("description"));
+		tourney.setTaggedDesc(row.getString("tagged_desc"));
 		return tourney;
 	}
 		
@@ -41,7 +45,7 @@ public class JDBCTournamentDAO implements TournamentDAO{
 		String sql ="INSERT INTO tournament (tournament_name, organizer_id, game_id, tournament_type, description)" +
 				"VALUES (?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, newTournament.getName(), newTournament.getOrganizerId(),
-				newTournament.getGameId(),newTournament.getType(),newTournament.getDescription()
+				newTournament.getGame(),newTournament.getType(),newTournament.getDescription()
 					);
 			return true;
 	}
