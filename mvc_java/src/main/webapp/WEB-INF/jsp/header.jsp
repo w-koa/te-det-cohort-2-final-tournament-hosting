@@ -68,6 +68,19 @@
 		<li>
 		<a href="${teamsPageURL }">Teams</a>
 		</li>
+		
+		<c:choose>
+			<c:when test="${currentUser.role.equals('3')}">
+				<c:url var="organizerDashboardURL" value="/organizerDashboard"/>
+				<li><a href="${organizerDashboardURL}">Dashboard</a></li>
+			</c:when>
+			<c:when test="${currentUser.role.equals('2')}">
+				<c:url var="teamLeaderDashboardURL" value="/teamLeaderDashboard"/>
+				<li><a href="${teamLeaderDashboardURL}">Dashboard</a></li>
+			</c:when>
+		
+		</c:choose>
+		
 		<%-- 		<c:if test="${not empty currentUser}">
 					<c:url var="dashboardHref" value="/users/${currentUser}" />
 					<li class="nav-item"><a class="nav-link"
