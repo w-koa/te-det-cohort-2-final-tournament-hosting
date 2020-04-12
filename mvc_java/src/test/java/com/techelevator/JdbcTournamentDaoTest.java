@@ -16,6 +16,8 @@ import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
+import com.techelevator.model.MatchUpModel.JDBCMatchUpDAO;
+import com.techelevator.model.MatchUpModel.MatchUp;
 import com.techelevator.model.TeamModel.JDBCTeamDAO;
 import com.techelevator.model.TeamModel.Team;
 import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
@@ -26,6 +28,7 @@ public class JdbcTournamentDaoTest {
 	
 	private static JDBCTournamentDAO tournamentDAO;
 	private static JDBCTeamDAO teamDAO;
+	private static JDBCMatchUpDAO matchUpDAO;
 
 	private static SingleConnectionDataSource dataSource;
 	
@@ -40,6 +43,7 @@ public class JdbcTournamentDaoTest {
 		dataSource.setAutoCommit(false);
 		tournamentDAO = new JDBCTournamentDAO(dataSource);
 		teamDAO = new JDBCTeamDAO(dataSource);
+		matchUpDAO = new JDBCMatchUpDAO(dataSource);
 	}
 	
 //	@Before
@@ -75,7 +79,6 @@ public class JdbcTournamentDaoTest {
 				assertEquals(tourney.getDescription(), tournament.getDescription());
 			}
 		}
-
 	}
 
 	@Test
@@ -119,37 +122,58 @@ public class JdbcTournamentDaoTest {
 		assertEquals(tournament.getId(), retrievedTourney.getId());
 	}
 
-//	@Test
-//	public void testGetTournamentByTeam() {
-//		Team team = new Team();
-//		team.setId(4321);
-//		team.setName("timstestteam");
-//		team.setCaptainId(54321);
-//		teamDAO.createTeam(team);
-//		team = teamDAO.getTeamByName("timstestteam");
-//		Tournament tournament = new Tournament();
-//		Tournament retrievedTourney = new Tournament();
-//		tournament.setName("Timstourney");
-//		tournament.setOrganizerId("1");
-//		tournament.setGame("54321");
-//		tournament.setType("call of duty");
-//		tournament.setDescription("tims tourney is fun");
-//		tournament.setDate(LocalDate.parse("2020-05-14"));
-//		tournamentDAO.create(tournament);
-//		List<Tournament> tournaments = tournamentDAO.getTournamentByTeam(String.valueOf(team.getId()));
-//		for
-//		
-//		// write method adding for adding a team to a tournament
-//	}
-
 	@Test
-	public void testGetTournamentByGameId() {
-		fail("Not yet implemented");
+	public void testGetTournamentByTeam() {
+		Team team = new Team();
+		team.setId(4321);
+		team.setName("timstestteam");
+		team.setCaptainId(54321);
+		Team team2 = new Team();
+		team2.setId(321321);
+		team2.setName("timsteam2");
+		team2.setCaptainId(12345);
+		teamDAO.createTeam(team);
+		teamDAO.createTeam(team2);
+		team = teamDAO.getTeamByName("timstestteam");
+		Tournament tournament = new Tournament();
+		Tournament retrievedTourney = new Tournament();
+		tournament.setName("Timstourney");
+		tournament.setOrganizerId("1");
+		tournament.setGame("54321");
+		tournament.setType("call of duty");
+		tournament.setDescription("tims tourney is fun");
+		tournament.setDate(LocalDate.parse("2020-05-14"));
+		tournamentDAO.create(tournament);
+		MatchUp matchUp = new MatchUp(tournament.getId(), 
+				"2", "4321", "321321", "1234 main st", "2020-06-03", "21:21", "4321", "321321");
+		matchUpDAO.createMatchup(matchUp);
+		List<Tournament> tournaments = tournamentDAO.getTournamentByTeam(String.valueOf(team.getId()));
+		assertTrue(tournaments.get(0).equals(tournament));
+		
+
 	}
 
 	@Test
-	public void testTopXTournamentsByPlayerCount() {
-		fail("Not yet implemented");
+	public void testGetTournamentByGame() {
+		Tournament tournament = new Tournament();
+		tournament.setName("Timstourney");
+		tournament.setOrganizerId("1");
+		tournament.setGame("Call of Duty");
+		tournament.setType("single");
+		tournament.setDescription("tims tourney is fun");
+		tournament.setDate(LocalDate.parse("2020-05-14"));
+		tournamentDAO.create(tournament);
+		List<Tournament> tournaments = tournamentDAO.getTournamentByGame("Call of Duty");
+		Tournament toCheck = new Tournament();
+		for (Tournament tourn : tournaments) {
+			if(tourn.getName().equals("Timstourney")) {
+				toCheck = tourn;
+				break;
+			}
+		}
+		System.out.println("" +  toCheck);
+		
+		assertTrue(toCheck.equals(tournament));
 	}
 
 	@Test

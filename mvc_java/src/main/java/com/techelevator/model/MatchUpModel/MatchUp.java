@@ -13,6 +13,24 @@ public class MatchUp {
 	private String winnerId;
 	private String loserId;
 	
+	
+	
+	public MatchUp(String tournamentId, String gameId, String teamId1, String teamId2,
+			String location, String date, String time, String winnerId, String loserId) {
+		this.tournamentId = tournamentId;
+		this.gameId = gameId;
+		this.teamId1 = teamId1;
+		this.teamId2 = teamId2;
+		this.location = location;
+		this.date = date;
+		this.time = time;
+		this.winnerId = winnerId;
+		this.loserId = loserId;
+	}
+	
+	public MatchUp() {
+	}
+	
 	public String getMatchUpId() {
 		return matchUpId;
 	}

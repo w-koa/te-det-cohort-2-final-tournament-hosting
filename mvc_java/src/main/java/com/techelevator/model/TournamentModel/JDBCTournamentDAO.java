@@ -119,18 +119,19 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		}
 		return tournaments;
 	}
-
-	@Override
-	public boolean update(Tournament tournament) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean delete(Tournament tournament) {
 		String sql = "DELETE FROM tournament WHERE tournament_id = ?";
 		jdbcTemplate.update(sql, tournament.getId());
 		return true;
+	}
+
+	@Override
+	public boolean update(Tournament tournament) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
