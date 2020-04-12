@@ -33,6 +33,7 @@ public class OrganizerController {
 		}
 		// Redirect to user registration if role is not organizer.
 		if (!currentUser.getRole().equals("3")) {
+			System.out.println("Oops, not an organizer!");
 			return "redirect:/users/new";
 		}
 		

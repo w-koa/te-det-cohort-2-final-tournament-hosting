@@ -1,14 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
-<div>
+<div class="col-md-8">
 	<c:choose>
 		<c:when test="${empty currentUser}">
 			<c:url var="loginHref" value="/login" />
 			<a href="${loginHref}"><button class="btn btn-primary">Log
 					In</button></a>
 		</c:when>
-		<c:when test="${currentUser.role < 3}">
+		<c:when test="${currentUser.role != 3}">
 			<h2>You must be an organizer to manage tournaments!</h2>
 			<c:url var="newUserHref" value="/users/new" />
 			<a href="${newUserHref}"><button class="btn btn-primary">Register</button></a>
@@ -17,12 +17,13 @@
 </div>
 <div>
 	<h1>Organizer Dashboard</h1>
+	<h2>
+		<c:out value="Welcome, ${currentUser.userName}!" />
+	</h2>
 </div>
 <div class="col-md-8">
-	<c:url var="organizerTournaments" value="${organizerTournamentsList}" />
 
-
-	<%-- <c:if test="organizerTournaments.size() = 0">--%>
+	<c:if test="${organizerTournaments.size() == 0}">
 
 	<p>Sample. Should show if no tournaments being hosted by this
 		organizer</p>
@@ -33,23 +34,25 @@
 			id="registerTournament">
 			<div>
 				<label for="name">Tournament Name: </label> <input type="text"
-					name="name" class="form-control" id="tournamentName">
+					name="name" class="form-control" id="tournamentName"
+					placeholder="Tournament Name">
 			</div>
 			<div>
-				<label for="date">Date: </label> <input type="datetime" name="date"
+				<label for="date">Date: </label> <input type="date" name="date"
 					class="form-control" id="tournamentDate">
 			</div>
 			<div>
 				<label for="location">Location: </label> <input type="text"
-					class="form-control" name="location" id="tournamentLocation">
+					class="form-control" name="location" id="tournamentLocation"
+					placeholder="Location">
 			</div>
 			<div>
 				<label for="game">Game: </label> <input type="text" name="game"
-					class="form-control" id="tournamentGame">
+					class="form-control" id="tournamentGame" placeholder="Game">
 			</div>
 			<div class="radio">
 				<label><input type="radio" class="optionsRadios"
-					id="optionsRadios1" name="type" value="Single" checked>Single
+					id="optionsRadios1" name="type" value="single" checked>Single
 					Elimination</label>
 			</div>
 			<div>
@@ -58,13 +61,14 @@
 					class="form-control" id="tournamentDescription">Describe your tournament...</textarea>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Register Tournament</button>
+				<button type="submit" class="btn btn-primary">Register
+					Tournament</button>
 			</div>
 		</form>
 	</div>
-	<%--</c:if> --%>
+	</c:if>
 	<div class="form-group">
-		<form class="searchForm" id="earchForm">
+		<form method="POST" class="searchForm" id="searchForm">
 			<!-- display: flex; align-items: center; -->
 			<label for="searchFilter">Search: </label> <input id="searchBar"
 				class="form-control" type="text" name="searchFilter"
@@ -72,8 +76,65 @@
 			<button class="btn btn-success" type="submit">Search</button>
 		</form>
 	</div>
+	<div>
+		<h2>Manage Tournaments</h2>
+		<table class="table table-hover table-striped">
+			<tr>
+				<th>Name</th>
+				<th>Game</th>
+				<th>Type</th>
+				<th>Location</th>
+				<th>Date</th>
+			</tr>
+
+			<c:choose>
+				<c:when test="${organizerTournaments.size() != 0}">
+					<p>there's something in organizer tournaments</p>
+				</c:when>
+
+				<c:otherwise>
+					<c:forEach var="tournament" items="${organizerTournaments}">
+
+						<tr>
+							<td><c:out value="${tournament.name}" /></td>
+							<td><c:out value="${tournament.game}" /></td>
+							<td><c:out value="${tournament.type}" /></td>
+							<td><c:out value="${tournament.location}" /></td>
+							<td><c:out value="${tournament.date}" /></td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</table>
+		<c:if test="${organizerTournaments.size() == 0}">
+			<h2 class="text-center">No tournaments found.</h2>
+			<a href="#">Host a Tournament</a>
+		</c:if>
+	</div>
 </div>
-<div></div>
+<div class="col-md-8">
+	<div>
+		<h2>Invite Teams to your tournaments!</h2>
+	</div>
+	<div class="form-group">
+		<c:url var="inviteTeamURL" value="/inviteTeam"/>
+		<form method="POST" action="${inviteTeamURL}" id="inviteTeamForm">
+			<div>
+				<label for="tournamentName">Tournament: </label>
+				<select id="tournamentSelect" name="tournamentId" class="form-control">
+					<c:forEach var="tournament" items="${organizerTournaments}">
+						<option value="${tournament.id}">${tournament.name}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div>
+				<label for="teamName">Team: </label> 
+				<input type="text"
+					placeholder="Team name" id="teamName" class="form-control">
+			</div>
+		</form>
+	</div>
+</div>
 
 
 <c:import url="/WEB-INF/jsp/footer.jsp" />
