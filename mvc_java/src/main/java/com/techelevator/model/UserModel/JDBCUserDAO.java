@@ -79,4 +79,11 @@ public class JDBCUserDAO implements UserDAO {
 		return thisUser;
 	}
 
+	public void deleteUserbyUserName(String userName) {
+		String deleteUser = "Delete from app_user where user_name = ?";
+		jdbcTemplate.update(deleteUser, userName);
+	}
+
+
+
 }

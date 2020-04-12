@@ -46,9 +46,7 @@ public class JDBCTeamDAO implements TeamDAO {
 	// new teamId should be auto generated
 	@Override
 	public void createTeam(Team team) {
-		// TODO Auto-generated method stub
-		String sqlCreateTeam = "INSERT INTO team (name, captain_id) VALUES (?, ?)";
-
+		String sqlCreateTeam = "INSERT INTO team (team_name, captain_id) VALUES (?, ?)";
 		jdbcTemplate.update(sqlCreateTeam, team.getName(), team.getCaptainId());
 
 	}
@@ -166,10 +164,11 @@ public class JDBCTeamDAO implements TeamDAO {
 	}
 
 	@Override
-	public void deleteTeam(int id) {
-
+	public void deleteTeam(Team team) {
 		String sqlDeleteTeam = "DELETE FROM team WHERE team_id = ?";
-		jdbcTemplate.update(sqlDeleteTeam, id);
+		jdbcTemplate.update(sqlDeleteTeam, team.getId());
 	}
+
+
 
 }

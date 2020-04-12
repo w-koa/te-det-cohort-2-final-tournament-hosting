@@ -19,10 +19,9 @@ public interface TeamDAO {
 	
 	// Update
 	public void updateTeam(Team team);
-	
-	// Destroy
-	public void deleteTeam(int id);
 
 	public int getTeamCount();
+
+	void deleteTeam(Team team);
 	
 }

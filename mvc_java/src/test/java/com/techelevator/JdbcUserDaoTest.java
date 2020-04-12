@@ -21,10 +21,10 @@ public class JdbcUserDaoTest {
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-		dataSource.setUsername("capstone_appuser");
-		dataSource.setPassword("capstone_appuser1");
-//		dataSource.setUsername("postgres");
-//		dataSource.setPassword("postgres1");
+//		dataSource.setUsername("capstone_appuser");
+//		dataSource.setPassword("capstone_appuser1");
+		dataSource.setUsername("postgres");
+		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
 		PasswordHasher hashMaster = new PasswordHasher();
 		userDAO = new JDBCUserDAO(dataSource, hashMaster);
@@ -61,6 +61,13 @@ public class JdbcUserDaoTest {
 		userDAO.getUserByUserName("timtheuser");
 		assertTrue(userDAO.searchForUsernameAndPassword("timtheuser", "timspassword"));
 
+	}
+
+	@Test
+	public void testDeleteUserById() {
+		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		userDAO.deleteUserbyUserName("timtheuser");
+		assertNull(userDAO.getUserByUserName("timtheuser"));
 	}
 
 }

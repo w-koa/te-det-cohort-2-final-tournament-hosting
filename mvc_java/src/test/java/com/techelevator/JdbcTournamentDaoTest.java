@@ -25,13 +25,13 @@ import com.techelevator.model.TournamentModel.Tournament;
 import com.techelevator.model.TournamentModel.TournamentDAO;
 
 public class JdbcTournamentDaoTest {
-	
+
 	private static JDBCTournamentDAO tournamentDAO;
 	private static JDBCTeamDAO teamDAO;
 	private static JDBCMatchUpDAO matchUpDAO;
 
 	private static SingleConnectionDataSource dataSource;
-	
+
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
@@ -45,20 +45,7 @@ public class JdbcTournamentDaoTest {
 		teamDAO = new JDBCTeamDAO(dataSource);
 		matchUpDAO = new JDBCMatchUpDAO(dataSource);
 	}
-	
-//	@Before
-//	public void setup() {
-//		String sqlInsertTournament = "insert into tournament (tournament_id, tournament_name, "
-//				+ "organizer_id, date, location, game, tournament_type, description) "
-//				+ "values (7654321, 'Four Sons', 5, '2020/10/30', '0 Vahlen Street', "
-//				+ "'Assassins Creed', 'single', 'Sed ante. Vivamus tortor. "
-//				+ "Duis mattis egestas metus.')";
-//		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//		jdbcTemplate.update(sqlInsertTournament);
-//		tournamentDAO = new JDBCTournamentDAO(dataSource);
-//	}
-	
-	
+
 	@Test
 	public void testCreate() {
 		Tournament tournament = new Tournament();
@@ -69,9 +56,9 @@ public class JdbcTournamentDaoTest {
 		tournament.setDescription("tims tourney is fun");
 		tournament.setDate(LocalDate.parse("2020-05-14"));
 		assertTrue(tournamentDAO.create(tournament));
-		List <Tournament> tournaments = tournamentDAO.getTournamentByOrganizer("1");
-		for (Tournament tourney: tournaments) {
-			if (tourney.getName() == tournament.getName()){
+		List<Tournament> tournaments = tournamentDAO.getTournamentByOrganizer("1");
+		for (Tournament tourney : tournaments) {
+			if (tourney.getName() == tournament.getName()) {
 				assertEquals(tourney.getName(), tournament.getName());
 				assertEquals(tourney.getOrganizerId(), tournament.getOrganizerId());
 				assertEquals(tourney.getGame(), tournament.getGame());
@@ -92,13 +79,13 @@ public class JdbcTournamentDaoTest {
 		tournament.setDescription("tims tourney is fun");
 		tournament.setDate(LocalDate.parse("2020-05-14"));
 		tournamentDAO.create(tournament);
-		List <Tournament> tournaments = tournamentDAO.getTournamentByOrganizer("1");
-		for (Tournament tourney: tournaments) {
-			if (tourney.getName() == "Timstourney"){
+		List<Tournament> tournaments = tournamentDAO.getTournamentByOrganizer("1");
+		for (Tournament tourney : tournaments) {
+			if (tourney.getName() == "Timstourney") {
 				retrievedTourney = tournamentDAO.getTournamentByID(tourney.getId());
 			}
 		}
-			
+
 		assertEquals(tournament.getId(), retrievedTourney.getId());
 	}
 
@@ -113,9 +100,9 @@ public class JdbcTournamentDaoTest {
 		tournament.setDescription("tims tourney is fun");
 		tournament.setDate(LocalDate.parse("2020-05-14"));
 		tournamentDAO.create(tournament);
-		List <Tournament> tournaments = tournamentDAO.getTournamentByOrganizer("1");
-		for (Tournament tourney: tournaments) {
-			if (tourney.getName() == "Timstourney"){
+		List<Tournament> tournaments = tournamentDAO.getTournamentByOrganizer("1");
+		for (Tournament tourney : tournaments) {
+			if (tourney.getName() == "Timstourney") {
 				retrievedTourney = tournamentDAO.getTournamentByID(tourney.getId());
 			}
 		}
@@ -125,13 +112,13 @@ public class JdbcTournamentDaoTest {
 	@Test
 	public void testGetTournamentByTeam() {
 		Team team = new Team();
-		team.setId(4321);
-		team.setName("timstestteam");
-		team.setCaptainId(54321);
+//		team.setId(4321);
+		team.setName("Topicblab");
+		team.setCaptainId(44);
 		Team team2 = new Team();
-		team2.setId(321321);
-		team2.setName("timsteam2");
-		team2.setCaptainId(12345);
+//		team2.setId(321321);
+		team2.setName("Photolist");
+		team2.setCaptainId(35);
 		teamDAO.createTeam(team);
 		teamDAO.createTeam(team2);
 		team = teamDAO.getTeamByName("timstestteam");
@@ -144,41 +131,74 @@ public class JdbcTournamentDaoTest {
 		tournament.setDescription("tims tourney is fun");
 		tournament.setDate(LocalDate.parse("2020-05-14"));
 		tournamentDAO.create(tournament);
-		MatchUp matchUp = new MatchUp(tournament.getId(), 
-				"2", "4321", "321321", "1234 main st", "2020-06-03", "21:21", "4321", "321321");
-		matchUpDAO.createMatchup(matchUp);
+		MatchUp matchUp2 = new MatchUp();
+		matchUp2.setTournamentId(tournament.getId());
+		matchUp2.setGameId("6");
+		matchUp2.setTeamId1(String.valueOf(team.getId()));
+		matchUp2.setTeamId2(String.valueOf(team2.getId()));
+		matchUp2.setLocation("456 main st");
+		matchUp2.setDate("2023-04-03");
+		matchUp2.setTime("20:20");
+		matchUp2.setWinnerId(String.valueOf(team.getId()));
+		matchUp2.setLoserId(String.valueOf(team2.getId()));
+		matchUpDAO.createMatchup(matchUp2);
 		List<Tournament> tournaments = tournamentDAO.getTournamentByTeam(String.valueOf(team.getId()));
-		assertTrue(tournaments.get(0).equals(tournament));
-		
-
+		assertTrue(tournaments.get(0).getName().equals(tournament.getName()));
 	}
 
 	@Test
 	public void testGetTournamentByGame() {
 		Tournament tournament = new Tournament();
-		tournament.setName("Timstourney");
-		tournament.setOrganizerId("1");
-		tournament.setGame("Call of Duty");
-		tournament.setType("single");
-		tournament.setDescription("tims tourney is fun");
-		tournament.setDate(LocalDate.parse("2020-05-14"));
+		tournament.setName("BobsTourney");
+		tournament.setOrganizerId("11");
+		tournament.setGame("Duty of Call");
+		tournament.setType("tripple");
+		tournament.setDescription("Fun Tourney at Tims");
+		tournament.setDate(LocalDate.parse("2023-06-18"));
 		tournamentDAO.create(tournament);
-		List<Tournament> tournaments = tournamentDAO.getTournamentByGame("Call of Duty");
+		List<Tournament> tournaments = tournamentDAO.getTournamentByGame("Duty of Call");
 		Tournament toCheck = new Tournament();
 		for (Tournament tourn : tournaments) {
-			if(tourn.getName().equals("Timstourney")) {
+
+			if (tourn.getName().equals("BobsTourney")) {
 				toCheck = tourn;
+				System.out.println(toCheck.getName());
 				break;
 			}
 		}
-		System.out.println("" +  toCheck);
-		
-		assertTrue(toCheck.equals(tournament));
+		System.out.println(tournament.getName());
+		assertTrue(toCheck.getName().equals(tournament.getName()));
 	}
 
 	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		Tournament tournament = new Tournament();
+		tournament.setName("Tourney one");
+		tournament.setOrganizerId("1");
+		tournament.setGame("2469");
+		tournament.setType("Assasins Creed");
+		tournament.setDate(LocalDate.parse("2025-02-02"));
+		tournament.setDescription("FuntimeTourney");
+		tournamentDAO.create(tournament);
+		List<Tournament> tournamentList = tournamentDAO.getAllTournaments();
+		String tourneyId = "";
+		for (Tournament tourney : tournamentList) {
+			System.out.println(tourney.getName());
+			if (tourney.getName() == "Tourney one") {
+				tourneyId = tourney.getId();
+			}
+		}
+		if (tourneyId == "") {
+			System.out.println("print anything");
+		}
+		tournamentDAO.delete(tourneyId);
+		assertNull(tournamentDAO.getTournamentByID(tourneyId));
 	}
-
+	
+	
+	
+	
+	
+	
+	
 }

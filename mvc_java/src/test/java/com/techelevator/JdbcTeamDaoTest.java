@@ -3,11 +3,13 @@ package com.techelevator;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.sql.DataSource;
 import com.techelevator.model.TeamModel.JDBCTeamDAO;
 import com.techelevator.model.TeamModel.Team;
+import com.techelevator.model.TournamentModel.Tournament;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,10 +59,24 @@ public class JdbcTeamDaoTest {
 
 	@Test
 	public void testGetTeamById() {
-
-		fail("Not yet implemented");
+		Team team = new Team();
+		Team retrievedTeam = new Team();
+		team.setName("Timsteam");
+		team.setCaptainId(8);
+		teamDAO.createTeam(team);
+		assertEquals(team.getId(), retrievedTeam.getId());
+		
 	}
 
+
+	
+	
+	
+	
+	
+	
+	
+	
 	@Test
 	public void testGetTeamByName() {
 		fail("Not yet implemented");
