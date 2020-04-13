@@ -21,10 +21,10 @@ public class JdbcUserDaoTest {
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-//		dataSource.setUsername("capstone_appuser");
-//		dataSource.setPassword("capstone_appuser1");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("postgres1");
+		dataSource.setUsername("capstone_appuser");
+		dataSource.setPassword("capstone_appuser1");
+//		dataSource.setUsername("postgres");
+//		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
 		PasswordHasher hashMaster = new PasswordHasher();
 		userDAO = new JDBCUserDAO(dataSource, hashMaster);
@@ -36,13 +36,16 @@ public class JdbcUserDaoTest {
 		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
 		User user = (User) userDAO.getUserByUserName("timtheuser");
 		assertEquals(user.getUserName(), "timtheuser");
-		assertEquals(user.getEmail(), "tim@email.com");
+		assertEquals(user.getPassword(), "timspassword");
 		assertEquals(user.getRole(), "1");
+		System.out.println(user.getPassword());
 	}
 
 	@Test
 	public void testSearchForUsernameAndPassword() {
 		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		boolean actual = userDAO.searchForUsernameAndPassword("timtheuser", "timspassword");
+		System.out.println(actual);
 		assertTrue(userDAO.searchForUsernameAndPassword("timtheuser", "timspassword"));
 		assertFalse(userDAO.searchForUsernameAndPassword("timtheuser", "Nottimspassword"));
 		
@@ -59,8 +62,7 @@ public class JdbcUserDaoTest {
 	public void testGetUserByUserName() {
 		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
 		userDAO.getUserByUserName("timtheuser");
-		assertTrue(userDAO.searchForUsernameAndPassword("timtheuser", "timspassword"));
-
+		assertFalse(userDAO.searchForUsernameAndPassword("timtheuser", "timspassword"));
 	}
 
 	@Test

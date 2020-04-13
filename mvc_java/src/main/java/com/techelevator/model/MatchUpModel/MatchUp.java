@@ -91,6 +91,13 @@ public class MatchUp {
 	public void setLoserId(String loserId) {
 		this.loserId = loserId;
 	}
+	
+	
+	@Override 
+	public String toString() {
+		return this.tournamentId + "," + this.gameId + "," + this.teamId1 + "," + this.location;
+				
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -69,6 +69,12 @@ public class Tournament {
 	public void setTaggedDesc(String taggedDesc) {
 		this.taggedDesc = taggedDesc;
 	}
+	
+	@Override 
+	public String toString() {
+		return this.getName() + ", "+ this.getId() + ", " + this.getGame() + ", " + this.getDescription();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

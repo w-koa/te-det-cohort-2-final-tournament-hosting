@@ -2,12 +2,6 @@ package com.techelevator;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
@@ -24,14 +18,13 @@ public class JdbcMatchUpDaoTest {
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-//		dataSource.setUsername("capstone_appuser");
-//		dataSource.setPassword("capstone_appuser1");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("postgres1");
+		dataSource.setUsername("capstone_appuser");
+		dataSource.setPassword("capstone_appuser1");
+//		dataSource.setUsername("postgres");
+//		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
 	}
 	
-
 	@Test
 	public void testCreateMatchup() {
 		fail("Not yet implemented");
