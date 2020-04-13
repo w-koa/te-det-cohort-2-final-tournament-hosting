@@ -157,6 +157,15 @@ public class JDBCTeamDAO implements TeamDAO {
 		}
 		return teamCount;
 	}
+	
+	
+	@Override
+	public String idToName(String teamId) {
+		String sql = "SELECT team_name FROM team WHERE team_id = ?";
+		String name = jdbcTemplate.queryForObject(sql,  String.class, Integer.parseInt(teamId));
+		return name;
+	}
+
 
 	@Override
 	public void updateTeam(Team team) {
@@ -168,7 +177,6 @@ public class JDBCTeamDAO implements TeamDAO {
 		String sqlDeleteTeam = "DELETE FROM team WHERE team_id = ?";
 		jdbcTemplate.update(sqlDeleteTeam, team.getId());
 	}
-
-
-
 }
+
+

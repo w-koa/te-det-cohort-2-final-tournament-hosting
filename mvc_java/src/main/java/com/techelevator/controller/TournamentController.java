@@ -58,7 +58,7 @@ public class TournamentController {
 
 	// Post/Redirect
 	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.POST)
-	public String processRegisterNewTournament() {
+	public String processRegisterNewTournament(@RequestParam String ) {
 		
 		// Register a new tournament here. Should take in a tournament object to save to DB.
 		

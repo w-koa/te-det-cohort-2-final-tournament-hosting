@@ -12,6 +12,9 @@ public class MatchUp {
 	private String time;
 	private String winnerId;
 	private String loserId;
+	private String team1Name;
+	private String team2Name;
+	private String winnerName;
 	
 	
 	
@@ -91,13 +94,30 @@ public class MatchUp {
 	public void setLoserId(String loserId) {
 		this.loserId = loserId;
 	}
-	
-	
-	@Override 
-	public String toString() {
-		return this.tournamentId + "," + this.gameId + "," + this.teamId1 + "," + this.location;
-				
+	public String getTeam1Name() {
+		return team1Name;
 	}
+
+	public void setTeam1Name(String team1Name) {
+		this.team1Name = team1Name;
+	}
+
+	public String getTeam2Name() {
+		return team2Name;
+	}
+
+	public void setTeam2Name(String team2Name) {
+		this.team2Name = team2Name;
+	}
+
+	public String getWinnerName() {
+		return winnerName;
+	}
+
+	public void setWinnerName(String winnerName) {
+		this.winnerName = winnerName;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

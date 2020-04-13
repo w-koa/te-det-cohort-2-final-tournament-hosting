@@ -16,6 +16,7 @@ public interface TeamDAO {
 	public List<User> getAllTeamCaptains();
 	public User getCaptainByTeamId(int teamId);
 	public List<User> getMembersByTeamId(int teamId);
+	public String idToName (String teamId);
 	
 	// Update
 	public void updateTeam(Team team);

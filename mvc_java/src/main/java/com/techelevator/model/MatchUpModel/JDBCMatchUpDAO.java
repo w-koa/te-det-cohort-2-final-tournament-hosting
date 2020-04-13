@@ -35,6 +35,12 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		match.setTime(row.getString("time"));
 		match.setWinnerId(row.getString("winner_id"));
 		match.setLoserId(row.getString("loser_id"));
+		match.setTeam1Name(jdbcTemplate.queryForObject(
+		"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId1())));
+		match.setTeam2Name(jdbcTemplate.queryForObject(
+				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId2())));
+		match.setWinnerName(jdbcTemplate.queryForObject(
+				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getWinnerId())));
 		return match;
 	}
 

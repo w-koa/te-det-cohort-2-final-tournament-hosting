@@ -56,9 +56,19 @@
 					Elimination</label>
 			</div>
 			<div>
-				<label for="description">Description: </label>
-				<textarea name="description" rows="4" form="registerTournament"
-					class="form-control" id="tournamentDescription">Describe your tournament...</textarea>
+				<label for="format">Format: </label>
+				<textarea name="format" rows="4" form="registerTournament"
+					class="form-control" id="format">Describe your tournament format</textarea>
+			</div>
+			<div>
+				<label for="rules">Rules: </label>
+				<textarea name="rules" rows="4" form="registerTournament"
+					class="form-control" id="rules">Describe your tournament format</textarea>
+			</div>
+			<div>
+				<label for="prizes">Prizes: </label>
+				<textarea name="prizes" rows="4" form="registerTournament"
+					class="form-control" id="prizes">Describe your tournament format</textarea>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Register
