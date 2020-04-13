@@ -122,7 +122,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		
 		String sqlJoinTournament = "INSERT INTO team_tournament (tournament_id, team_id) "
 				+ "VALUES (?, ?)";
-		jdbcTemplate.update(sqlJoinTournament, tournamentId, teamId);
+		jdbcTemplate.update(sqlJoinTournament, Integer.parseInt(tournamentId), Integer.parseInt(teamId));
 	}
 
 	@Override

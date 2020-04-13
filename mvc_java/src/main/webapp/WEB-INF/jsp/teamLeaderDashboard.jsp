@@ -27,29 +27,30 @@
 		 Update team name.
 		 Update captainID another option to consider.
 		 --%>
-		 
+
 </div>
 <div class="col-md-8">
 
 	<div>
 		<c:if test="${teamTournaments.size() == 0}">
-		<h2>No tournaments! Join a tournament</h2>
+			<h2>No tournaments! Join a tournament</h2>
 		</c:if>
 	</div>
-	
+
 	<div class="form-group">
-	<c:url var="joinTournamentURL" value="/tournaments/join" />
-		<form method="POST" action="${joinTournamentURL}"
-			id="joinTournament">
-			<div>
-				<label for="name">Tournament Name: </label> <select
-					id="tournamentSelect" class="form-control">
+		<c:url var="joinTournamentURL" value="/tournaments/join" />
+		<form method="POST" action="${joinTournamentURL}" id="joinTournament">
+			<div class="form-group">
+				<label for="tournamentSelect">Tournament Name: </label> <select
+					id="tournamentSelect" class="form-control" name="tournamentId">
 					<c:forEach var="tournament" items="${allTournaments}">
 						<option value="${tournament.id}">${tournament.name}-
 							${tournament.game}</option>
 					</c:forEach>
-
 				</select>
+			</div>
+			<div>
+				<input type="hidden" value="${userTeam.id}" name="teamId">
 			</div>
 
 			<div class="form-group">
@@ -71,7 +72,17 @@
 	</div>
 	 --%>
 	<div>
-		<h2>Manage Team Members</h2>
+
+		<div>
+			<c:if test="${userTeam.name == null}">
+				<h2>No team found! Create a team!</h2>
+				<c:url var="createTeamURL" value="/createTeam" />
+				<a href="${createTeamURL}"><button class="btn btn-primary">Create
+						Team</button></a>
+
+			</c:if>
+		</div>
+		<h2>Manage ${userTeam.name}'s Team Members</h2>
 		<table class="table table-hover table-striped">
 			<tr>
 				<th>Name</th>
@@ -95,16 +106,19 @@
 			</tr>
 
 			<c:choose>
-				<c:when test="${organizerTournaments != 0}">
-					<p>there's something in organizer tournaments</p>
+				<c:when test="${teamTournaments.size() == 0}">
+					<p>there's nothing in team tournaments</p>
 				</c:when>
 
 				<c:otherwise>
-					<c:forEach var="tournament" items="${organizerTournaments}"> <!-- this will be team tournaments -->
+					<c:forEach var="tournament" items="${teamTournaments}">
+						<!-- this will be team tournaments -->
 
 						<tr>
-							<c:url var="tournamentDetailURL" value="/tournament/detail?id=${tournament.id}"/>
-							<td><a href="${tournamentDetailURL}"><c:out value="${tournament.name}" /></a></td>
+							<c:url var="tournamentDetailURL"
+								value="/tournament/detail?id=${tournament.id}" />
+							<td><a href="${tournamentDetailURL}"><c:out
+										value="${tournament.name}" /></a></td>
 							<td><c:out value="${tournament.game}" /></td>
 							<td><c:out value="${tournament.type}" /></td>
 							<td><c:out value="${tournament.location}" /></td>
@@ -114,7 +128,7 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
-		<c:if test="${organizerTournaments == 0}">
+		<c:if test="${teamTournaments.size() == 0}">
 			<h2 class="text-center">No tournaments found.</h2>
 			<a href="#">Join a Tournament</a>
 		</c:if>

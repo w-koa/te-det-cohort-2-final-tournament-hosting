@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -47,6 +49,50 @@ public class TeamController {
 		map.addAttribute("teamMembers", teamMembers);
 		map.addAttribute("registeredTournaments", registeredTournaments);
 		return "teamDetail";
+	}
+	
+	
+	@RequestMapping(path="/createTeam", method = RequestMethod.GET)
+	public String displayCreateTeam(HttpSession session) {
+		
+		User currentUser = (User) session.getAttribute("currentUser");
+		
+		if (currentUser == null) {
+			return "redirect:/login";
+		} 
+		if (!currentUser.getRole().equals("2")) {
+			System.out.println("Oops, not a team captain!");
+			return "redirect:/newUser";
+		}
+		
+		Team userTeam = teamDAO.getTeamByCaptainId(Integer.parseInt(currentUser.getUserID()));
+		if (userTeam.getName() != null) {
+			System.out.println("Already managing a team!");
+			return "redirect:/teamLeaderDashboard";
+		}
+		
+		return "createTeam";
+	}
+	
+	@RequestMapping(path="/createTeam/process", method = RequestMethod.POST)
+	public String processCreateTeam(HttpSession session, @RequestParam String teamName, @RequestParam int captainId) {
+		
+		User currentUser = (User) session.getAttribute("currentUser");
+		Team newTeam = new Team();
+		// team Id should be automatically generated
+		newTeam.setName(teamName);
+		newTeam.setCaptainId(captainId);
+		
+		teamDAO.createTeam(newTeam);
+		
+		
+		return "redirect:/createTeam/success";
+	}
+	
+	@RequestMapping(path="/createTeam/success", method = RequestMethod.GET)
+	public String displayCreateTeamSuccess() {
+		
+		return "createTeamSuccess";
 	}
 	
 	@RequestMapping(path="/teams/dummyDetail", method = RequestMethod.GET)

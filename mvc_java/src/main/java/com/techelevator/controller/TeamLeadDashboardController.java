@@ -45,6 +45,7 @@ public class TeamLeadDashboardController {
 		int userIdInt = Integer.parseInt(currentUser.getUserID());
 		Team userTeam = teamDAO.getTeamByCaptainId(userIdInt);
 		List<User> teamMembers = teamDAO.getMembersByTeamId(userTeam.getId());
+		map.addAttribute("userTeam", userTeam);
 		map.addAttribute("teamMembers", teamMembers);
 		
 		// Redirect to user registration if role is not team leader. 
