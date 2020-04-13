@@ -2,17 +2,25 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.techelevator.DescriptionBuilder;
 import com.techelevator.model.MatchUpModel.JDBCMatchUpDAO;
 import com.techelevator.model.MatchUpModel.MatchUp;
 import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
 import com.techelevator.model.TournamentModel.Tournament;
+import com.techelevator.model.UserModel.User;
 
 @Controller
 public class TournamentController {
@@ -58,15 +66,29 @@ public class TournamentController {
 
 	// Post/Redirect
 	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.POST)
-	public String processRegisterNewTournament(@RequestParam String ) {
-		
+	public String processRegisterNewTournament(@Valid @ModelAttribute Tournament tournament, BindingResult result, RedirectAttributes flash,
+			HttpSession session) {
+		if(result.hasErrors()) {
+			flash.addFlashAttribute("newTournament", tournament);
+			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "newTournament", result);
+			
+			return "redirect:/organizerDashboard";
+		}
+	
 		// Register a new tournament here. Should take in a tournament object to save to DB.
 		
-		// Tournament newTournamentRegistration = tournament;
-		// tournamentDAO.registerNewTournament(newTournamentRegistration);
+		Tournament newTournamentRegistration = tournament;
+		
+		newTournamentRegistration.setDescription(DescriptionBuilder.formatDesc(tournament.getFormat(),
+				tournament.getRules(), tournament.getPrizes()));
+		newTournamentRegistration.setTaggedDesc(DescriptionBuilder.formatTaggedDesc(tournament.getFormat(),
+				tournament.getRules(), tournament.getPrizes()));
 		
 		
-		return "redirect:/newTournamentSuccess";
+		tournamentDAO.create(newTournamentRegistration);
+		
+		
+		return "redirect:/organizerDashboard";
 	}
 	
 	// Redirect page. Informs user that registration was successful, this page should do other useful stuff.

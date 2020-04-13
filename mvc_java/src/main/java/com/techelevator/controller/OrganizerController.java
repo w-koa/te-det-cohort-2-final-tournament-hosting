@@ -21,11 +21,16 @@ public class OrganizerController {
 	private JDBCTournamentDAO tournamentDAO;
 
 	@RequestMapping(path="/organizerDashboard", method = RequestMethod.GET)
-	public String displayOrganizerDashboard(ModelMap map, HttpSession session) {
+	public String displayOrganizerDashboard(ModelMap map, ModelMap modelHolder, HttpSession session) {
 		
 		// Gets user session data.
 		User currentUser = (User) session.getAttribute("currentUser");
 		map.addAttribute("currentUser", currentUser);
+		
+		// loads tournament modelattribute
+		if( ! modelHolder.containsAttribute("newTournament")) {
+			modelHolder.addAttribute("newTournament", new Tournament());
+		}
 		
 		// Redirect to login if user data is null
 		if (currentUser == null) {

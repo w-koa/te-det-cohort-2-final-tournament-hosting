@@ -50,11 +50,13 @@
 				<label for="game">Game: </label> <input type="text" name="game"
 					class="form-control" id="tournamentGame" placeholder="Game">
 			</div>
-			<div class="radio">
+			<!-- <div class="radio">
 				<label><input type="radio" class="optionsRadios"
 					id="optionsRadios1" name="type" value="single" checked>Single
 					Elimination</label>
-			</div>
+			</div> -->
+			<input type="hidden" name="organizerId" value="${currentUser.userID}"/>
+			<input type="hidden" name="type" value="single"/>			
 			<div>
 				<label for="format">Format: </label>
 				<textarea name="format" rows="4" form="registerTournament"
@@ -69,7 +71,7 @@
 				<label for="prizes">Prizes: </label>
 				<textarea name="prizes" rows="4" form="registerTournament"
 					class="form-control" id="prizes">Describe your tournament format</textarea>
-			</div>
+			</div> 
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Register
 					Tournament</button>
