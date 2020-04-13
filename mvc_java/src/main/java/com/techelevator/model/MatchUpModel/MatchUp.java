@@ -12,6 +12,27 @@ public class MatchUp {
 	private String time;
 	private String winnerId;
 	private String loserId;
+	private String team1Name;
+	private String team2Name;
+	private String winnerName;
+	
+	
+	
+	public MatchUp(String tournamentId, String gameId, String teamId1, String teamId2,
+			String location, String date, String time, String winnerId, String loserId) {
+		this.tournamentId = tournamentId;
+		this.gameId = gameId;
+		this.teamId1 = teamId1;
+		this.teamId2 = teamId2;
+		this.location = location;
+		this.date = date;
+		this.time = time;
+		this.winnerId = winnerId;
+		this.loserId = loserId;
+	}
+	
+	public MatchUp() {
+	}
 	
 	public String getMatchUpId() {
 		return matchUpId;
@@ -73,6 +94,30 @@ public class MatchUp {
 	public void setLoserId(String loserId) {
 		this.loserId = loserId;
 	}
+	public String getTeam1Name() {
+		return team1Name;
+	}
+
+	public void setTeam1Name(String team1Name) {
+		this.team1Name = team1Name;
+	}
+
+	public String getTeam2Name() {
+		return team2Name;
+	}
+
+	public void setTeam2Name(String team2Name) {
+		this.team2Name = team2Name;
+	}
+
+	public String getWinnerName() {
+		return winnerName;
+	}
+
+	public void setWinnerName(String winnerName) {
+		this.winnerName = winnerName;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

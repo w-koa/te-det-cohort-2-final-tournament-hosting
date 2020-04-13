@@ -14,41 +14,13 @@
 <div id="allTournamentInfoBlock">
 	<div id="tournamentInfoTextBlock" class="">
 		<div class="tournamentDetails">
+	<h2>Tournament Details</h2>
+	 
+	 <h4>Where</h4> <p>${tournament.location}</p> 
+	  <h4>When</h4> <p>${tournament.date}</p> 
+		
 		${tournament.taggedDesc}
-			<%-- 
-			<h2>Tournament Details</h2>
-
-			<h4>Where</h4>
-			<p>The Internets</p>
-			<h4>When</h4>
-			<p>The Day before tomorrow</p>
-			<h4>Format</h4>
-			<p>Single Elimination 1v1, 3 Stock, No items</p>
-
-		</div>
-		<div class="tournamentRules">
-			<h2>Rules</h2>
-			<!--  for each to display rules? -->
-			<ul>
-				<li>Don't talk about fight club</li>
-				<li>Don't. Talk. About. Fight Club.</li>
-				<li>No smoking</li>
-				<li>You have to shower and wear deodorant</li>
-			</ul>
-		</div>
-		<div class="tournamentPrizes">
-			<h2>Prizes</h2>
-
-			<ol>
-				<li>Bragging rights, maybe some money</li>
-				<li>You didn't get third</li>
-				<li>You placed, so that's something</li>
-				<li>Fourth place huh...</li>
-			</ol>
-		</div>
-		<div class="tournamentSchedule">
-			<h2>Schedule</h2>
-			--%>
+	
 			<!-- maybe some sort of embedded calendar... ? -->
 
 		</div>
@@ -104,12 +76,12 @@
 					</tr>
 					<c:forEach var="matchup" items="${matchups}"> 
 					<tr>
-						<td><c:out value = "${matchup.teamId1}"/> VS. <c:out value = "${matchup.teamId2}"/></td>
+						<td><c:out value = "${matchup.team1Name}"/> VS. <c:out value = "${matchup.team2Name}"/></td>
 						<td><c:out value = "${matchup.location}"/></td>
 						<td><c:out value = "${matchup.date}"/> @<c:out value = "${matchup.time}"/></td>
 						<td>
 						<c:if test="${matchup.winnerId} != 0">
-						<c:out value= "${matchup.winnerId}"/>
+						<c:out value= "${matchup.winnerName}"/>
 						</c:if></td>
 							
 					</tr>

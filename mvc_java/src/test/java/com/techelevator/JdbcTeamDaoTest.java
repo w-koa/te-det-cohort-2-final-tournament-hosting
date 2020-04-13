@@ -3,11 +3,13 @@ package com.techelevator;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.sql.DataSource;
 import com.techelevator.model.TeamModel.JDBCTeamDAO;
 import com.techelevator.model.TeamModel.Team;
+import com.techelevator.model.TournamentModel.Tournament;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,8 +29,10 @@ public class JdbcTeamDaoTest {
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-		dataSource.setUsername("capstone_appuser");
-		dataSource.setPassword("capstone_appuser1");
+//		dataSource.setUsername("capstone_appuser");
+//		dataSource.setPassword("capstone_appuser1");
+		dataSource.setUsername("postgres");
+		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
 	}
 	
@@ -40,16 +44,6 @@ public class JdbcTeamDaoTest {
 		teamDAO = new JDBCTeamDAO(dataSource);
 	}
 
-	@AfterClass
-	public static void closeDataSource() throws SQLException {
-		dataSource.destroy();
-	}
-
-	@After
-	public void rollback() throws SQLException {
-		dataSource.getConnection().rollback();
-	}
-	
 
 	@Test
 	public void testCreateTeam() {
@@ -65,10 +59,24 @@ public class JdbcTeamDaoTest {
 
 	@Test
 	public void testGetTeamById() {
-
-		fail("Not yet implemented");
+		Team team = new Team();
+		Team retrievedTeam = new Team();
+		team.setName("Timsteam");
+		team.setCaptainId(8);
+		teamDAO.createTeam(team);
+		assertEquals(team.getId(), retrievedTeam.getId());
+		
 	}
 
+
+	
+	
+	
+	
+	
+	
+	
+	
 	@Test
 	public void testGetTeamByName() {
 		fail("Not yet implemented");

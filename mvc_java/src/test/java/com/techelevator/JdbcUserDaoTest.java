@@ -2,45 +2,35 @@ package com.techelevator;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 import com.techelevator.model.UserModel.JDBCUserDAO;
 import com.techelevator.model.UserModel.User;
+import com.techelevator.security.PasswordHasher;
 
 public class JdbcUserDaoTest {
 
 	private static SingleConnectionDataSource dataSource;
 
-	private JDBCUserDAO userDAO;
+	private static JDBCUserDAO userDAO;
+	
 
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-		dataSource.setUsername("capstone_appuser");
-		dataSource.setPassword("capstone_appuser1");
+//		dataSource.setUsername("capstone_appuser");
+//		dataSource.setPassword("capstone_appuser1");
+		dataSource.setUsername("postgres");
+		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
+		PasswordHasher hashMaster = new PasswordHasher();
+		userDAO = new JDBCUserDAO(dataSource, hashMaster);
 	}
 
-	@AfterClass
-	public static void closeDataSource() throws SQLException {
-		dataSource.destroy();
-	}
-
-	@After
-	public void rollback() throws SQLException {
-		dataSource.getConnection().rollback();
-	}
-
+	
 	@Test
 	public void testSaveUser() {
 		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
@@ -52,18 +42,32 @@ public class JdbcUserDaoTest {
 
 	@Test
 	public void testSearchForUsernameAndPassword() {
-
-		fail("Not yet implemented");
+		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		assertTrue(userDAO.searchForUsernameAndPassword("timtheuser", "timspassword"));
+		assertFalse(userDAO.searchForUsernameAndPassword("timtheuser", "Nottimspassword"));
+		
 	}
 
 	@Test
 	public void testUpdatePassword() {
-		fail("Not yet implemented");
+		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		userDAO.updatePassword("timtheuser", "newpassword");
+		assertTrue(userDAO.searchForUsernameAndPassword("timtheuser", "newpassword"));
 	}
 
 	@Test
 	public void testGetUserByUserName() {
-		fail("Not yet implemented");
+		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		userDAO.getUserByUserName("timtheuser");
+		assertTrue(userDAO.searchForUsernameAndPassword("timtheuser", "timspassword"));
+
+	}
+
+	@Test
+	public void testDeleteUserById() {
+		userDAO.saveUser("timtheuser", "timspassword", "tim@email.com", "1");
+		userDAO.deleteUserbyUserName("timtheuser");
+		assertNull(userDAO.getUserByUserName("timtheuser"));
 	}
 
 }

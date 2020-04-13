@@ -68,11 +68,14 @@
 
 				<!-- ForEach -->
 				
-				<c:forEach var="tournament" items="registeredTournaments">
+				<c:forEach var="tournament" items="${registeredTournaments}">
 				<tr>
-					<c:url var="tournamentURL" value="/tournaments/details?id=${tournament.id}"/>
-					<td><a href="${tournamentURL }"><c:out value="${tournament.name}"/></a></td>
-					<td><c:out value="${tournament.gameId}"/></td> <%--Get actual game names --%>
+					<c:url var="tournamentURL" value="/tournament/detail">
+					<c:param value="${tournament.id}" name="tournamentId"/>
+					</c:url>
+				
+					<td><a href="${tournamentURL}"><c:out value="${tournament.name}"/></a></td>
+					<td><c:out value="${tournament.game}"/></td> <%--Get actual game names --%>
 					<td><c:out value="${tournament.type}"/></td>
 					<td>Add location</td>
 					<td>Add Date</td>

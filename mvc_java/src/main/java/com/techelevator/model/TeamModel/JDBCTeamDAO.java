@@ -46,9 +46,7 @@ public class JDBCTeamDAO implements TeamDAO {
 	// new teamId should be auto generated
 	@Override
 	public void createTeam(Team team) {
-		// TODO Auto-generated method stub
-		String sqlCreateTeam = "INSERT INTO team (name, captain_id) VALUES (?, ?)";
-
+		String sqlCreateTeam = "INSERT INTO team (team_name, captain_id) VALUES (?, ?)";
 		jdbcTemplate.update(sqlCreateTeam, team.getName(), team.getCaptainId());
 
 	}
@@ -136,10 +134,10 @@ public class JDBCTeamDAO implements TeamDAO {
 	@Override
 	public List<User> getMembersByTeamId(int teamId) {
 		List<User> teamMembers = new ArrayList<>();
-		
+
 		String sqlGetTeamMembersByTeamId = "SELECT id, user_name FROM app_user JOIN player ON player.player_id = "
 				+ "app_user.id WHERE player.team_id = ?";
-		
+
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetTeamMembersByTeamId, teamId);
 		while (results.next()) {
 			User member = new User();
@@ -147,8 +145,9 @@ public class JDBCTeamDAO implements TeamDAO {
 			teamMembers.add(member);
 		}
 		return teamMembers;
-		
+
 	}
+
 	public int getTeamCount() {
 		String sqlGetTeamCount = "select count(team_id) as cnt from team";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetTeamCount);
@@ -158,6 +157,8 @@ public class JDBCTeamDAO implements TeamDAO {
 		}
 		return teamCount;
 	}
+	
+	
 	@Override
 	public String idToName(String teamId) {
 		String sql = "SELECT team_name FROM team WHERE team_id = ?";
@@ -172,11 +173,10 @@ public class JDBCTeamDAO implements TeamDAO {
 	}
 
 	@Override
-	public void deleteTeam(int id) {
-
+	public void deleteTeam(Team team) {
 		String sqlDeleteTeam = "DELETE FROM team WHERE team_id = ?";
-		jdbcTemplate.update(sqlDeleteTeam, id);
+		jdbcTemplate.update(sqlDeleteTeam, team.getId());
 	}
-
-
 }
+
+
