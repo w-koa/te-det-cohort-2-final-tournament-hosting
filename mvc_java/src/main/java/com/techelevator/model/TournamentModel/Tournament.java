@@ -33,6 +33,12 @@ public class Tournament {
 				+ getTaggedDesc() + ", getFormat()=" + getFormat() + ", getRules()=" + getRules() + ", getPrizes()="
 				+ getPrizes() + ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
 	}
+	
+	@Override 
+	public String toString() {
+		return this.getName() + ", "+ this.getId() + ", " + this.getGame() + ", " + this.getDescription();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

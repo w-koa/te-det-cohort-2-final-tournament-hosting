@@ -1,5 +1,6 @@
 package com.techelevator.model.MatchUpModel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +46,13 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 
 	@Override
 	public boolean createMatchup(MatchUp newMatchUp) {
-		String sql = "INSERT INTO match_up (match_up_id, tournament_id, "
+		String sql = "INSERT INTO match_up (tournament_id, "
 				+ "game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) "
-				+ "VALUES (?,?,?,?,?,?,?,?,'0','0')";
-		jdbcTemplate.batchUpdate(sql, newMatchUp.getMatchUpId(), newMatchUp.getTournamentId(), newMatchUp.getGameId(),
-				newMatchUp.getTeamId1(), newMatchUp.getTeamId2(), newMatchUp.getLocation(), newMatchUp.getDate(),
-				newMatchUp.getTime());
+				+ "VALUES (?,?,?,?,?,?,?,?,?);";
+	
+		jdbcTemplate.update(sql, Integer.parseInt(newMatchUp.getTournamentId()), Integer.parseInt(newMatchUp.getGameId()),
+				Integer.parseInt(newMatchUp.getTeamId1()), Integer.parseInt(newMatchUp.getTeamId2()), newMatchUp.getLocation(), LocalDate.parse(newMatchUp.getDate()),
+				newMatchUp.getTime(), 0, 0);
 		return true;
 	}
 

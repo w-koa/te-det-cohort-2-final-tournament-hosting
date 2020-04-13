@@ -59,7 +59,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 
 	@Override
 	public Tournament getTournamentByID(String id) {
-		Tournament tournament = new Tournament();
+		Tournament tournament = null;
 		String sql = "SELECT * FROM tournament WHERE tournament_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(id));
 		while (results.next()) {
@@ -84,16 +84,13 @@ public class JDBCTournamentDAO implements TournamentDAO {
 
 	@Override
 	public List<Tournament> getTournamentByTeam(String teamId) {
+		String goodSql = "select * from match_up where team_id_1 = ? or team_id_2 = ?";
 		List<Tournament> tournaments = new ArrayList<>();
-		String sql = "SELECT * FROM tournament JOIN team_tournament ON tournament.tournament_id = team_tournament.tournament_id "
-				+ "WHERE team_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(teamId));
+		SqlRowSet results = jdbcTemplate.queryForRowSet(goodSql,Integer.parseInt(teamId), Integer.parseInt(teamId));
 		while (results.next()) {
-			Tournament tournament = mapTournament(results);
-			tournaments.add(tournament);
+			tournaments.add(this.getTournamentByID(results.getString("tournament_id")));
 		}
 		return tournaments;
-
 	}
 
 	@Override
@@ -124,7 +121,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	@Override
 	public boolean delete(String id) {
 		String sql = "DELETE FROM tournament WHERE tournament_id = ?";
-		jdbcTemplate.update(sql, id);
+		jdbcTemplate.update(sql, Integer.parseInt(id));
 		return true;
 	}
 
