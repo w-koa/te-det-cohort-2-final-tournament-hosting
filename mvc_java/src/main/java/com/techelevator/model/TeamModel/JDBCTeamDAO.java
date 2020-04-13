@@ -132,6 +132,21 @@ public class JDBCTeamDAO implements TeamDAO {
 	}
 
 	@Override
+	public Team getTeamByCaptainId(int captainId) {
+		Team team = new Team();
+		String sqlGetTeamByCaptainId = "SELECT * FROM team WHERE captain_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetTeamByCaptainId, captainId);
+		if (results.next()) {
+			team.setId(results.getInt("team_id"));
+			team.setName(results.getString("team_name"));
+		}
+		
+		return team;
+		
+	}
+	
+	
+	@Override
 	public List<User> getMembersByTeamId(int teamId) {
 		List<User> teamMembers = new ArrayList<>();
 

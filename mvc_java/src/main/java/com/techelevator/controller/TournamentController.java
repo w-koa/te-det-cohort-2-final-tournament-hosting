@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.model.MatchUpModel.JDBCMatchUpDAO;
 import com.techelevator.model.MatchUpModel.MatchUp;
+import com.techelevator.model.TeamModel.JDBCTeamDAO;
+import com.techelevator.model.TeamModel.Team;
 import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
 import com.techelevator.model.TournamentModel.Tournament;
+import com.techelevator.model.UserModel.User;
 
 @Controller
 public class TournamentController {
@@ -21,6 +26,8 @@ public class TournamentController {
 	JDBCTournamentDAO tournamentDAO;
 	@Autowired
 	JDBCMatchUpDAO matchUpDAO;
+	@Autowired
+	JDBCTeamDAO teamDAO;
 	
 	// Display all tournaments
 	@RequestMapping(path="/tournaments", method = RequestMethod.GET)
@@ -57,17 +64,17 @@ public class TournamentController {
 	}
 
 	// Post/Redirect
-	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.POST)
-	public String processRegisterNewTournament(@RequestParam String ) {
-		
-		// Register a new tournament here. Should take in a tournament object to save to DB.
-		
-		// Tournament newTournamentRegistration = tournament;
-		// tournamentDAO.registerNewTournament(newTournamentRegistration);
-		
-		
-		return "redirect:/newTournamentSuccess";
-	}
+//	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.POST)
+//	public String processRegisterNewTournament(@RequestParam String ) {
+//		
+//		// Register a new tournament here. Should take in a tournament object to save to DB.
+//		
+//		// Tournament newTournamentRegistration = tournament;
+//		// tournamentDAO.registerNewTournament(newTournamentRegistration);
+//		
+//		
+//		return "redirect:/newTournamentSuccess";
+//	}
 	
 	// Redirect page. Informs user that registration was successful, this page should do other useful stuff.
 	@RequestMapping(path="/newTournamentSuccess", method = RequestMethod.GET)
@@ -76,5 +83,38 @@ public class TournamentController {
 		// Maybe a link to manage tournament details. Dashboard sort of view? Allow edits and invitations to tournament.
 		
 		return "newTournamentSuccess";
+	}
+	
+	@RequestMapping(path="/tournaments/join", method = RequestMethod.GET)
+	public String displayJoinTournament(ModelMap map, HttpSession session) {
+		
+		User currentUser = (User) session.getAttribute("currentUser");
+		if (currentUser == null) {
+			return "redirect:/login";
+		}
+		if (!currentUser.getRole().equals("2")) {
+			System.out.println("Oops, not a team captain!");
+			return "redirect:/newUser";
+		}
+		Team userTeam = teamDAO.getTeamByCaptainId(Integer.parseInt(currentUser.getUserID()));
+		map.addAttribute("userTeam", userTeam);
+		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
+		map.addAttribute("allTournaments", allTournaments);
+		
+		return "joinTournament";
+	}
+	
+	@RequestMapping(path="/tournaments/join", method = RequestMethod.POST)
+	public String processJoinTournament(HttpSession session, @RequestParam String tournamentId, @RequestParam String teamId) {
+		
+		tournamentDAO.joinTournament(tournamentId, teamId);
+		
+		return "redirect:/tournaments/join/success";
+	}
+	
+	@RequestMapping(path="/tournaments/join/success", method = RequestMethod.GET)
+	public String displayJoinTournamentSuccess(HttpSession session) {
+		
+		return "joinTournamentSuccess";
 	}
 }

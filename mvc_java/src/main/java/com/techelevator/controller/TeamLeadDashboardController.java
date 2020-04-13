@@ -36,29 +36,30 @@ public class TeamLeadDashboardController {
 		User currentUser = (User) session.getAttribute("currentUser");
 		map.addAttribute("currentUser", currentUser);
 		
-		// Make this method
-		// Will get team info from captainId
-//		Team userTeam = teamDAO.getTeamByCaptainId(currentUser.getUserID());
-//		List<User> teamMembers = teamDAO.getMembersByTeamId(userTeam.getId());
-
 		// Redirect to login if user data is null
 		if (currentUser == null) {
 			return "redirect:/login";
 		}
 		
+		// Will get team info from captainId
+		int userIdInt = Integer.parseInt(currentUser.getUserID());
+		Team userTeam = teamDAO.getTeamByCaptainId(userIdInt);
+		List<User> teamMembers = teamDAO.getMembersByTeamId(userTeam.getId());
+		map.addAttribute("teamMembers", teamMembers);
+		
 		// Redirect to user registration if role is not team leader. 
-		// Maybe make it into an alert message
+		// Maybe make it into an alert message?
 		if (!currentUser.getRole().equals("2")) {
 			System.out.println("Oops, not a team captain!");
 			return "redirect:/users/new";
 		}
 		
 		// Get tournament information for modeling
-//		String teamIdString = Integer.toString(userTeam.getId());
+		String teamIdString = Integer.toString(userTeam.getId());
 		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
-//		List<Tournament> teamTournaments = tournamentDAO.getTournamentByTeam(teamIdString);
+		List<Tournament> teamTournaments = tournamentDAO.getTournamentByTeam(teamIdString);
 		map.addAttribute("allTournaments", allTournaments);
-//		map.addAttribute("teamTournaments", teamTournaments);
+		map.addAttribute("teamTournaments", teamTournaments);
 
 		return "teamLeaderDashboard";
 	}

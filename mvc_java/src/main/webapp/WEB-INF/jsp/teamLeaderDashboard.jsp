@@ -32,13 +32,15 @@
 <div class="col-md-8">
 
 	<div>
-		<p>Sample. Should show if no tournaments are registered</p>
+		<c:if test="${teamTournaments.size() == 0}">
 		<h2>No tournaments! Join a tournament</h2>
+		</c:if>
 	</div>
-	<c:url var="joinTournamentURL" value="/tournaments/join" />
+	
 	<div class="form-group">
-		<form method="POST" action="${registerTournamentURL}"
-			id="registerTournament">
+	<c:url var="joinTournamentURL" value="/tournaments/join" />
+		<form method="POST" action="${joinTournamentURL}"
+			id="joinTournament">
 			<div>
 				<label for="name">Tournament Name: </label> <select
 					id="tournamentSelect" class="form-control">

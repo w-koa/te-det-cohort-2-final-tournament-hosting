@@ -11,6 +11,7 @@ public interface TournamentDAO {
 	public List <Tournament> getTournamentByTeam (String teamId);
 	public List <Tournament> getTournamentByGame (String game);
 	public List <Tournament> topXTournamentsByPlayerCount (String limit);
+	public void joinTournament(String tournamentId, String teamId);
 	public boolean update (Tournament tournament);
 	boolean delete(String id);
 

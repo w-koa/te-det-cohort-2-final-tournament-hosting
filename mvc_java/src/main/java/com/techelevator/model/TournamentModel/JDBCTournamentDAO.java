@@ -117,6 +117,13 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		return tournaments;
 	}
 	
+	@Override
+	public void joinTournament(String tournamentId, String teamId) {
+		
+		String sqlJoinTournament = "INSERT INTO team_tournament (tournament_id, team_id) "
+				+ "VALUES (?, ?)";
+		jdbcTemplate.update(sqlJoinTournament, tournamentId, teamId);
+	}
 
 	@Override
 	public boolean delete(String id) {
