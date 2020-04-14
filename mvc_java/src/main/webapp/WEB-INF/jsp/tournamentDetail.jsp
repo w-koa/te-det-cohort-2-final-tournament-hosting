@@ -8,7 +8,7 @@
 
 <div>
 	<h1>${tournament.name }</h1>
-	<h2>Hosted by: ${tournament.organizerId}</h2>
+	<h2>Hosted by: ${tournament.organizerName}</h2>
 	<!-- link to organizer -->
 </div>
 <div id="allTournamentInfoBlock">

@@ -10,6 +10,7 @@ public class Tournament {
 	private String name="";
 	private String organizerId="";
 	private String organizerName="";
+	@DateTimeFormat (pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	private String location="";
 	private String game="";
