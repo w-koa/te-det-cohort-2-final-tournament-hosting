@@ -11,16 +11,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.techelevator.model.TeamModel.JDBCTeamDAO;
+import com.techelevator.model.TeamModel.Team;
 import com.techelevator.model.TournamentModel.Tournament;
 
 @Component
 public class JDBCMatchUpDAO implements MatchUpDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	private JDBCTeamDAO teamDao;
 
 	@Autowired
 	public JDBCMatchUpDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		teamDao = new JDBCTeamDAO(dataSource);
 	}
 
 	public MatchUp mapMatchUp(SqlRowSet row) {
@@ -35,12 +39,18 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		match.setTime(row.getString("time"));
 		match.setWinnerId(row.getString("winner_id"));
 		match.setLoserId(row.getString("loser_id"));
-		match.setTeam1Name(jdbcTemplate.queryForObject(
-		"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId1())));
-		match.setTeam2Name(jdbcTemplate.queryForObject(
-				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId2())));
-		match.setWinnerName(jdbcTemplate.queryForObject(
-				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getWinnerId())));
+		Team teamOne = teamDao.getTeamById(row.getInt("team_id_1"));
+		Team teamTwo = teamDao.getTeamById(row.getInt("team_id_2"));
+		Team winner = match.getWinnerId().equals(String.valueOf(teamOne.getId())) ? teamOne : teamTwo;
+		match.setTeam1Name(teamOne.getName());
+		match.setTeam2Name(teamTwo.getName());
+		match.setWinnerName(winner.getName());
+//		match.setTeam1Name(jdbcTemplate.queryForObject(
+//		"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId1())));
+//		match.setTeam2Name(jdbcTemplate.queryForObject(
+//				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId2())));
+//		match.setWinnerName(jdbcTemplate.queryForObject(
+//				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getWinnerId())));
 		return match;
 	}
 
@@ -107,12 +117,23 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		return matchups;
 	}
 	
+	public List<MatchUp> getAllMatchups() {
+		String sql = "SELECT * from match_up";
+		List<MatchUp> matchups = new ArrayList<>();
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while (results.next()) {
+			matchups.add(mapMatchUp(results));
+		}
+		System.out.println("matchups: " + matchups.size());
+		return matchups;
+	}
+	
 	@Override
 	public List<MatchUp> getMatchUpsByTeamId(String teamId) {
 		List<MatchUp> teamMatchups = new ArrayList<>();
 		String sqlGetMatchupsByTeamId = "SELECT * FROM match_up WHERE team_id_1 = ? or team_id_2 = ?";
 		
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetMatchupsByTeamId, Integer.parseInt(teamId));
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetMatchupsByTeamId, Integer.parseInt(teamId), Integer.parseInt(teamId));
 		while (results.next()) {
 			teamMatchups.add(mapMatchUp(results));
 		}

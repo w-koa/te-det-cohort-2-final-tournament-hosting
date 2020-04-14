@@ -255,7 +255,7 @@ insert into tournament (tournament_name, organizer_id, date, location, game, tou
 
 
 
-insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 5, 2, 4, '11 E Walton St Chicago IL 60611', '2020/12/24', '20:17', 2, 4);
+
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 1, 7, 4, '11 E Walton St Chicago IL 60611', '2020/09/21', '12:55', 7, 4);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 6, 8, 5, '11 E Walton St Chicago IL 60611', '2020/10/21', '11:57', 5, 8);
 insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 1, 1, 10, '11 E Walton St Chicago IL 60611', '2020/12/19', '14:58', 10, 1);
