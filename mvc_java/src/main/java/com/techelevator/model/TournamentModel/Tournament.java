@@ -2,12 +2,15 @@ package com.techelevator.model.TournamentModel;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Tournament {
 
 	private String id ="";
 	private String name="";
 	private String organizerId="";
 	private String organizerName="";
+	@DateTimeFormat (pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	private String location="";
 	private String game="";
