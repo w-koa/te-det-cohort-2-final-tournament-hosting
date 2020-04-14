@@ -107,7 +107,7 @@ public class JdbcTournamentDaoTest {
 	}
 
 	@Test
-	public void testGetTournamentByTeam() {
+	public void testGetTournamentByTeamID() {
 		Team team = new Team();
 		team.setName("Topicblab");
 		team.setCaptainId(44);
@@ -139,13 +139,9 @@ public class JdbcTournamentDaoTest {
 		matchUp2.setWinnerId(String.valueOf(team_one.getId()));
 		matchUp2.setLoserId(String.valueOf(team_two.getId()));
 		matchUpDAO.createMatchup(matchUp2);
-<<<<<<< HEAD
-		List<Tournament> tournaments = tournamentDAO.getTournamentByTeam(String.valueOf(team_one.getId()));
-		assertTrue(tournaments.get(tournaments.size() - 1).getName().equals(tournament.getName()));
-=======
+		tournamentDAO.joinTournament(tourn.get(0).getId(), String.valueOf(team_one.getId()));
 		List<Tournament> tournaments = tournamentDAO.getTournamentByTeamID(String.valueOf(team_one.getId()));
 		assertTrue(tournaments.get(tournaments.size()-1).getName().equals(tournament.getName()));
->>>>>>> b52e97d74a71c501b0003d79be417d31d1e575e7
 	}
 
 	@Test
