@@ -8,7 +8,7 @@ public class Tournament {
 	private String name="";
 	private String organizerId="";
 	private String organizerName="";
-	private LocalDate date;
+	private LocalDate date = LocalDate.now();
 	private String location="";
 	private String game="";
 	private String type="";

@@ -85,6 +85,7 @@ public class TournamentController {
 	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.POST)
 	public String processRegisterNewTournament(@Valid @ModelAttribute Tournament tournament, BindingResult result, RedirectAttributes flash,
 			HttpSession session) {
+		System.out.println(tournament.toString());
 		if(result.hasErrors()) {
 			flash.addFlashAttribute("newTournament", tournament);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "newTournament", result);

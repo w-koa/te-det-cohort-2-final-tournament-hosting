@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 <div class="col-md-8">
@@ -40,10 +41,12 @@
 					name="name" class="form-control" id="name"
 					placeholder="Tournament Name">
 			</div>
-			<div>
+	
+			 <div>
 				<label for="date">Date: </label> <input type="date" name="date"
-					class="form-control" id="tournamentDate">
-			</div>
+					class="form-control" id="date" value = "<fmt:formatDate value="${date}" pattern="yyyy-mm-dd" />">
+					
+			</div> 
 			<div>
 				<label for="location">Location: </label> <input type="text"
 					class="form-control" name="location" id="location"
