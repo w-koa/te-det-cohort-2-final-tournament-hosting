@@ -100,12 +100,12 @@ public class TournamentController {
 				tournament.getRules(), tournament.getPrizes()));
 		newTournamentRegistration.setTaggedDesc(DescriptionBuilder.formatTaggedDesc(tournament.getFormat(),
 				tournament.getRules(), tournament.getPrizes()));
-		
+		System.out.println(newTournamentRegistration.toString());
 		
 		tournamentDAO.create(newTournamentRegistration);
 		
 		
-		return "redirect:/organizerDashboard";
+		return "redirect:/newTournamentSuccess";
 	}
 	
 	// Redirect page. Informs user that registration was successful, this page should do other useful stuff.
