@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,6 +18,7 @@ import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
 import com.techelevator.model.TournamentModel.Tournament;
 import com.techelevator.model.UserModel.User;
 
+@CrossOrigin
 @Controller
 public class TeamLeadDashboardController {
 
@@ -58,9 +60,10 @@ public class TeamLeadDashboardController {
 		// Get tournament information for modeling
 		String teamIdString = Integer.toString(userTeam.getId());
 		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
-		List<Tournament> teamTournaments = tournamentDAO.getTournamentByTeam(teamIdString);
+		List<Tournament> teamTournaments = tournamentDAO.getTournamentByTeamID(teamIdString);
 		map.addAttribute("allTournaments", allTournaments);
 		map.addAttribute("teamTournaments", teamTournaments);
+		System.out.println(teamTournaments.size());
 
 		return "teamLeaderDashboard";
 	}

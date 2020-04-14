@@ -8,6 +8,10 @@
 		<h2>Tournament Joined Successfully!</h2>
 		<p>Get ready for Tourney Time!</p>
 	</div>
+	<div>
+		<c:url var="teamDashboardURL" value="/teamLeaderDashboard"/>
+		<a href="${teamDashboardURL}"><button class="btn btn-primary">Team Dashboard</button></a>
+	</div>
 	
 </div>
 

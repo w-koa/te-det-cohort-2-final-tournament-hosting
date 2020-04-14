@@ -8,7 +8,7 @@ public interface TournamentDAO {
 	public Tournament getTournamentByID (String id);
 	public List <Tournament> getAllTournaments();
 	public List <Tournament> getTournamentByOrganizer (String organizerId);
-	public List <Tournament> getTournamentByTeam (String teamId);
+	public List <Tournament> getTournamentByTeamID (String teamId);
 	public List <Tournament> getTournamentByGame (String game);
 	public List <Tournament> topXTournamentsByPlayerCount (String limit);
 	public void joinTournament(String tournamentId, String teamId);

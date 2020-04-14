@@ -134,7 +134,7 @@ public class JdbcTournamentDaoTest {
 		matchUp2.setWinnerId(String.valueOf(team_one.getId()));
 		matchUp2.setLoserId(String.valueOf(team_two.getId()));
 		matchUpDAO.createMatchup(matchUp2);
-		List<Tournament> tournaments = tournamentDAO.getTournamentByTeam(String.valueOf(team_one.getId()));
+		List<Tournament> tournaments = tournamentDAO.getTournamentByTeamID(String.valueOf(team_one.getId()));
 		assertTrue(tournaments.get(tournaments.size()-1).getName().equals(tournament.getName()));
 	}
 

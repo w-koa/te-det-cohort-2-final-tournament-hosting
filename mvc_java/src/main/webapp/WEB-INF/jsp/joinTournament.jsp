@@ -20,6 +20,7 @@
 
 				</select>
 				<input type="hidden" value="${userTeam.id}" name="teamId">
+				<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 			</div>
 
 			<div class="form-group">

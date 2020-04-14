@@ -7,6 +7,10 @@
 	<div>
 		<h1>Team Created!</h1>
 	</div>
+	<div>
+		<c:url var="teamDashboardURL" value="/teamLeaderDashboard"/>
+		<a href="teamDashboardURL"><button class="btn btn-primary">Team Dashboard</button></a>
+	</div>
 </div>
 
 
