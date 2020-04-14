@@ -9,7 +9,7 @@
 	</div>
 	<div>
 		<c:url var="organizerDashboardURL" value="/organizerDashboard"/>
-		<a href="organizerDashboardURL"><button class="btn btn-primary">Organizer Dashboard</button></a>
+		<a href="${organizerDashboardURL }"><button class="btn btn-primary">Organizer Dashboard</button></a>
 	</div>
 </div>
 
