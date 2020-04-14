@@ -32,9 +32,12 @@
 	<div class="form-group">
 		<form method="POST" action="${registerTournamentURL}"
 			id="registerTournament">
+			<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+			<input type="hidden" name="organizerId" value="${currentUser.userID}"/>
+			<input type="hidden" name="type" value="single"/>	
 			<div>
 				<label for="name">Tournament Name: </label> <input type="text"
-					name="name" class="form-control" id="tournamentName"
+					name="name" class="form-control" id="name"
 					placeholder="Tournament Name">
 			</div>
 			<div>
@@ -43,20 +46,19 @@
 			</div>
 			<div>
 				<label for="location">Location: </label> <input type="text"
-					class="form-control" name="location" id="tournamentLocation"
+					class="form-control" name="location" id="location"
 					placeholder="Location">
 			</div>
 			<div>
 				<label for="game">Game: </label> <input type="text" name="game"
-					class="form-control" id="tournamentGame" placeholder="Game">
+					class="form-control" id="game" placeholder="Game">
 			</div>
 			<!-- <div class="radio">
 				<label><input type="radio" class="optionsRadios"
 					id="optionsRadios1" name="type" value="single" checked>Single
 					Elimination</label>
 			</div> -->
-			<input type="hidden" name="organizerId" value="${currentUser.userID}"/>
-			<input type="hidden" name="type" value="single"/>			
+		
 			<div>
 				<label for="format">Format: </label>
 				<textarea name="format" rows="4" form="registerTournament"
@@ -65,12 +67,12 @@
 			<div>
 				<label for="rules">Rules: </label>
 				<textarea name="rules" rows="4" form="registerTournament"
-					class="form-control" id="rules">Describe your tournament format</textarea>
+					class="form-control" id="rules">Describe your tournament rules</textarea>
 			</div>
 			<div>
 				<label for="prizes">Prizes: </label>
 				<textarea name="prizes" rows="4" form="registerTournament"
-					class="form-control" id="prizes">Describe your tournament format</textarea>
+					class="form-control" id="prizes">Describe your tournament prizes</textarea>
 			</div> 
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Register
