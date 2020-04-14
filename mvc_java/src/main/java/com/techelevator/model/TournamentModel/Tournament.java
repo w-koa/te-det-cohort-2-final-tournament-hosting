@@ -34,10 +34,10 @@ public class Tournament {
 				+ getPrizes() + ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
 	}
 	
-	@Override 
-	public String toString() {
-		return this.getName() + ", "+ this.getId() + ", " + this.getGame() + ", " + this.getDescription();
-	}
+//	@Override 
+//	public String toString() {
+//		return this.getName() + ", "+ this.getId() + ", " + this.getGame() + ", " + this.getDescription();
+//	}
 	
 	@Override
 	public int hashCode() {

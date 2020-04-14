@@ -12,7 +12,6 @@ team_tournament - both fields should be derived from other tables
 
 BEGIN;
 
-insert into app_user (user_name, email, password, role, salt) values ('eingerith0', 'plilie0@deliciousdays.com', 'kRcmsvKx', 2, '03eccb23537c30d25ac3fe15a198f9e9cca29182');
 insert into app_user (user_name, email, password, role, salt) values ('wcollingdon1', 'tmoakes1@chronoengine.com', '9i3y8sxjO0', 1, '03eccb23537c30d25ac3fe15a198f9e9cca29182');
 insert into app_user (user_name, email, password, role, salt) values ('ccawdell2', 'bbrislane2@sun.com', 'qhDhzKbf', 2, '03eccb23537c30d25ac3fe15a198f9e9cca29182');
 insert into app_user (user_name, email, password, role, salt) values ('menrrico3', 'rbasilio3@dyndns.org', 'KjZKdwtEeL', 3, '03eccb23537c30d25ac3fe15a198f9e9cca29182');
@@ -304,7 +303,6 @@ insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, da
 
 
 insert into player (player_id, team_id, ranking, points_scored) values (18, 12, 7, 108);
-insert into player (player_id, team_id, ranking, points_scored) values (4, 32, 2, 56);
 insert into player (player_id, team_id, ranking, points_scored) values (27, 18, 10, 283);
 insert into player (player_id, team_id, ranking, points_scored) values (18, 37, 4, 77);
 insert into player (player_id, team_id, ranking, points_scored) values (16, 8, 8, 262);

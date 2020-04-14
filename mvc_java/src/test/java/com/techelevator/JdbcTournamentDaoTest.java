@@ -3,11 +3,14 @@ package com.techelevator;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.MatchUpModel.JDBCMatchUpDAO;
 import com.techelevator.model.MatchUpModel.MatchUp;
@@ -21,6 +24,7 @@ public class JdbcTournamentDaoTest {
 	private static JDBCTournamentDAO tournamentDAO;
 	private static JDBCTeamDAO teamDAO;
 	private static JDBCMatchUpDAO matchUpDAO;
+	private static JdbcTemplate jdbcTemplate;
 
 	private static SingleConnectionDataSource dataSource;
 
@@ -28,14 +32,15 @@ public class JdbcTournamentDaoTest {
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-		dataSource.setUsername("capstone_appuser");
-		dataSource.setPassword("capstone_appuser1");
-//		dataSource.setUsername("postgres");
-//		dataSource.setPassword("postgres1");
+//		dataSource.setUsername("capstone_appuser");
+//		dataSource.setPassword("capstone_appuser1");
+		dataSource.setUsername("postgres");
+		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
 		tournamentDAO = new JDBCTournamentDAO(dataSource);
 		teamDAO = new JDBCTeamDAO(dataSource);
 		matchUpDAO = new JDBCMatchUpDAO(dataSource);
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Test
@@ -135,7 +140,7 @@ public class JdbcTournamentDaoTest {
 		matchUp2.setLoserId(String.valueOf(team_two.getId()));
 		matchUpDAO.createMatchup(matchUp2);
 		List<Tournament> tournaments = tournamentDAO.getTournamentByTeam(String.valueOf(team_one.getId()));
-		assertTrue(tournaments.get(tournaments.size()-1).getName().equals(tournament.getName()));
+		assertTrue(tournaments.get(tournaments.size() - 1).getName().equals(tournament.getName()));
 	}
 
 	@Test
@@ -170,13 +175,38 @@ public class JdbcTournamentDaoTest {
 		tournament.setDescription("FuntimeTourney");
 		tournamentDAO.create(tournament);
 		List<Tournament> tor = tournamentDAO.getTournamentByGame("2469");
-		String id = tor.get(tor.size()-1).getId();
+		String id = tor.get(tor.size() - 1).getId();
 		tournamentDAO.delete(id);
 		Tournament toCheck = tournamentDAO.getTournamentByID(id);
 		assertNull(toCheck);
 	}
-	
+
 	@Test
-	public void testGetAllTeams() {
+	public void testGetAllTournaments() {
+		Tournament tournament = new Tournament();
+		tournament.setName("Tourney two");
+		tournament.setOrganizerId("3");
+		tournament.setGame("5342");
+		tournament.setType("Super Mario");
+		tournament.setDate(LocalDate.parse("2023-03-03"));
+		tournament.setDescription("It's a tourney");
+		tournamentDAO.create(tournament);
+		String sql = "select count(tournament_id) as dbcount from tournament";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		List<Tournament> tournaments = tournamentDAO.getAllTournaments();
+		Tournament toCheck = new Tournament();
+		int databaseCount = 0;
+		while (results.next()) {
+			databaseCount = (results.getInt("dbcount"));
+		}
+		for (Tournament tourn : tournaments) {
+			if (tourn.getName().equals("Tourney two")) {
+				toCheck = tourn;
+				break;
+			}
+		}
+		assertEquals(tournaments.size(), databaseCount);
+		assertTrue(toCheck.getName().equals(tournament.getName()));
 	}
 }
+
