@@ -10,9 +10,8 @@ public class Tournament {
 	private String name="";
 	private String organizerId="";
 	private String organizerName="";
-	private LocalDate date = LocalDate.now();
 	@DateTimeFormat (pattern = "yyyy-MM-dd")
-//	private LocalDate date;
+	private LocalDate date;
 	private String location="";
 	private String game="";
 	private String type="";
