@@ -11,6 +11,7 @@ public interface MatchUpDAO {
 	public Integer getTournamentLossesByTeam(String teamId, String tournamentId);
 	boolean update(MatchUp matchUp);
 	boolean delete(MatchUp matchUp);
-	List<MatchUp> getMatchUpsByTournamentId(String tournamentId);
-	List<Integer> getTeamsForTournament(String tournamentID);
+	public List<MatchUp> getMatchUpsByTournamentId(String tournamentId);
+	public List<MatchUp> getMatchUpsByTeamId(String teamId);
+	public List<Integer> getTeamsForTournament(String tournamentID);
 }

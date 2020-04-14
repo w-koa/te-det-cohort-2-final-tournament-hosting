@@ -106,6 +106,19 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		}
 		return matchups;
 	}
+	
+	@Override
+	public List<MatchUp> getMatchUpsByTeamId(String teamId) {
+		List<MatchUp> teamMatchups = new ArrayList<>();
+		String sqlGetMatchupsByTeamId = "SELECT * FROM match_up WHERE team_id_1 = ? or team_id_2 = ?";
+		
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetMatchupsByTeamId, Integer.parseInt(teamId));
+		while (results.next()) {
+			teamMatchups.add(mapMatchUp(results));
+		}
+		return teamMatchups;
+		
+	}
 
 	@Override
 	public List<Integer> getTeamsForTournament(String tournamentID){

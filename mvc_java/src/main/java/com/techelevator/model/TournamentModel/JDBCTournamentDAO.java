@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Component
 public class JDBCTournamentDAO implements TournamentDAO {
@@ -83,14 +84,16 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	}
 
 	@Override
-	public List<Tournament> getTournamentByTeam(String teamId) {
-		String goodSql = "select * from match_up where team_id_1 = ? or team_id_2 = ?";
-		List<Tournament> tournaments = new ArrayList<>();
-		SqlRowSet results = jdbcTemplate.queryForRowSet(goodSql,Integer.parseInt(teamId), Integer.parseInt(teamId));
+	public List<Tournament> getTournamentByTeamID(String teamId) {
+		String sql = "SELECT * FROM tournament JOIN team_tournament ON tournament.tournament_id = team_tournament.tournament_id "
+		+ "WHERE team_id = ?";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, Integer.parseInt(teamId));
+		List<Tournament> teamTournaments = new ArrayList<>();
 		while (results.next()) {
-			tournaments.add(this.getTournamentByID(results.getString("tournament_id")));
+			teamTournaments.add(mapTournament(results));
 		}
-		return tournaments;
+		return teamTournaments;
 	}
 
 	@Override

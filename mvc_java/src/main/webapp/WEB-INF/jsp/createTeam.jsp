@@ -10,12 +10,13 @@
 	</div>
 	
 	<div class="form-group">
-		<c:url var="createTeamURL" value="/createTeam/process" />
+		<c:url var="createTeamURL" value="/createTeam" />
 		<form method="POST" action="${createTeamURL}" id="createTeam">
 			<div class="form-group">
 				<label for="teamName">Team Name: </label>
 				<input type="text" name="teamName" id="teamName" class="form-control">
 				<input type="hidden" value="${Integer.parseInt(currentUser.userID)}" name="captainId">
+				<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 			</div>
 
 			<div class="form-group">
