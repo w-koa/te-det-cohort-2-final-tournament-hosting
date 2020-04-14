@@ -210,9 +210,9 @@ public class JDBCTeamDAO implements TeamDAO {
 
 	@Override
 	public void deleteTeam(Team team) {
-		String sqlDeleteFromPlayer = "delete from player where team_id = ?";
+//		String sqlDeleteFromPlayer = "delete from player where team_id = ?";
 		String sqlDeleteTeam = "DELETE FROM team WHERE team_id = ?";
-		jdbcTemplate.update(sqlDeleteFromPlayer, team.getId());
+//		jdbcTemplate.update(sqlDeleteFromPlayer, team.getId());
 		jdbcTemplate.update(sqlDeleteTeam, team.getId());
 		
 	}
