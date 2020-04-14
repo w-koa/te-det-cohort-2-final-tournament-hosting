@@ -28,8 +28,8 @@ public class JdbcMatchUpDaoTest {
 	
 	private Team team_one;
 	private Team team_two;
-	private Tournament tourny = new Tournament();
-	private MatchUp matchup;
+	private Tournament tourny;
+	private MatchUp matchup = new MatchUp();
 	private Tournament tournament;
 	
 	@BeforeClass
@@ -44,13 +44,10 @@ public class JdbcMatchUpDaoTest {
 		teamDao = new JDBCTeamDAO(dataSource);
 		matchUpDao = new JDBCMatchUpDAO(dataSource);
 		tournamentDao = new JDBCTournamentDAO(dataSource);
-		
-		
 	}
-	//  insert into match_up (tournament_id, game_id, team_id_1, team_id_2, location, date, time, winner_id, loser_id) values (1, 5, 2, 4, '11 E Walton St Chicago IL 60611', '2020/12/24', '20:17', 2, 4);
+	
 	@Before
 	public void setupData() {
-		System.out.println("setting up");
 		Team teamOne = new Team();
 		teamOne.setName("capstone_tim");
 		teamOne.setCaptainId(44);
@@ -68,20 +65,14 @@ public class JdbcMatchUpDaoTest {
 		teamDao.createTeam(teamTwo);
 		tournamentDao.create(tournament);
 		team_one = teamDao.getTeamByName("capstone_tim");
-		System.out.println("TeamOne: " + team_one.getId());
 		team_two = teamDao.getTeamByName("capstone_timTwo");
 		List<Tournament> list = tournamentDao.getAllTournaments();
-		System.out.println("size: " + list.size());
 		for (Tournament tor : list) {
-//			System.out.println(tor.getName());
 			if (tor.getName().equals("TimvsTim")) {
-				System.out.println("found");
 				tourny = tor;
 				break;
 			}
 		}
-		System.out.println("tounry: " + tourny.getDescription());
-
 		MatchUp matchUp = new MatchUp();
 		matchUp.setTeamId1(String.valueOf(team_one.getId()));
 		matchUp.setTeamId2(String.valueOf(team_two.getId()));
@@ -90,13 +81,12 @@ public class JdbcMatchUpDaoTest {
 		matchUp.setLocation("Downtown");
 		matchUp.setDate("1999-12-20");
 		matchUp.setTime("20:11");
-		
+		matchUp.setWinnerId(String.valueOf(team_one.getId()));
+		matchUp.setLoserId(String.valueOf(team_two.getId()));
 		matchUpDao.createMatchup(matchUp);
 		List<MatchUp> matchupList = matchUpDao.getAllMatchups();
-		System.out.println("size: " + matchupList.size());
 		for (MatchUp match : matchupList) {
 			if (match.getLocation().equals(matchUp.getLocation()) && match.getDate().equals(matchUp.getDate())) {
-				System.out.println("Found Matchup");
 				matchup = match;
 				break;
 			}
@@ -108,59 +98,92 @@ public class JdbcMatchUpDaoTest {
 	public void afterTests() {
 		teamDao.deleteTeam(team_one);
 		teamDao.deleteTeam(team_two);
-		tournamentDao.delete(tourny.getId());
 		matchUpDao.delete(matchup);
 	}
 	
 	@Test
 	public void testCreateMatchup() {
-		// 1, 5, 2, 4, '11 E Walton St Chicago IL 60611', '2020/12/24', '20:17', 2, 4
-
-		List<MatchUp> toCheckList = matchUpDao.getMatchUpsByTournamentId(tourny.getId());
-		MatchUp toCheck = new MatchUp();
+		List<MatchUp> toCheckList = matchUpDao.getAllMatchups();
+		MatchUp toCheck = null;
 		for (MatchUp m : toCheckList) {
-			if (m.getLocation() == "Downtown" && m.getDate() == "1999-12-20") {
+			if (m.getLocation().equals("Downtown")) {
 				toCheck = m;
 			}
 		}
-		assertTrue(toCheck.getTeam1Name().equals(matchup.getTeam1Name()));
-		assertTrue(toCheck.getTeam2Name().equals(matchup.getTeam2Name()));
-		assertTrue(toCheck.getGameId().equals(matchup.getGameId()));
+		MatchUp check = matchUpDao.getMatchByMatchUpId(matchup.getMatchUpId());
+		assertEquals(toCheck, check);
 	}
 
 	@Test
 	public void testGetMatchByMatchUpId() {
-		fail("Not yet implemented");
+		List<MatchUp> toCheckList = matchUpDao.getMatchUpsByTournamentId(tourny.getId());
+		MatchUp toCheck = new MatchUp();
+		for (MatchUp m : toCheckList) {
+			if (m.getLocation().equals("Downtown")) {
+				toCheck = m;
+			}
+		}
+		MatchUp expected = matchUpDao.getMatchByMatchUpId(toCheck.getMatchUpId());
+		assertEquals(toCheck, expected);
 	}
 
 	@Test
 	public void testGetWinsByTeam() {
-		fail("Not yet implemented");
+		int wins = matchUpDao.getWinsByTeam(String.valueOf(team_one.getId()));
+		assertTrue(wins == 1);
 	}
 
 	@Test
 	public void testGetLossesByTeam() {
-		fail("Not yet implemented");
+		int losses = matchUpDao.getLossesByTeam(String.valueOf(team_two.getId()));
+		assertTrue(losses == 1);
 	}
 
 	@Test
 	public void testGetTournamentWinsByTeam() {
-		fail("Not yet implemented");
+		int wins = matchUpDao.getTournamentWinsByTeam(String.valueOf(team_one.getId()), tourny.getId());
+		int secondTeamWins = matchUpDao.getTournamentWinsByTeam(String.valueOf(team_two.getId()), tourny.getId());
+		assertTrue(wins == 1);
+		assertTrue(secondTeamWins == 0);
 	}
 
 	@Test
 	public void testGetTournamentLossesByTeam() {
-		fail("Not yet implemented");
+		int losses = matchUpDao.getTournamentLossesByTeam(String.valueOf(team_two.getId()), tourny.getId());
+		int secondTeamLosses = matchUpDao.getTournamentLossesByTeam(String.valueOf(team_one.getId()), tourny.getId());
+		assertTrue(losses == 1);
+		assertTrue(secondTeamLosses == 0);
 	}
 
 	@Test
 	public void testGetMatchUpsByTournamentId() {
-		fail("Not yet implemented");
+		List<MatchUp> list = matchUpDao.getMatchUpsByTournamentId(tourny.getId());
+		assertTrue(list.size() == 1);
+		assertTrue(list.get(0).equals(matchup));
 	}
 
 	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		matchUpDao.delete(matchup);
+		MatchUp check = matchUpDao.getMatchByMatchUpId(matchup.getMatchUpId());
+		assertEquals(check, null);
 	}
 
+	@Test
+	public void testGetMatchUpsByTeamId() {
+		List<MatchUp> list = matchUpDao.getMatchUpsByTeamId(String.valueOf(team_one.getId()));
+		List<MatchUp> listTwo = matchUpDao.getMatchUpsByTeamId(String.valueOf(team_two.getId()));
+		assertTrue(list.size() == 1);
+		assertTrue(listTwo.size() == 1);
+		assertEquals(list.get(0), matchup);
+		assertEquals(listTwo.get(0), matchup);
+	}
+	
+	@Test
+	public void TestGetTeamsForTournament() {
+		List<Integer> list = matchUpDao.getTeamsForTournament(tourny.getId());
+		assertTrue(list.size() == 2);
+		assertTrue(list.get(0) == team_one.getId());
+		assertTrue(list.get(1) == team_two.getId());
+	}
 }
