@@ -8,7 +8,7 @@
 <div class="col-md-8">
 	<form class="searchForm" id="tournamentsSearchForm"> <!-- display: flex; align-items: center; -->
 		<label for="searchFilter">Search Tournaments: </label>
-		<input id="searchBar" class="form-control" type="text" name="searchFilter" placeholder="Search">
+		<input id="searchBar" class="form-control" type="text" name="search" placeholder="Search">
 		<button class="btn btn-success" type="submit">Search</button>
 	</form>
 </div>

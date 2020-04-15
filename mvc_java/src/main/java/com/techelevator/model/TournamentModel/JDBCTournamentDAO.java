@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
+import com.techelevator.model.UserModel.User;
 
 @Component
 public class JDBCTournamentDAO implements TournamentDAO {
@@ -38,6 +39,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 
 	@Override
 	public boolean create(Tournament newTournament) {
+
 		String sql = "INSERT INTO tournament (tournament_name, organizer_id, date, location, game, tournament_type, description, tagged_desc)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, newTournament.getName(), Integer.parseInt(newTournament.getOrganizerId()),
@@ -106,6 +108,34 @@ public class JDBCTournamentDAO implements TournamentDAO {
 			tournaments.add(tournament);
 		}
 		return tournaments;
+	}
+	
+	public User getOrganizerByTournamentId(String tournamentId) {
+		User organizer = new User();
+		String sqlGetOrganizerByTournamentId = "SELECT id, user_name, email FROM app_user "
+				+ "JOIN tournament ON tournament.organizer_id = app_user.id "
+				+ "WHERE tournament_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetOrganizerByTournamentId, Integer.parseInt(tournamentId));
+		if (results.next()) {
+			organizer.setUserID(Integer.toString(results.getInt("id")));
+			organizer.setUserName(results.getString("user_name"));
+			organizer.setEmail(results.getString("email"));
+		}
+		return organizer;
+	}
+	
+	public List<Tournament> searchTournaments(String search) {
+		List<Tournament> matchingTournaments = new ArrayList<>();
+		String sqlSearchTournaments = "SELECT * FROM tournament "
+				+ "WHERE name ILIKE ? OR game ILIKE ? OR location ILIKE ? "
+				+ "ORDER BY tournament_id";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchTournaments, "%" + search + "%",
+				"%" + search + "%", "%" + search + "%");
+		
+		while (results.next()) {
+			matchingTournaments.add(mapTournament(results));
+		}
+		return matchingTournaments;
 	}
 
 	

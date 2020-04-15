@@ -46,6 +46,14 @@ public class TournamentController {
 
 		return "tournaments";
 	}
+	
+	@RequestMapping(path = "tournamentSearch", method = RequestMethod.GET)
+	public String displayMatchingTournaments(ModelMap map, @RequestParam String search) {
+		List<Tournament> matchingTournaments = tournamentDAO.searchTournaments(search);
+		map.addAttribute("matchingTournaments", matchingTournaments);
+		
+		return "tournaments";
+	}
 
 	// Display tournament detail page
 	@RequestMapping(path = "/tournament/detail", method = RequestMethod.GET)
@@ -56,6 +64,8 @@ public class TournamentController {
 		
 		Tournament tournament = tournamentDAO.getTournamentByID(tournamentId);
 		map.addAttribute("tournament", tournament);
+		User organizer = tournamentDAO.getOrganizerByTournamentId(tournamentId);
+		map.addAttribute("tournamentOrganizer", organizer);
 		List<Team> participatingTeams = teamDAO.getParticipatingTeamsByTournamentId(tournamentId);
 		map.addAttribute("participatingTeams", participatingTeams);
 		List<MatchUp> matchups = matchUpDAO.getMatchUpsByTournamentId(tournamentId);

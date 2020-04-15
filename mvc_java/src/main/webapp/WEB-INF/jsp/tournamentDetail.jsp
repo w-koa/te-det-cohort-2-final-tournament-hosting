@@ -10,7 +10,7 @@
 
 	<div>
 		<h1>${tournament.name }</h1>
-		<h2>Hosted by: ${tournament.organizerName}</h2>
+		<h2>Hosted by: ${tournamentOrganizer.userName}</h2>
 		<!-- link to organizer -->
 	</div>
 	<div id="allTournamentInfoBlock">
@@ -30,15 +30,18 @@
 			</div>
 			<div class="tournamentParticipants">
 				<h2>Participating Teams</h2>
-				<c:if test="${participatingTeams.size() == 0 && currentUser.role.equals('3')}">
+				<c:if
+					test="${participatingTeams.size() == 0 && currentUser.role.equals('3')}">
 					<p>Invite Teams!</p>
 				</c:if>
 				<c:if test="${participatingTeams.size() == 0}">
 					<p>No teams yet!</p>
 				</c:if>
 				<c:forEach var="team" items="${participatingTeams}">
-					<c:url var="teamDetailURL" value="/teams/detail?id=${team.id}"/>
-					<p><a href="${teamDetailURL}">${team.name}</a><p>
+					<c:url var="teamDetailURL" value="/teams/detail?id=${team.id}" />
+					<p>
+						<a href="${teamDetailURL}">${team.name}</a>
+					<p>
 				</c:forEach>
 			</div>
 		</div>
@@ -76,6 +79,7 @@
 				<h2>Matchups</h2>
 
 
+<<<<<<< HEAD
 			<div>
 			<div class= "button"> 
 			<c:if test="${currentUser.role == 3}">
@@ -109,9 +113,45 @@
 					</tr>
 					</c:forEach>
 				</table>
-			</div>
-		</div>
+=======
+				<div>
+					<div class="button">
+						<c:if test="${currentUser.role == 3}">
 
+							<c:url var="pairMatchups" value="/matchPairing">
+								<c:param name="tournamentId" value="${tournament.id}" />
+							</c:url>
+							<a href="${pairMatchups}"><button class="btn btn-primary">Pair
+									Matchups</button></a>
+						</c:if>
+					</div>
+					<table id="tournamentMatchupTable"
+						class="table table-hover table-striped">
+						<tr>
+							<th>Matchup</th>
+							<th>Location</th>
+							<th>Time</th>
+							<th>Winner</th>
+						</tr>
+						<c:forEach var="matchup" items="${matchups}">
+							<tr>
+								<td><c:out value="${matchup.team1Name}" /> VS. <c:out
+										value="${matchup.team2Name}" /></td>
+								<td><c:out value="${matchup.location}" /></td>
+								<td><c:out value="${matchup.date}" /> @<c:out
+										value="${matchup.time}" /></td>
+								<td><c:if test="${matchup.winnerId} != 0">
+										<c:out value="${matchup.winnerName}" />
+									</c:if></td>
+
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+>>>>>>> 243a7dd399ebc35d41345a35cdb699d7d1f426f4
+			</div>
+
+		</div>
 	</div>
 	<div id="embeddedMap">
 		<h2>Tournament Map</h2>
