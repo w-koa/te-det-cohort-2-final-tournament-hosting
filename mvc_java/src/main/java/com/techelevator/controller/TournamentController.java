@@ -1,6 +1,6 @@
 package com.techelevator.controller;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -169,7 +169,7 @@ public class TournamentController {
 		return "joinTournamentSuccess";
 	}
 	
-	@RequestMapping (path="/matchPairing", method= RequestMethod.POST)
+	@RequestMapping (path="/matchPairing", method= RequestMethod.GET)
 	public String pairMatchups (HttpSession session, @RequestParam String tournamentId) {
 		//pull a list of all participants
 		List <Team> tourneyParticipants = teamDAO.getParticipatingTeamsByTournamentId(tournamentId);
@@ -201,8 +201,10 @@ public class TournamentController {
 			pairing.setLoserId("0");
 			tourneyParticipants.remove(x);
 			tourneyParticipants.remove(x-1);
+			
+			
 			matchUpDAO.createMatchup(pairing);
-			// x == 2
+		
 			
 		}
 			
