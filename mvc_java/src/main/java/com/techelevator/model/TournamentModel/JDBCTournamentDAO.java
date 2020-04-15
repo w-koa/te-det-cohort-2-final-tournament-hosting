@@ -154,15 +154,4 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		return true;
 	}
 
-	@Override
-	public boolean update(Tournament tournament) {
-		return false;
-	}
-
-	@Override
-	public List<Tournament> topXTournamentsByPlayerCount(String limit) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

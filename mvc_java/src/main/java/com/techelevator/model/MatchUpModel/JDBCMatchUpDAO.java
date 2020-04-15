@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.techelevator.model.TeamModel.JDBCTeamDAO;
 import com.techelevator.model.TeamModel.Team;
-import com.techelevator.model.TournamentModel.Tournament;
 
 @Component
 public class JDBCMatchUpDAO implements MatchUpDAO {
@@ -49,13 +48,6 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		Team winner = match.getWinnerId().equals(String.valueOf(teamOne.getId())) ? teamOne : teamTwo;
 		match.setWinnerName(winner.getName());
 		}
-		
-//		match.setTeam1Name(jdbcTemplate.queryForObject(
-//		"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId1())));
-//		match.setTeam2Name(jdbcTemplate.queryForObject(
-//				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getTeamId2())));
-//		match.setWinnerName(jdbcTemplate.queryForObject(
-//				"SELECT team_name FROM team WHERE team_id = ? ", String.class, Integer.parseInt(match.getWinnerId())));
 		return match;
 	}
 
@@ -183,13 +175,5 @@ String sql = "UPDATE match_up SET winner_id = ? , loser_id = ? WHERE match_up_id
 		jdbcTemplate.update(sql, Integer.parseInt(matchUp.getMatchUpId()));
 		return true;
 	}
-
-	@Override
-	public boolean update(MatchUp matchUp) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
 
 }

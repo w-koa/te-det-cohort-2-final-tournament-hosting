@@ -19,12 +19,8 @@ public interface TeamDAO {
 	List<Team> getParticipatingTeamsByTournamentId(String tournamentId);
 	public List<User> getMembersByTeamId(int teamId);
 	public String idToName (String teamId);
-	
-	// Update
 	public void updateTeam(Team team);
-
 	public int getTeamCount();
-
 	void deleteTeam(Team team);
 
 	
