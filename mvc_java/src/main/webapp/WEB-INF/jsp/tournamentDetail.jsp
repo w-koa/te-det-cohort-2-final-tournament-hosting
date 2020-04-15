@@ -5,7 +5,7 @@
 
 <div>
 	<div>
-		<h1>Banner Image here?</h1>
+		<h1></h1>
 	</div>
 
 	<div>
@@ -79,40 +79,39 @@
 				<h2>Matchups</h2>
 
 
-				<div>
-					<div class="button">
-						<c:if test="${currentUser.role == 3}">
-
-							<c:url var="pairMatchups" value="/matchPairing">
-								<c:param name="tournamentId" value="${tournament.id}" />
-							</c:url>
-							<a href="${pairMatchups}"><button class="btn btn-primary">Pair
-									Matchups</button></a>
-						</c:if>
-					</div>
-					<table id="tournamentMatchupTable"
-						class="table table-hover table-striped">
-						<tr>
-							<th>Matchup</th>
-							<th>Location</th>
-							<th>Time</th>
-							<th>Winner</th>
-						</tr>
-						<c:forEach var="matchup" items="${matchups}">
-							<tr>
-								<td><c:out value="${matchup.team1Name}" /> VS. <c:out
-										value="${matchup.team2Name}" /></td>
-								<td><c:out value="${matchup.location}" /></td>
-								<td><c:out value="${matchup.date}" /> @<c:out
-										value="${matchup.time}" /></td>
-								<td><c:if test="${matchup.winnerId} != 0">
-										<c:out value="${matchup.winnerName}" />
-									</c:if></td>
-
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
+			<div>
+			<div class= "button"> 
+			<c:if test="${currentUser.role == 3}">
+			
+				<c:url var="pairMatchups" value="/matchPairing" >
+				
+				<c:param name="tournamentId" value ="${tournament.id}"/>
+ 				
+ 				</c:url>
+				<a href="${pairMatchups}"><button class="btn btn-primary">Pair Matchups</button></a>
+			</c:if>
+			</div>
+				<table id="tournamentMatchupTable"
+					class="table table-hover table-striped">
+					<tr>
+						<th>Matchup</th>
+						<th>Location</th>
+						<th>Time</th>
+						<th>Winner</th>
+					</tr>
+					<c:forEach var="matchup" items="${matchups}"> 
+					<tr>
+						<td><c:out value = "${matchup.team1Name}"/> VS. <c:out value = "${matchup.team2Name}"/></td>
+						<td><c:out value = "${matchup.location}"/></td>
+						<td><c:out value = "${matchup.date}"/> @<c:out value = "${matchup.time}"/></td>
+						<td>
+						<c:if test="${matchup.winnerId} != 0">
+						<c:out value= "${matchup.winnerName}"/>
+						</c:if></td>
+							
+					</tr>
+					</c:forEach>
+				</table>
 			</div>
 
 		</div>

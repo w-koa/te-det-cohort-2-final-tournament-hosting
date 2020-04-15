@@ -147,7 +147,7 @@ public class TournamentController {
 			return "redirect:/newUser";
 		}
 		Team userTeam = teamDAO.getTeamByCaptainId(Integer.parseInt(currentUser.getUserID()));
-		map.addAttribute("userTeam", userTeam);
+		map.addAttribute("user", userTeam);
 		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
 		map.addAttribute("allTournaments", allTournaments);
 
@@ -170,46 +170,48 @@ public class TournamentController {
 	}
 	
 	@RequestMapping (path="/matchPairing", method= RequestMethod.GET)
-	public String pairMatchups (HttpSession session, @RequestParam String tournamentId) {
+	public String pairMatchups (HttpSession session, @RequestParam (name = "tournamentId") String tournamentId) {
 		//pull a list of all participants
 		List <Team> tourneyParticipants = teamDAO.getParticipatingTeamsByTournamentId(tournamentId);
 		List <Team> eliminatedTeams = teamDAO.eliminatedTeamsByTourneyId(tournamentId);
 		// remove eliminated teams
+		if (tourneyParticipants.size() > 0) {
+		if (eliminatedTeams.size() > 0 ) {
 		for (Team eliminated : eliminatedTeams) {
-			for (int x = tourneyParticipants.size() ; x >= 0 ; x--) {
-				if (eliminated.equals(tourneyParticipants)) {
+			for (int x = tourneyParticipants.size()-1 ; x >= 0 ; x--) {
+				if (eliminated.equals(tourneyParticipants.get(x))) {
 					tourneyParticipants.remove(x);
 			}
 			}
 			}
-		
-		for (int x = tourneyParticipants.size() ; x >= 0 ; x= x-2) {
+			}
+		for (int x = tourneyParticipants.size()-1 ; x >= 1 ; x= x-2) {
 			MatchUp pairing = new MatchUp ();
 			pairing.setTournamentId(tournamentId);
 			pairing.setGameId("1");
 			if (x == 0) {
-				pairing.setTeamId1(tourneyParticipants.get(0).getId() + "");
+				pairing.setTeamId1(tourneyParticipants.get(0).getId());
 				pairing.setTeamId2("0");
 			}
 			
-			pairing.setTeamId1(tourneyParticipants.get(x).getId() + "");
-			pairing.setTeamId2(tourneyParticipants.get(x-1).getId() + "");
-			pairing.setLocation("location");
-			pairing.setDate("11/22/1066");
+			pairing.setTeamId1(tourneyParticipants.get(x).getId());
+			pairing.setTeamId2(tourneyParticipants.get(x-1).getId());
+			pairing.setLocation("Pod "+ x);
+			pairing.setDate("1066-02-02");
 			pairing.setTime("8:00");
 			pairing.setWinnerId("0");
 			pairing.setLoserId("0");
 			tourneyParticipants.remove(x);
 			tourneyParticipants.remove(x-1);
 			
-			
+			System.out.println(pairing.toString());
 			matchUpDAO.createMatchup(pairing);
 		
-			
+		}
 		}
 			
 		
 		
-		return "redirect:/tournament/detail";
+		return "redirect:/tournament/detail?tournamentId=" + tournamentId;
 	}
 }

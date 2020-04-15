@@ -98,6 +98,13 @@ insert into app_user (user_name, email, password, role, salt) values ('dheatly2b
 insert into app_user (user_name, email, password, role, salt) values ('mjanik2c', 'hmagner2c@sun.com', 'Np3gzOFDTt8', 3, '03eccb23537c30d25ac3fe15a198f9e9cca29182');
 insert into app_user (user_name, email, password, role, salt) values ('jmcartan2d', 'emccullum2d@tripadvisor.com', 'sKV8Y9', 2, '03eccb23537c30d25ac3fe15a198f9e9cca29182');
 
+insert into app_user (id, user_name, password, email, role, salt) values (96, 'Tim', 'iarBqBcNqRsCpoZNOd7Z2Q==', 'tim@tim.com', 3,'JiRyM0/IaeWDxhAfpcDUG1D+z35ANH3mSm/rCYmkk3GRjmzxYGAXdeaielGjkg87hBrNvaHbN9HJeHpWLLwUJSDZB5dyQGI37zfVnvgJUNOk2Ur9feAqth/0rqI2/S2TZs+JW6PzrIHNwb9+VY1TZD0M1ngqVkcfNI/uGHkHdqQ=');
+insert into app_user (id, user_name, password, email, role, salt) values (97, 'captain1',	'OcH7q8H4ubbhP/fwhh9UjQ==',	'captain@captain.com',	2,	'gJPrCcgloYGYD6CD2N2FW3XJLVdlUOs/qcnX1JBqbBgpgN0y3JYddUCTq5Pq39oK1HrQfBYzCphyH9RlBP0aiVspGEu0MP7l6f4V867wkQ2IJFPcokQGxieTOmM7IbsNtZoJrLFTjEyd1/kdiCDZyCsUCI4J4l1xRz+MNqr7vZQ=');
+insert into app_user (id, user_name, password, email, role, salt) values (98, 'player1',	'G0IFcnJ68bBs9PGLsXYRqQ==',	'player1@player1.com',	1,	'FGW+HXZ8YlxkOeP0F4GHy776JjQaGw6i+RHk7O8L/g3uKiRvsFsYLmh6CoUACQLgyjZUEfIHN+jbKX5xu9Z9lT3kZ3w+n7saBUoqD0QA1CSkXZlD6mAQ5D5Bqb/QUoo5sXjqbU+g9YF+WyU+MwJrxN+cHuUtb+CxDmND9P5CnFw=');
+insert into app_user (id, user_name, password, email, role, salt) values (99, 'Captain2',	'5/39UrYDEY9ukmmG1cHCZw==',	'captain2@captain2.com', 2,	'GwKU+YoeGLH/Nkl1vN3eVnNrGKhgp7vIB/MT2BdZi/54V6InF8okB4vZqk3IYUbY3OlqjJm6bRmG4s3piPfzsmD92Wgfyt+wIB+4GN1SKCcMBJtw1jNXSsKw88jRYlRyrtkp1W16tYrVWtti2JPEl1mpi4iwhcWmXUWgXDC+pyY=');
+insert into app_user (id, user_name, password, email, role, salt) values (105,'player2',	'nLG49pB26g96dK1DY/xVCQ==',	'player2@player2.com',	1,	'ApL1F4pK2F4f8xk7lwTVQ0S4riTZLSEeW1e2DEYcYo4TCDpWbeSaFf27dnVu2xUnuHqmNuyYNg8t6qipegpznP/fO7zZzNX2vIt9PI5KgTrk00x14e0qSNf8QAmFa6acqiNF7SpDuc3A2MHEFyuYftc9FgJxK9TJTdpAi7X6vmU=');
+insert into app_user (id, user_name, password, email, role, salt) values (106, 'player3',	'/oy5uLh90UKnKSTodIwAPQ==',	'player3@player3.com',	1,	'BIy6jqEQRTu1zneQ2U6wKRNupLM/9cFbXAF670Tth26ulm95muwp7q0GOSUV2ha3JQEYZrw6FNjuqFudBzqm/907Lcbs3Gv7EQRh7zXibpDnrkyHqqfuK+r9PxkhQTj5BGBMwnIxhd9VdwhYw2NMmsDx+Ir0W9Sct1N+L6SffoY=');
+insert into app_user (id, user_name, password, email, role, salt) values (107, 'player4',	'E0AGuJ3sze+/I55PMbg2WQ==',	'player4@player4.com',	1,	'H2hvoNyzJWI5k9EWg6UzZpvRis6mRxxgSMBZRFV3EZEGsmhsDvhO1EIwN5ajSFyCkzF26HvaqCHiom07LQq9TWIUBuY7FWUW7IfMrE+SmHqXZRBRSx7RHZRC1/fZf5Yg3ebv5GRJXtYd1ClJDKWOn4pGMEUTg73geCCrTSIT8+A=');
 
 
 
@@ -142,7 +149,8 @@ insert into team (team_name, captain_id) values ('Bubblemix', 48);
 insert into team (team_name, captain_id) values ('Wikizz', 48);
 insert into team (team_name, captain_id) values ('Flashset', 46);
 insert into team (team_name, captain_id) values ('Zoomzone', 9);
-
+insert into team (team_id, team_name, captain_id) values (53,	'captain1team1',	97);
+insert into team (team_id, team_name, captain_id) values (54,	'captain2team2',	99);
 
 
 
@@ -246,7 +254,7 @@ insert into tournament (tournament_name, organizer_id, date, location, game, tou
 insert into tournament (tournament_name, organizer_id, date, location, game, tournament_type, description) values ('The Last Gladiators', 9, '2020/05/03', '11 E Walton St Chicago IL 60611', 'Call of Duty', 'single', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.');
 insert into tournament (tournament_name, organizer_id, date, location, game, tournament_type, description) values ('Taste of Honey, A', 7, '2020/04/18', '11 E Walton St Chicago IL 60611', 'BioShock', 'single', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.');
 insert into tournament (tournament_name, organizer_id, date, location, game, tournament_type, description) values ('Nymphomaniac: Volume I', 9, '2020/08/07', '11 E Walton St Chicago IL 60611', 'Call of Duty', 'single', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.');
-
+insert into tournament (tournament_id, tournament_name, organizer_id, date, location, game, tournament_type, description) values (100,	'Sample Tourney',	96,	'2020-04-17',	'35239 Palmer Rd, Westland, MI 48186',	'Tetris',	'single',	'Format: /nSingle Elimination - winner murders loser/n/nRules:/nwinner must behead loser with dull axe/n/nPrizes:/n');
 
 
 
@@ -386,6 +394,8 @@ insert into team_tournament (tournament_id, team_id) values (18, 21);
 insert into team_tournament (tournament_id, team_id) values (25, 2);
 insert into team_tournament (tournament_id, team_id) values (11, 7);
 insert into team_tournament (tournament_id, team_id) values (6, 28);
+insert into team_tournament (tournament_id, team_id) values (100, 53);
+insert into team_tournament (tournament_id, team_id) values (100, 54);
 
 UPDATE tournament 
 SET tagged_desc = '<h2>Tournament Details</h2>
