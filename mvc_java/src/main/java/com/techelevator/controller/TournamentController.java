@@ -185,18 +185,18 @@ public class TournamentController {
 			}
 			}
 			}
-		for (int x = tourneyParticipants.size()-1 ; x >= 0 ; x= x-2) {
+		for (int x = tourneyParticipants.size()-1 ; x >= 1 ; x= x-2) {
 			MatchUp pairing = new MatchUp ();
 			pairing.setTournamentId(tournamentId);
 			pairing.setGameId("1");
 			if (x == 0) {
-				pairing.setTeamId1(tourneyParticipants.get(0).getId() + "");
+				pairing.setTeamId1(tourneyParticipants.get(0).getId());
 				pairing.setTeamId2("0");
 			}
 			
-			pairing.setTeamId1(tourneyParticipants.get(x).getId() + "");
-			pairing.setTeamId2(tourneyParticipants.get(x-1).getId() + "");
-			pairing.setLocation("location");
+			pairing.setTeamId1(tourneyParticipants.get(x).getId());
+			pairing.setTeamId2(tourneyParticipants.get(x-1).getId());
+			pairing.setLocation("Pod "+ x);
 			pairing.setDate("1066-02-02");
 			pairing.setTime("8:00");
 			pairing.setWinnerId("0");
