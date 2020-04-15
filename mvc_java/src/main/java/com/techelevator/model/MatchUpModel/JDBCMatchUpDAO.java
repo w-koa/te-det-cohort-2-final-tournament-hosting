@@ -168,8 +168,12 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		}
 
 	@Override
-	public boolean update(MatchUp matchUp) {
-
+	public boolean updateWinner(MatchUp matchUp, boolean isTeamOneWinning) {
+String sql = "UPDATE match_up SET winner_id = ? , loser_id = ? WHERE match_up_id = ?";
+	String winner = isTeamOneWinning ? matchUp.getTeamId1() : matchUp.getTeamId2() ;
+	String loser = isTeamOneWinning ? matchUp.getTeamId2() : matchUp.getTeamId1() ;
+	jdbcTemplate.update(sql, Integer.parseInt(winner), Integer.parseInt(loser), Integer.parseInt(matchUp.getMatchUpId() ));
+		
 		return false;
 	}
 
@@ -178,6 +182,12 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		String sql = "DELETE FROM match_up WHERE match_up_id = ?";
 		jdbcTemplate.update(sql, Integer.parseInt(matchUp.getMatchUpId()));
 		return true;
+	}
+
+	@Override
+	public boolean update(MatchUp matchUp) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
