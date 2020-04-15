@@ -58,8 +58,8 @@ tournament_name varchar (150),
 organizer_id integer,
 date date,
 location varchar (150),
-game varchar (30),
-tournament_type varchar (30) default 'single',
+game varchar (50),
+tournament_type varchar (50) default 'single',
 description varchar (5000),
 tagged_desc varchar (5000)
 );
