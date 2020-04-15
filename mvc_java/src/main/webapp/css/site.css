@@ -65,6 +65,16 @@ p {
 	color: var(--site-white);
 }
 
+#bunnyLargeImg {
+	width: 50%;
+}
+
+#homepageSection {
+	display: flex;
+}
+#homepageSection div{
+	padding-right: 20px;
+}
 .searchForm {
 	display: flex;
 	align-items: center;

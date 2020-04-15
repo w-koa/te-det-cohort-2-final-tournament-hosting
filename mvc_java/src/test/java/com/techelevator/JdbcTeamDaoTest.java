@@ -22,20 +22,17 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 public class JdbcTeamDaoTest {
 
 	private static SingleConnectionDataSource dataSource;
-	
+
 	private static JDBCTeamDAO teamDAO;
 	private static JDBCUserDAO userDao;
 	private static JdbcTemplate jdbcTemplate;
-	
+
 	private Team team_one = null;
 	private Team team = new Team();
 	private Team injectedTeam = new Team();
 	private User injectedUser = new User();
 	private User globalUser = null;
-	
-	
-	
-	
+
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
@@ -49,10 +46,7 @@ public class JdbcTeamDaoTest {
 		teamDAO = new JDBCTeamDAO(dataSource);
 		userDao = new JDBCUserDAO(dataSource, new PasswordHasher());
 	}
-	
-	
-	
-	
+
 	@Before
 	public void setup() {
 		User user = new User();
@@ -66,13 +60,13 @@ public class JdbcTeamDaoTest {
 		team.setName("Fake Team");
 		team.setCaptainId(Integer.parseInt(globalUser.getUserID()));
 		teamDAO.createTeam(team);
-		List<Team> list =  teamDAO.getAllTeams();
+		List<Team> list = teamDAO.getAllTeams();
 		for (Team te : list) {
 			if (te.getName().equals("Fake Team") && te.getCaptainId() == Integer.parseInt(globalUser.getUserID())) {
 				team_one = te;
 			}
 		}
-		
+	}
 //		String sqlInsertTeam = "Insert into team (team_id, team_name, captain_id) values (54321, 'Fake Team', 1)";
 //		String sqlInsertPlayer = "insert into player (player_id, team_id, ranking, points_scored) values (54321, 54321, 2, 56)";
 //		String sqlInsertAppUser = "insert into app_user (id, user_name, email, password, role, salt) values (54321, 'eingerith0', "
@@ -88,30 +82,6 @@ public class JdbcTeamDaoTest {
 ////		injectedUser.setUserName("eingerith0");
 //		team.setName("new fake team");
 //		team.setCaptainId(2);
-		
-	}
-
-	@Test
-	public void testGetTeamByCaptainId() {
-		Team check = teamDAO.getTeamByCaptainId(team_one.getCaptainId());
-		assertEquals(check.getName(), team_one.getName());
-		assertTrue(team_one.getId() == check.getId());
-	}
-	
-	@Test
-	public void testGetAllTeamCaptains() {
-		List<User> list = teamDAO.getAllTeamCaptains();
-		System.out.println("Size: " + list.size());
-		
-		assertTrue(list.get(0).equals(globalUser));
-	}
-	
-	@Test
-	public void testGetCaptainByTeamId() {
-		User check = teamDAO.getCaptainByTeamId(team_one.getId());
-		assertEquals(check.getUserName(), globalUser.getUserName());
-		assertEquals(check.getUserID(), globalUser.getUserID());
-	}
 
 	@After
 	public void deleteSetup() {
@@ -123,17 +93,13 @@ public class JdbcTeamDaoTest {
 		jdbcTemplate.update(deletePlayer);
 		jdbcTemplate.update(deleteTeam);
 		jdbcTemplate.update(deleteUser);
-		
-
 	}
-	
-	
-	@Test
-	public void testCreateTeam() {
-		teamDAO.createTeam(team);
-		Team testTeam = teamDAO.getTeamByName("new fake team");
-		assertTrue(team.getName().equals(testTeam.getName()));
 
+	@Test
+	public void testGetTeamByCaptainId() {
+		Team check = teamDAO.getTeamByCaptainId(team_one.getCaptainId());
+		assertEquals(check.getName(), team_one.getName());
+		assertTrue(team_one.getId() == check.getId());
 	}
 
 	@Test
@@ -143,12 +109,35 @@ public class JdbcTeamDaoTest {
 	}
 
 	@Test
+	public void testGetAllTeamCaptains() {
+		List<User> list = teamDAO.getAllTeamCaptains();
+		System.out.println("Size: " + list.size());
+
+		assertTrue(list.get(0).equals(globalUser));
+	}
+
+	@Test
+	public void testGetCaptainByTeamId() {
+		User check = teamDAO.getCaptainByTeamId(team_one.getId());
+		assertEquals(check.getUserName(), globalUser.getUserName());
+		assertEquals(check.getUserID(), globalUser.getUserID());
+	}
+
+	@Test
+	public void testCreateTeam() {
+		teamDAO.createTeam(team);
+		Team testTeam = teamDAO.getTeamByName("new fake team");
+		assertTrue(team.getName().equals(testTeam.getName()));
+
+	}
+
+	@Test
 	public void testGetTeamById() {
 		Team retrievedTeam = teamDAO.getTeamById(54321);
 		assertTrue(retrievedTeam.getName().equals("Fake Team"));
 		System.out.println(retrievedTeam);
 	}
-	
+
 	@Test
 	public void testGetTeamByName() {
 		Team retrievedTeam = teamDAO.getTeamByName("Fake Team");
@@ -159,11 +148,10 @@ public class JdbcTeamDaoTest {
 	public void testMembersByTeamId() {
 		List<User> teamMembers = teamDAO.getMembersByTeamId(team_one.getId());
 		for (User member : teamMembers) {
-		assertTrue(member.getUserName().equals(globalUser.getUserName()));
+			assertTrue(member.getUserName().equals(globalUser.getUserName()));
 		}
 	}
 
-	
 	@Test
 	public void testDeleteTeam() {
 		teamDAO.deleteTeam(injectedTeam);

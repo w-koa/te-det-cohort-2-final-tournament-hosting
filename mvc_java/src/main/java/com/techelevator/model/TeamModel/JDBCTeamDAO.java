@@ -32,16 +32,6 @@ public class JDBCTeamDAO implements TeamDAO {
 		return team;
 	}
 
-	// Helper Just in case id is not auto-generated.
-	private int getNextTeamId() {
-		String sqlCurrentIdMax = "SELECT NEXTVAL(team_team_id_seq)";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlCurrentIdMax);
-		if (result.next()) {
-			return result.getInt(1);
-		} else {
-			throw new RuntimeException("Oops, something went wrong getting the next team ID");
-		}
-	}
 
 	// new teamId should be auto generated
 	@Override
@@ -172,7 +162,24 @@ public class JDBCTeamDAO implements TeamDAO {
 		return teamCount;
 	}
 	
-	public List<Team> teamsByTourneyId (String tournamentId) {
+	@Override
+	public List<Team> getParticipatingTeamsByTournamentId(String tournamentId) {
+		List<Team> participatingTeams = new ArrayList<>();
+		
+		String sqlGetParticipatingTeams = "SELECT * FROM team "
+				+ "JOIN team_tournament ON team.team_id = team_tournament.team_id "
+				+ "JOIN tournament ON tournament.tournament_id = team_tournament.tournament_id "
+				+ "WHERE tournament.tournament_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetParticipatingTeams, Integer.parseInt(tournamentId));
+		while (results.next()) {
+			participatingTeams.add(mapRowToTeam(results));
+		}
+		return participatingTeams;
+				
+	}
+	
+	public List<Team> activeTeamsByTourneyId (String tournamentId) {
+
 		List<Team> teamList = new ArrayList<>();
 
 		String sqlGetActiveTeams = "SELECT * FROM team JOIN team_tournament ON team.team_id = team_tournament.team_id WHERE tournament_id = ?";
