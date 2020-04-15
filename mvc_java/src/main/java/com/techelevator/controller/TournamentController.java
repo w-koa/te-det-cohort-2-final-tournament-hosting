@@ -28,45 +28,49 @@ import com.techelevator.model.UserModel.User;
 @CrossOrigin
 @Controller
 public class TournamentController {
-	
+
 	@Autowired
 	JDBCTournamentDAO tournamentDAO;
 	@Autowired
 	JDBCMatchUpDAO matchUpDAO;
 	@Autowired
 	JDBCTeamDAO teamDAO;
-	
+
 	// Display all tournaments
-	@RequestMapping(path="/tournaments", method = RequestMethod.GET)
+	@RequestMapping(path = "/tournaments", method = RequestMethod.GET)
 	public String displayTournaments(ModelMap map) {
-		
+
 		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
 		map.addAttribute("tournaments", allTournaments);
-		
+
 		return "tournaments";
 	}
-	
-		
+
 	// Display tournament detail page
-	@RequestMapping(path="/tournament/detail", method = RequestMethod.GET)
+	@RequestMapping(path = "/tournament/detail", method = RequestMethod.GET)
 	public String displayTournamentDetail(@RequestParam String tournamentId, ModelMap map) {
+		// Google Map Embed API key
+		String apiKey = "AIzaSyBvxfdPSYjCtOO_vyW3KGAIF2SzpKNgnGA";
+		map.addAttribute("apiKey", apiKey);
 		
-	Tournament tournament = tournamentDAO.getTournamentByID(tournamentId);
-	map.addAttribute("tournament", tournament);
-	List <MatchUp> matchups = matchUpDAO.getMatchUpsByTournamentId(tournamentId);
-	map.addAttribute("matchups", matchups);
-		
+		Tournament tournament = tournamentDAO.getTournamentByID(tournamentId);
+		map.addAttribute("tournament", tournament);
+		List<Team> participatingTeams = teamDAO.getParticipatingTeamsByTournamentId(tournamentId);
+		map.addAttribute("participatingTeams", participatingTeams);
+		List<MatchUp> matchups = matchUpDAO.getMatchUpsByTournamentId(tournamentId);
+		map.addAttribute("matchups", matchups);
+
 		return "tournamentDetail";
 	}
-	
-	
+
 	// Register new tournament
-	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.GET)
+	@RequestMapping(path = "/tournaments/newTournament", method = RequestMethod.GET)
 	public String displayRegisterNewTournament(@RequestParam String role) {
-		
-		if(Integer.parseInt(role) >= 3) {
-		 return "createTournament"; }
-		
+
+		if (Integer.parseInt(role) >= 3) {
+			return "createTournament";
+		}
+
 		return "/";
 	}
 
@@ -82,45 +86,47 @@ public class TournamentController {
 //		
 //		return "redirect:/newTournamentSuccess";
 //	}
-	@RequestMapping(path="/tournaments/newTournament", method = RequestMethod.POST)
-	public String processRegisterNewTournament(@Valid @ModelAttribute Tournament tournament, BindingResult result, RedirectAttributes flash,
-			HttpSession session) {
+	@RequestMapping(path = "/tournaments/newTournament", method = RequestMethod.POST)
+	public String processRegisterNewTournament(@Valid @ModelAttribute Tournament tournament, BindingResult result,
+			RedirectAttributes flash, HttpSession session) {
 		System.out.println(tournament.toString());
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			flash.addFlashAttribute("newTournament", tournament);
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "newTournament", result);
-			
+
 			return "redirect:/organizerDashboard";
 		}
-	
-		// Register a new tournament here. Should take in a tournament object to save to DB.
-		
+
+		// Register a new tournament here. Should take in a tournament object to save to
+		// DB.
+
 		Tournament newTournamentRegistration = tournament;
-		
-		newTournamentRegistration.setDescription(DescriptionBuilder.formatDesc(tournament.getFormat(),
-				tournament.getRules(), tournament.getPrizes()));
+
+		newTournamentRegistration.setDescription(
+				DescriptionBuilder.formatDesc(tournament.getFormat(), tournament.getRules(), tournament.getPrizes()));
 		newTournamentRegistration.setTaggedDesc(DescriptionBuilder.formatTaggedDesc(tournament.getFormat(),
 				tournament.getRules(), tournament.getPrizes()));
 		System.out.println(newTournamentRegistration.toString());
-		
+
 		tournamentDAO.create(newTournamentRegistration);
-		
-		
+
 		return "redirect:/newTournamentSuccess";
 	}
-	
-	// Redirect page. Informs user that registration was successful, this page should do other useful stuff.
-	@RequestMapping(path="/newTournamentSuccess", method = RequestMethod.GET)
+
+	// Redirect page. Informs user that registration was successful, this page
+	// should do other useful stuff.
+	@RequestMapping(path = "/newTournamentSuccess", method = RequestMethod.GET)
 	public String displayNewTournamentSuccess() {
-		
-		// Maybe a link to manage tournament details. Dashboard sort of view? Allow edits and invitations to tournament.
-		
+
+		// Maybe a link to manage tournament details. Dashboard sort of view? Allow
+		// edits and invitations to tournament.
+
 		return "newTournamentSuccess";
 	}
-	
-	@RequestMapping(path="/tournaments/join", method = RequestMethod.GET)
+
+	@RequestMapping(path = "/tournaments/join", method = RequestMethod.GET)
 	public String displayJoinTournament(ModelMap map, HttpSession session) {
-		
+
 		User currentUser = (User) session.getAttribute("currentUser");
 		if (currentUser == null) {
 			return "redirect:/login";
@@ -133,21 +139,22 @@ public class TournamentController {
 		map.addAttribute("userTeam", userTeam);
 		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
 		map.addAttribute("allTournaments", allTournaments);
-		
+
 		return "joinTournament";
 	}
-	
-	@RequestMapping(path="/tournaments/join", method = RequestMethod.POST)
-	public String processJoinTournament(HttpSession session, @RequestParam String tournamentId, @RequestParam String teamId) {
-		
+
+	@RequestMapping(path = "/tournaments/join", method = RequestMethod.POST)
+	public String processJoinTournament(HttpSession session, @RequestParam String tournamentId,
+			@RequestParam String teamId) {
+
 		tournamentDAO.joinTournament(tournamentId, teamId);
-		
+
 		return "redirect:/tournaments/join/success";
 	}
-	
-	@RequestMapping(path="/tournaments/join/success", method = RequestMethod.GET)
+
+	@RequestMapping(path = "/tournaments/join/success", method = RequestMethod.GET)
 	public String displayJoinTournamentSuccess(HttpSession session) {
-		
+
 		return "joinTournamentSuccess";
 	}
 }

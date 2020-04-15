@@ -16,6 +16,7 @@ public interface TeamDAO {
 	public List<User> getAllTeamCaptains();
 	public Team getTeamByCaptainId(int captainId);
 	public User getCaptainByTeamId(int teamId);
+	List<Team> getParticipatingTeamsByTournamentId(String tournamentId);
 	public List<User> getMembersByTeamId(int teamId);
 	public String idToName (String teamId);
 	
@@ -25,5 +26,6 @@ public interface TeamDAO {
 	public int getTeamCount();
 
 	void deleteTeam(Team team);
+
 	
 }

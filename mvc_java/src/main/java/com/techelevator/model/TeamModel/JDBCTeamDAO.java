@@ -172,6 +172,22 @@ public class JDBCTeamDAO implements TeamDAO {
 		return teamCount;
 	}
 	
+	@Override
+	public List<Team> getParticipatingTeamsByTournamentId(String tournamentId) {
+		List<Team> participatingTeams = new ArrayList<>();
+		
+		String sqlGetParticipatingTeams = "SELECT * FROM team "
+				+ "JOIN team_tournament ON team.team_id = team_tournament.team_id "
+				+ "JOIN tournament ON tournament.tournament_id = team_tournament.tournament_id "
+				+ "WHERE tournament.tournament_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetParticipatingTeams, Integer.parseInt(tournamentId));
+		while (results.next()) {
+			participatingTeams.add(mapRowToTeam(results));
+		}
+		return participatingTeams;
+				
+	}
+	
 	public List<Team> activeTeamsByTourneyId (String tournamentId) {
 		List<Team> teamList = new ArrayList<>();
 

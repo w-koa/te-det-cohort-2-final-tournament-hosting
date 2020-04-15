@@ -38,10 +38,10 @@ public class JDBCTournamentDAO implements TournamentDAO {
 
 	@Override
 	public boolean create(Tournament newTournament) {
-		String sql = "INSERT INTO tournament (tournament_name, organizer_id, date, game, tournament_type, description)"
+		String sql = "INSERT INTO tournament (tournament_name, organizer_id, date, location, game, tournament_type, description)"
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, newTournament.getName(), Integer.parseInt(newTournament.getOrganizerId()),
-				newTournament.getDate(), newTournament.getGame(), newTournament.getType(), newTournament.getDescription());
+				newTournament.getDate(), newTournament.getLocation(), newTournament.getGame(), newTournament.getType(), newTournament.getDescription());
 		return true;
 	}
 
