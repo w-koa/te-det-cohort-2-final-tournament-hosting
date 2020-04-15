@@ -30,35 +30,42 @@
 
 </div>
 <div class="col-md-8">
-
+	<c:if test="${userTeam.name == null}">
+		<h2>You must have a team to compete!</h2>
+	</c:if>
 	<div>
-		<c:if test="${teamTournaments.size() == 0}">
-			<h2>No tournaments! Join a tournament</h2>
-		</c:if>
-	</div>
-
-	<div class="form-group">
-		<c:url var="joinTournamentURL" value="/tournaments/join" />
-		<form method="POST" action="${joinTournamentURL}" id="joinTournament">
-			<div class="form-group">
-				<label for="tournamentSelect">Tournament Name: </label> <select
-					id="tournamentSelect" class="form-control" name="tournamentId">
-					<c:forEach var="tournament" items="${allTournaments}">
-						<option value="${tournament.id}">${tournament.name}-
-							${tournament.game}</option>
-					</c:forEach>
-				</select>
-			</div>
+		<c:if test="${userTeam.name != null}">
 			<div>
-				<input type="hidden" value="${userTeam.id}" name="teamId">
-				<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+				<c:if test="${teamTournaments.size() == 0}">
+					<h2>No tournaments! Join a tournament</h2>
+				</c:if>
 			</div>
 
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Join
-					Tournament</button>
+				<c:url var="joinTournamentURL" value="/tournaments/join" />
+				<form method="POST" action="${joinTournamentURL}"
+					id="joinTournament">
+					<div class="form-group">
+						<label for="tournamentSelect">Tournament Name: </label> <select
+							id="tournamentSelect" class="form-control" name="tournamentId">
+							<c:forEach var="tournament" items="${allTournaments}">
+								<option value="${tournament.id}">${tournament.name}-
+									${tournament.game}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div>
+						<input type="hidden" value="${userTeam.id}" name="teamId">
+						<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Join
+							Tournament</button>
+					</div>
+				</form>
 			</div>
-		</form>
+		</c:if>
 	</div>
 	<%-- Not sure if we need a search form on this page.
 	
@@ -76,7 +83,7 @@
 
 		<div>
 			<c:if test="${userTeam.name == null}">
-				<h2>No team found! Create a team!</h2>
+				<h2>Create a team!</h2>
 				<c:url var="createTeamURL" value="/createTeam" />
 				<a href="${createTeamURL}"><button class="btn btn-primary">Create
 						Team</button></a>
@@ -108,7 +115,7 @@
 
 			<c:choose>
 				<c:when test="${teamTournaments.size() == 0}">
-					<p>there's nothing in team tournaments</p>
+					<p>No tournaments yet</p>
 				</c:when>
 
 				<c:otherwise>
@@ -116,8 +123,9 @@
 						<!-- this will be team tournaments -->
 
 						<tr>
-							<c:url var="tournamentDetailURL"
-								value="/tournament/detail?id=${tournament.id}" />
+							<c:url var="tournamentDetailURL" value="/tournament/detail">
+								<c:param value="${tournament.id}" name="tournamentId" />
+							</c:url>
 							<td><a href="${tournamentDetailURL}"><c:out
 										value="${tournament.name}" /></a></td>
 							<td><c:out value="${tournament.game}" /></td>
