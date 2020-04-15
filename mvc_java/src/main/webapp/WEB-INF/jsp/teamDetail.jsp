@@ -3,19 +3,11 @@
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
 <div>
-	<h1>Team Banner Image here?</h1>
-</div>
-
-<div>
 	<h1>${team.name}</h1>
 	<h2>Leader: ${teamLeader.userName}</h2>
 	<!-- Leader can appoint new leader if more than one member of Team -->
 	<label for="temp">Website: </label>
 	<a href="#" id="temp">${team.name}.com</a>
-</div>
-<div id="teamSearchBar" class="col-md-8">
-	<input class="form-control" type="text" name="searchBar" placeholder="Search for team members or registered tournaments"/>
-	<button type="submit" class="btn btn-primary">Search</button>
 </div>
 <div id="allTeamInfoBlock">
 	<div id="teamInfoTextBlock" class="">

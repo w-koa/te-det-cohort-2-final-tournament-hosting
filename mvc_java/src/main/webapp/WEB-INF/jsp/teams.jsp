@@ -9,7 +9,6 @@
 	<c:url var="teamSearchURL" value="/teams/search" />
 	<form method="GET" action="${teamSearchURL}" class="searchForm"
 		id="teamsSearchForm">
-		<!-- display: flex; align-items: center; -->
 		<label for="searchFilter">Search Teams: </label> <input id="searchBar"
 			class="form-control" type="text" name="search" placeholder="Search">
 		<button class="btn btn-success" type="submit">Search</button>
@@ -27,8 +26,6 @@
 			<th>Ties</th>
 			<th>Team Website</th>
 		</tr>
-		<!-- <c:forEach var="team" items="allTeams"> -->
-
 		<c:forEach var="team" items="${allTeams}">
 			<tr>
 				<c:url var="teamDetail" value="/teams/detail?id=${team.id}" />

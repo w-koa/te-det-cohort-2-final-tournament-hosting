@@ -110,7 +110,10 @@
 					<c:forEach var="tournament" items="${organizerTournaments}">
 
 						<tr>
-							<td><c:out value="${tournament.name}" /></td>
+							<c:url var="tournamentDetailURL" value="/tournament/detail">
+							<c:param value="${tournament.id}" name="tournamentId"/>
+							</c:url>
+							<td><a href="${tournamentDetailURL}"><c:out value="${tournament.name}" /></a></td>
 							<td><c:out value="${tournament.game}" /></td>
 							<td><c:out value="${tournament.type}" /></td>
 							<td><c:out value="${tournament.location}" /></td>
