@@ -18,8 +18,6 @@
 <div>
 	<table class="table table-hover table-striped">
 		<tr>
-			<th></th>
-			<!-- Placeholder for team avatar/logo? -->
 			<th>Name</th>
 			<th>Current Tournament</th>
 			<th>Game</th>
@@ -34,8 +32,6 @@
 		<c:forEach var="team" items="${allTeams}">
 			<tr>
 				<c:url var="teamDetail" value="/teams/detail?id=${team.id}" />
-				<td></td>
-				<!-- Empty for now. Team Logo placeholder -->
 				<td><a href="${teamDetail}"><c:out value="${team.name}" /></a></td>
 				<td>Current?</td>
 				<td>Game</td>
@@ -52,8 +48,6 @@
 <div>
 	<table class="table table-hover table-striped">
 		<tr>
-			<th></th>
-			<!-- Placeholder for team avatar/logo? -->
 			<th>Name</th>
 			<th>Current Tournament</th>
 			<th>Game</th>
@@ -63,13 +57,9 @@
 			<th>Ties</th>
 			<th>Team Website</th>
 		</tr>
-		<!-- <c:forEach var="team" items="allTeams"> -->
-
 		<c:forEach var="team" items="${matchingTeams}">
 			<tr>
 				<c:url var="teamDetail" value="/teams/detail?id=${team.id}" />
-				<td></td>
-				<!-- Empty for now. Team Logo placeholder -->
 				<td><a href="${teamDetail}"><c:out value="${team.name}" /></a></td>
 				<td>Current?</td>
 				<td>Game</td>
