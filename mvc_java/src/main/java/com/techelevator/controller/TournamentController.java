@@ -162,7 +162,7 @@ public class TournamentController {
 	@RequestMapping (path="/matchPairing", method= RequestMethod.GET)
 	public String pairMatchups (HttpSession session, @RequestParam String tournamentId) {
 		//pull a list of all participants
-		List <Team> tourneyParticipants = teamDAO.teamsByTourneyId(tournamentId);
+		List <Team> tourneyParticipants = teamDAO.getParticipatingTeamsByTournamentId(tournamentId);
 		List <Team> eliminatedTeams = teamDAO.eliminatedTeamsByTourneyId(tournamentId);
 		// remove eliminated teams
 		for (Team eliminated : eliminatedTeams) {
