@@ -37,6 +37,14 @@ public class TeamController {
 		return "teams";
 	}
 	
+	@RequestMapping(path = "/teams/search", method = RequestMethod.GET)
+	public String displayMatchingTeams(ModelMap map, @RequestParam String search) {
+		List<Team> matchingTeams = teamDAO.searchTeams(search);
+		map.addAttribute("matchingTeams", matchingTeams);
+		
+		return "teams";
+	}
+	
 	// Displays team detail page
 	@RequestMapping(path="/teams/detail", method = RequestMethod.GET)
 	public String displayTeamDetail(@RequestParam int id, ModelMap map) {
