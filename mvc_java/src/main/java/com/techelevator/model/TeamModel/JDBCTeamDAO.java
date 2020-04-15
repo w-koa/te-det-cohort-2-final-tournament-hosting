@@ -32,7 +32,6 @@ public class JDBCTeamDAO implements TeamDAO {
 		return team;
 	}
 
-
 	// new teamId should be auto generated
 	@Override
 	public void createTeam(Team team) {
@@ -130,12 +129,11 @@ public class JDBCTeamDAO implements TeamDAO {
 			team.setId(results.getInt("team_id"));
 			team.setName(results.getString("team_name"));
 		}
-		
+
 		return team;
-		
+
 	}
-	
-	
+
 	@Override
 	public List<User> getMembersByTeamId(int teamId) {
 		List<User> teamMembers = new ArrayList<>();
@@ -152,6 +150,17 @@ public class JDBCTeamDAO implements TeamDAO {
 		return teamMembers;
 	}
 
+	public List<Team> searchTeams(String search) {
+		List<Team> matchingTeams = new ArrayList<>();
+		String sqlSearchTeams = "SELECT * FROM team " + "WHERE team_name ILIKE ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchTeams, "%" + search + "%");
+
+		while (results.next()) {
+			matchingTeams.add(mapRowToTeam(results));
+		}
+		return matchingTeams;
+	}
+
 	public int getTeamCount() {
 		String sqlGetTeamCount = "select count(team_id) as cnt from team";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetTeamCount);
@@ -161,11 +170,11 @@ public class JDBCTeamDAO implements TeamDAO {
 		}
 		return teamCount;
 	}
-	
+
 	@Override
 	public List<Team> getParticipatingTeamsByTournamentId(String tournamentId) {
 		List<Team> participatingTeams = new ArrayList<>();
-		
+
 		String sqlGetParticipatingTeams = "SELECT * FROM team "
 				+ "JOIN team_tournament ON team.team_id = team_tournament.team_id "
 				+ "JOIN tournament ON tournament.tournament_id = team_tournament.tournament_id "
@@ -175,10 +184,10 @@ public class JDBCTeamDAO implements TeamDAO {
 			participatingTeams.add(mapRowToTeam(results));
 		}
 		return participatingTeams;
-				
+
 	}
-	
-	public List<Team> activeTeamsByTourneyId (String tournamentId) {
+
+	public List<Team> activeTeamsByTourneyId(String tournamentId) {
 
 		List<Team> teamList = new ArrayList<>();
 
@@ -188,12 +197,12 @@ public class JDBCTeamDAO implements TeamDAO {
 		while (results.next()) {
 			teamList.add(mapRowToTeam(results));
 		}
-		
+
 		return teamList;
 	}
-	
-	public List<Team> eliminatedTeamsByTourneyId (String tournamentId) {
-		List <Team> teamList = new ArrayList <> ();
+
+	public List<Team> eliminatedTeamsByTourneyId(String tournamentId) {
+		List<Team> teamList = new ArrayList<>();
 		String sqlGetElimTeams = "SELECT * FROM team JOIN match_up ON team.team_id = match_up.loser_id WHERE match_up.tournament_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetElimTeams, Integer.parseInt(tournamentId));
 
@@ -202,14 +211,13 @@ public class JDBCTeamDAO implements TeamDAO {
 		}
 		return teamList;
 	}
-	
+
 	@Override
 	public String idToName(String teamId) {
 		String sql = "SELECT team_name FROM team WHERE team_id = ?";
-		String name = jdbcTemplate.queryForObject(sql,  String.class, Integer.parseInt(teamId));
+		String name = jdbcTemplate.queryForObject(sql, String.class, Integer.parseInt(teamId));
 		return name;
 	}
-
 
 	@Override
 	public void updateTeam(Team team) {
@@ -222,8 +230,6 @@ public class JDBCTeamDAO implements TeamDAO {
 		String sqlDeleteTeam = "DELETE FROM team WHERE team_id = ?";
 //		jdbcTemplate.update(sqlDeleteFromPlayer, team.getId());
 		jdbcTemplate.update(sqlDeleteTeam, team.getId());
-		
+
 	}
 }
-
-

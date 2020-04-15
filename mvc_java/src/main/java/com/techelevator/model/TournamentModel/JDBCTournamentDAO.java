@@ -127,7 +127,7 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	public List<Tournament> searchTournaments(String search) {
 		List<Tournament> matchingTournaments = new ArrayList<>();
 		String sqlSearchTournaments = "SELECT * FROM tournament "
-				+ "WHERE name ILIKE ? OR game ILIKE ? OR location ILIKE ? "
+				+ "WHERE tournament_name ILIKE ? OR game ILIKE ? OR location ILIKE ? "
 				+ "ORDER BY tournament_id";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchTournaments, "%" + search + "%",
 				"%" + search + "%", "%" + search + "%");
