@@ -170,7 +170,7 @@ public class TournamentController {
 	}
 	
 	@RequestMapping (path="/matchPairing", method= RequestMethod.GET)
-	public String pairMatchups (HttpSession session, @RequestParam String tournamentId) {
+	public String pairMatchups (HttpSession session, @RequestParam (name = "tournamentId") String tournamentId) {
 		//pull a list of all participants
 		List <Team> tourneyParticipants = teamDAO.getParticipatingTeamsByTournamentId(tournamentId);
 		List <Team> eliminatedTeams = teamDAO.eliminatedTeamsByTourneyId(tournamentId);
@@ -204,7 +204,7 @@ public class TournamentController {
 			tourneyParticipants.remove(x);
 			tourneyParticipants.remove(x-1);
 			
-			
+			System.out.println(pairing.toString());
 			matchUpDAO.createMatchup(pairing);
 		
 		}
@@ -212,6 +212,6 @@ public class TournamentController {
 			
 		
 		
-		return "redirect:/tournament/detail";
+		return "redirect:/tournament/detail?tournamentId=" + tournamentId;
 	}
 }
