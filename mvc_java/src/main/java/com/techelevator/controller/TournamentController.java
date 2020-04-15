@@ -47,7 +47,7 @@ public class TournamentController {
 		return "tournaments";
 	}
 	
-	@RequestMapping(path = "tournamentSearch", method = RequestMethod.GET)
+	@RequestMapping(path = "/tournaments/search", method = RequestMethod.GET)
 	public String displayMatchingTournaments(ModelMap map, @RequestParam String search) {
 		List<Tournament> matchingTournaments = tournamentDAO.searchTournaments(search);
 		map.addAttribute("matchingTournaments", matchingTournaments);
