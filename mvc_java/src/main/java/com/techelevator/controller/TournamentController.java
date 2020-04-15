@@ -190,12 +190,12 @@ public class TournamentController {
 			pairing.setTournamentId(tournamentId);
 			pairing.setGameId("1");
 			if (x == 0) {
-				pairing.setTeamId1(tourneyParticipants.get(0).getId());
+				pairing.setTeamId1(tourneyParticipants.get(0).getId() + "");
 				pairing.setTeamId2("0");
 			}
 			
-			pairing.setTeamId1(tourneyParticipants.get(x).getId());
-			pairing.setTeamId2(tourneyParticipants.get(x-1).getId());
+			pairing.setTeamId1(tourneyParticipants.get(x).getId() + "");
+			pairing.setTeamId2(tourneyParticipants.get(x-1).getId() + "");
 			pairing.setLocation("Pod "+ x);
 			pairing.setDate("1066-02-02");
 			pairing.setTime("8:00");

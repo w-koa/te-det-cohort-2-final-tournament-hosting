@@ -14,4 +14,5 @@ public interface MatchUpDAO {
 	public List<MatchUp> getMatchUpsByTournamentId(String tournamentId);
 	public List<MatchUp> getMatchUpsByTeamId(String teamId);
 	public List<Integer> getTeamsForTournament(String tournamentID);
+	boolean updateWinner(MatchUp matchUp, boolean isTeamOneWinning);
 }
