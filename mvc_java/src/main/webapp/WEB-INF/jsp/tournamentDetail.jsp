@@ -2,9 +2,6 @@
 
 <c:import url="/WEB-INF/jsp/header.jsp" />
 
-<div>
-	<h1>Banner Image here?</h1>
-</div>
 
 <div>
 	<h1>${tournament.name }</h1>
@@ -66,6 +63,15 @@
 			<h2>Matchups</h2>
 
 			<div>
+			<div class= "button"> 
+			<c:if test="${currentUser.role == 3}">
+			
+				<c:url var="pairMatchups" value="/matchPairing" >
+				<c:param name="tournamentId" value ="${tournament.id}"/>
+ 				</c:url>
+				<a href="${pairMatchups}"><button class="btn btn-primary">Pair Matchups</button></a>
+			</c:if>
+			</div>
 				<table id="tournamentMatchupTable"
 					class="table table-hover table-striped">
 					<tr>

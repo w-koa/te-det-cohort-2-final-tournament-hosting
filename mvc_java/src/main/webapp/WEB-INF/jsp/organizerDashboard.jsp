@@ -24,11 +24,8 @@
 </div>
 <div class="col-md-8">
 
-	<c:if test="${organizerTournaments.size() == 0}">
 
-	<p>Sample. Should show if no tournaments being hosted by this
-		organizer</p>
-	<h2>No tournaments hosted! Register a new tournament</h2>
+	<h2>Register a new tournament</h2>
 	<c:url var="registerTournamentURL" value="/tournaments/newTournament" />
 	<div class="form-group">
 		<form method="POST" action="${registerTournamentURL}"
@@ -83,7 +80,7 @@
 			</div>
 		</form>
 	</div>
-	</c:if>
+
 	<div class="form-group">
 		<form method="POST" class="searchForm" id="searchForm">
 			<!-- display: flex; align-items: center; -->
@@ -105,7 +102,7 @@
 			</tr>
 
 			<c:choose>
-				<c:when test="${organizerTournaments.size() != 0}">
+				<c:when test="${organizerTournaments.size() == 0}">
 					<p>there's something in organizer tournaments</p>
 				</c:when>
 
