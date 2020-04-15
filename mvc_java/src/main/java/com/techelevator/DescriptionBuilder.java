@@ -16,8 +16,8 @@ public class DescriptionBuilder {
 	 * </div> <div class="tournamentSchedule"> <h2>Schedule</h2> --%>
 	 */
 	public static String formatTaggedDesc(String format, String rules, String prizes) {
-		return "<h4>Format</h4> <p>" +format + "</p></div></div> <div class=\"tournamentRules\"> <h2>Rules</h2>"
-				+ rules + "<div class=\"tournamentPrizes\"> <h2>Prizes</h2><p>" + prizes + "</p></div>";
+		return "<h4>Format</h4> <p>" +format + "</p></div></div> <div class=\"tournamentRules\"> <h2>Rules</h2><p>"
+				+ rules + "</p><div class=\"tournamentPrizes\"> <h2>Prizes</h2><p>" + prizes + "</p></div>";
 		
 	}
 	

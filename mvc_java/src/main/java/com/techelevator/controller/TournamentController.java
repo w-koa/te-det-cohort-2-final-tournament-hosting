@@ -137,7 +137,7 @@ public class TournamentController {
 			return "redirect:/newUser";
 		}
 		Team userTeam = teamDAO.getTeamByCaptainId(Integer.parseInt(currentUser.getUserID()));
-		map.addAttribute("userTeam", userTeam);
+		map.addAttribute("user", userTeam);
 		List<Tournament> allTournaments = tournamentDAO.getAllTournaments();
 		map.addAttribute("allTournaments", allTournaments);
 
@@ -165,15 +165,17 @@ public class TournamentController {
 		List <Team> tourneyParticipants = teamDAO.getParticipatingTeamsByTournamentId(tournamentId);
 		List <Team> eliminatedTeams = teamDAO.eliminatedTeamsByTourneyId(tournamentId);
 		// remove eliminated teams
+		if (tourneyParticipants.size() > 0) {
+		if (eliminatedTeams.size() > 0 ) {
 		for (Team eliminated : eliminatedTeams) {
-			for (int x = tourneyParticipants.size() ; x >= 0 ; x--) {
-				if (eliminated.equals(tourneyParticipants)) {
+			for (int x = tourneyParticipants.size()-1 ; x >= 0 ; x--) {
+				if (eliminated.equals(tourneyParticipants.get(x))) {
 					tourneyParticipants.remove(x);
 			}
 			}
 			}
-		
-		for (int x = tourneyParticipants.size() ; x >= 0 ; x= x-2) {
+			}
+		for (int x = tourneyParticipants.size()-1 ; x >= 0 ; x= x-2) {
 			MatchUp pairing = new MatchUp ();
 			pairing.setTournamentId(tournamentId);
 			pairing.setGameId("1");
@@ -185,7 +187,7 @@ public class TournamentController {
 			pairing.setTeamId1(tourneyParticipants.get(x).getId() + "");
 			pairing.setTeamId2(tourneyParticipants.get(x-1).getId() + "");
 			pairing.setLocation("location");
-			pairing.setDate("11/22/1066");
+			pairing.setDate("1066-02-02");
 			pairing.setTime("8:00");
 			pairing.setWinnerId("0");
 			pairing.setLoserId("0");
@@ -195,7 +197,7 @@ public class TournamentController {
 			
 			matchUpDAO.createMatchup(pairing);
 		
-			
+		}
 		}
 			
 		
