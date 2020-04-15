@@ -32,16 +32,6 @@ public class JDBCTeamDAO implements TeamDAO {
 		return team;
 	}
 
-	// Helper Just in case id is not auto-generated.
-	private int getNextTeamId() {
-		String sqlCurrentIdMax = "SELECT NEXTVAL(team_team_id_seq)";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlCurrentIdMax);
-		if (result.next()) {
-			return result.getInt(1);
-		} else {
-			throw new RuntimeException("Oops, something went wrong getting the next team ID");
-		}
-	}
 
 	// new teamId should be auto generated
 	@Override

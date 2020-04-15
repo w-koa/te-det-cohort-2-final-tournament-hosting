@@ -108,17 +108,6 @@ public class JDBCTournamentDAO implements TournamentDAO {
 		return tournaments;
 	}
 
-	@Override // INCOMPLETE
-	public List<Tournament> topXTournamentsByPlayerCount(String limit) {
-		List<Tournament> tournaments = new ArrayList<>();
-		String sql = "SELECT *  FROM tournament WHERE game = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, limit);
-		while (results.next()) {
-			Tournament tournament = mapTournament(results);
-			tournaments.add(tournament);
-		}
-		return tournaments;
-	}
 	
 	@Override
 	public void joinTournament(String tournamentId, String teamId) {
@@ -138,6 +127,12 @@ public class JDBCTournamentDAO implements TournamentDAO {
 	@Override
 	public boolean update(Tournament tournament) {
 		return false;
+	}
+
+	@Override
+	public List<Tournament> topXTournamentsByPlayerCount(String limit) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
