@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -149,5 +150,47 @@ public class TournamentController {
 	public String displayJoinTournamentSuccess(HttpSession session) {
 		
 		return "joinTournamentSuccess";
+	}
+	
+	@RequestMapping (path="/matchPairing", method= RequestMethod.POST)
+	public String pairMatchups (HttpSession session, @RequestParam String tournamentId) {
+		//pull a list of all participants
+		List <Team> tourneyParticipants = teamDAO.teamsByTourneyId(tournamentId);
+		List <Team> eliminatedTeams = teamDAO.eliminatedTeamsByTourneyId(tournamentId);
+		// remove eliminated teams
+		for (Team eliminated : eliminatedTeams) {
+			for (int x = tourneyParticipants.size() ; x >= 0 ; x--) {
+				if (eliminated.equals(tourneyParticipants)) {
+					tourneyParticipants.remove(x);
+			}
+			}
+			}
+		
+		for (int x = tourneyParticipants.size() ; x >= 0 ; x= x-2) {
+			MatchUp pairing = new MatchUp ();
+			pairing.setTournamentId(tournamentId);
+			pairing.setGameId("1");
+			if (x == 0) {
+				pairing.setTeamId1(tourneyParticipants.get(0).getId() + "");
+				pairing.setTeamId2("0");
+			}
+			
+			pairing.setTeamId1(tourneyParticipants.get(x).getId() + "");
+			pairing.setTeamId2(tourneyParticipants.get(x-1).getId() + "");
+			pairing.setLocation("location");
+			pairing.setDate("11/22/1066");
+			pairing.setTime("8:00");
+			pairing.setWinnerId("0");
+			pairing.setLoserId("0");
+			tourneyParticipants.remove(x);
+			tourneyParticipants.remove(x-1);
+			matchUpDAO.createMatchup(pairing);
+			// x == 2
+			
+		}
+			
+		
+		
+		return "redirect:/tournament/detail";
 	}
 }
