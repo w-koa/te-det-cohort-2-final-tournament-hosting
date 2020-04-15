@@ -176,7 +176,7 @@ public class JDBCTeamDAO implements TeamDAO {
 		List<Team> teamList = new ArrayList<>();
 
 		String sqlGetActiveTeams = "SELECT * FROM team JOIN team_tournament ON team.team_id = team_tournament.team_id WHERE tournament_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetActiveTeams, tournamentId);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetActiveTeams, Integer.parseInt(tournamentId));
 
 		while (results.next()) {
 			teamList.add(mapRowToTeam(results));
@@ -188,7 +188,7 @@ public class JDBCTeamDAO implements TeamDAO {
 	public List<Team> eliminatedTeamsByTourneyId (String tournamentId) {
 		List <Team> teamList = new ArrayList <> ();
 		String sqlGetElimTeams = "SELECT * FROM team JOIN match_up ON team.team_id = match_up.loser_id WHERE match_up.tournament_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetElimTeams, tournamentId);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetElimTeams, Integer.parseInt(tournamentId));
 
 		while (results.next()) {
 			teamList.add(mapRowToTeam(results));
