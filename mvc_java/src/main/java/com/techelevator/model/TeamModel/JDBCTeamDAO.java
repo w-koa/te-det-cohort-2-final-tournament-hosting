@@ -40,6 +40,16 @@ public class JDBCTeamDAO implements TeamDAO {
 		jdbcTemplate.update(sqlCreateTeam, team.getName(), team.getCaptainId());
 
 	}
+	
+	public void dereferenceUserId(int userId) {
+		String sql = "UPDATE team set captain_id = 1 WHERE captain_id = ?";
+		jdbcTemplate.update(sql, userId);
+	}
+	
+	public void nullifyCaptainId(int teamId) {
+		String sql = "UPDATE team set captain_id = null WHERE team_id = ?";
+		jdbcTemplate.update(sql, teamId);
+	}
 
 	@Override
 	public List<Team> getAllTeams() {

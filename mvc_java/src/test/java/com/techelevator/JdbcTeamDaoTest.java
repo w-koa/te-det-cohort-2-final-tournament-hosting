@@ -56,7 +56,7 @@ public class JdbcTeamDaoTest {
 		user.setRole("2");
 		userDao.saveUser(user.getUserName(), user.getPassword(), user.getEmail(), user.getRole());
 		globalUser = userDao.getUserByUserName("eingerith0");
-		Team team = new Team();
+		team = new Team();
 		team.setName("Fake Team");
 		team.setCaptainId(Integer.parseInt(globalUser.getUserID()));
 		teamDAO.createTeam(team);
@@ -67,32 +67,14 @@ public class JdbcTeamDaoTest {
 			}
 		}
 	}
-//		String sqlInsertTeam = "Insert into team (team_id, team_name, captain_id) values (54321, 'Fake Team', 1)";
-//		String sqlInsertPlayer = "insert into player (player_id, team_id, ranking, points_scored) values (54321, 54321, 2, 56)";
-//		String sqlInsertAppUser = "insert into app_user (id, user_name, email, password, role, salt) values (54321, 'eingerith0', "
-//				+ "'plilie0@deliciousdays.com', 'kRcmsvKx', 2, '03eccb23537c30d25ac3fe15a198f9e9cca29182')";
-//		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-////		jdbcTemplate.update(sqlInsertAppUser);
-//		jdbcTemplate.update(sqlInsertTeam);
-//		jdbcTemplate.update(sqlInsertPlayer);
-//		injectedTeam.setId(54321);
-//		injectedTeam.setName("Fake Team");
-//		injectedTeam.setCaptainId(1);
-////		injectedUser.setUserID("54321");
-////		injectedUser.setUserName("eingerith0");
-//		team.setName("new fake team");
-//		team.setCaptainId(2);
+
 
 	@After
 	public void deleteSetup() {
-		String deletePlayer = "delete from player where team_id = 54321 and player_id = 54321";
-		String deleteTeam = "DELETE FROM team WHERE team_id = 54321";
-		String deleteUser = "delete from app_user where id = 54321";
+		teamDAO.nullifyCaptainId(team_one.getCaptainId());
 		teamDAO.deleteTeam(team_one);
+		teamDAO.dereferenceUserId(Integer.parseInt(globalUser.getUserID()));
 		userDao.deleteUserbyUserName("eingerith0");
-		jdbcTemplate.update(deletePlayer);
-		jdbcTemplate.update(deleteTeam);
-		jdbcTemplate.update(deleteUser);
 	}
 
 	@Test
@@ -110,10 +92,49 @@ public class JdbcTeamDaoTest {
 
 	@Test
 	public void testGetAllTeamCaptains() {
-		List<User> list = teamDAO.getAllTeamCaptains();
-		System.out.println("Size: " + list.size());
+		Team nextTeam = new Team();
+		Team nextTeamTwo = new Team();
+		User nextUserTwo = new User();
+		User nextUser = new User();
+		
+		nextUser.setUserName("engine");
+		nextUserTwo.setUserName("engine2");
+		nextUser.setEmail("aol@aol.com");
+		nextUserTwo.setEmail("yahoo@yahoo.com");
+		nextUser.setPassword("passwordyahoo");
+		nextUserTwo.setPassword("passwordaol.com");
+		nextUser.setRole("2");
+		nextUserTwo.setRole("2");
+		
+		userDao.saveUser(nextUser.getUserName(), nextUser.getPassword(), nextUser.getEmail(), nextUser.getRole());
+		userDao.saveUser(nextUserTwo.getUserName(), nextUserTwo.getPassword(), nextUserTwo.getEmail(), nextUserTwo.getRole());
+		User user = userDao.getUserByUserName("engine");
+		User userTwo = userDao.getUserByUserName("engine2");
+		
+		nextTeam.setName("Next Test");
+		nextTeamTwo.setName("Next Test Two");
+		nextTeam.setCaptainId(Integer.parseInt(user.getUserID()));
+		nextTeamTwo.setCaptainId(Integer.parseInt(userTwo.getUserID()));
 
-		assertTrue(list.get(0).equals(globalUser));
+		teamDAO.createTeam(nextTeam);
+		teamDAO.createTeam(nextTeamTwo);
+		
+		User captainOne = null;
+		User captainTwo = null;
+		User captainThree = null;
+		
+		List<User> list = teamDAO.getAllTeamCaptains();
+		for (User use : list) {
+			if (use.getUserName().equals(nextUser.getUserName())) {
+				captainOne = use;
+			} else if (use.getUserName().equals(nextUserTwo.getUserName())) {
+				captainTwo = use;
+			} else if (use.getUserName().equals(globalUser.getUserName())) {
+				captainThree = use;
+			}
+		}
+		
+		assertTrue(captainOne.getUserID().equals(nextUser.getUserName()));
 	}
 
 	@Test
@@ -126,36 +147,40 @@ public class JdbcTeamDaoTest {
 	@Test
 	public void testCreateTeam() {
 		teamDAO.createTeam(team);
-		Team testTeam = teamDAO.getTeamByName("new fake team");
+		Team testTeam = teamDAO.getTeamByName("Fake Team");
 		assertTrue(team.getName().equals(testTeam.getName()));
 
 	}
 
 	@Test
 	public void testGetTeamById() {
-		Team retrievedTeam = teamDAO.getTeamById(54321);
+		Team retrievedTeam = teamDAO.getTeamById(team_one.getId());
 		assertTrue(retrievedTeam.getName().equals("Fake Team"));
-		System.out.println(retrievedTeam);
+		assertTrue(retrievedTeam.getId() == team_one.getId());
 	}
 
 	@Test
 	public void testGetTeamByName() {
 		Team retrievedTeam = teamDAO.getTeamByName("Fake Team");
-		assertEquals(retrievedTeam.getId(), 54321);
+		assertEquals(retrievedTeam.getId(), team_one.getId());
+		assertTrue(retrievedTeam.getName().equals("Fake Team"));
 	}
 
 	@Test
 	public void testMembersByTeamId() {
 		List<User> teamMembers = teamDAO.getMembersByTeamId(team_one.getId());
+		System.out.println("Size: " + teamMembers.size());
+		assertTrue(teamMembers.size() == 1);
 		for (User member : teamMembers) {
+			System.out.println("User: "+ member.getUserName());
 			assertTrue(member.getUserName().equals(globalUser.getUserName()));
 		}
 	}
 
 	@Test
 	public void testDeleteTeam() {
-		teamDAO.deleteTeam(injectedTeam);
-		assertNull(teamDAO.getTeamById(injectedTeam.getId()).getName());
+		teamDAO.deleteTeam(team_one);
+		assertNull(teamDAO.getTeamById(team_one.getId()).getName());
 	}
 
 }
