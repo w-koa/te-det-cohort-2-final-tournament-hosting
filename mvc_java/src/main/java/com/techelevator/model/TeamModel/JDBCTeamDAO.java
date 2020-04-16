@@ -172,11 +172,7 @@ public class JDBCTeamDAO implements TeamDAO {
 	}
 
 	// Player info
-	public void addPlayer(String userId) {
-		String sqlAddPlayer = "INSERT INTO player (player_id) "
-				+ "VALUES (?)";
-		jdbcTemplate.update(sqlAddPlayer, Integer.parseInt(userId));
-	}
+	
 	public void updatePlayerTeam(String playerId, String teamId) {
 		String sqlUpdatePlayerTeam = "UPDATE player SET team_id = ? WHERE playerId = ?";
 		jdbcTemplate.update(sqlUpdatePlayerTeam, Integer.parseInt(teamId), Integer.parseInt(playerId));

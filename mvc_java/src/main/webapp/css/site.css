@@ -82,6 +82,9 @@ p {
 .searchForm label {
 	color: var(--site-white);
 }
+label {
+	color: var(--site-white);
+}
 
 table tr {
 	background-color: var(--site-black);
@@ -115,6 +118,6 @@ ol li {
 #allTournamentInfoBlock {
 	display: flex;
 }
-#tournamentInfoTextBlock {
+#allTournamentInfoBlock div {
 	margin-right: 40px;
 }

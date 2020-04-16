@@ -23,7 +23,6 @@
 			<th>Tournament Ranking</th>
 			<th>Wins</th>
 			<th>Losses</th>
-			<th>Ties</th>
 			<th>Team Website</th>
 		</tr>
 		<c:forEach var="team" items="${allTeams}">
@@ -35,25 +34,10 @@
 				<td>Ranking</td>
 				<td>Wins</td>
 				<td>Losses</td>
-				<td>Ties</td>
 				<td>${team.name}.com</td>
 			</tr>
 		</c:forEach>
 
-	</table>
-</div>
-<div>
-	<table class="table table-hover table-striped">
-		<tr>
-			<th>Name</th>
-			<th>Current Tournament</th>
-			<th>Game</th>
-			<th>Tournament Ranking</th>
-			<th>Wins</th>
-			<th>Losses</th>
-			<th>Ties</th>
-			<th>Team Website</th>
-		</tr>
 		<c:forEach var="team" items="${matchingTeams}">
 			<tr>
 				<c:url var="teamDetail" value="/teams/detail?id=${team.id}" />
@@ -63,7 +47,6 @@
 				<td>Ranking</td>
 				<td>Wins</td>
 				<td>Losses</td>
-				<td>Ties</td>
 				<td>${team.name}.com</td>
 			</tr>
 		</c:forEach>

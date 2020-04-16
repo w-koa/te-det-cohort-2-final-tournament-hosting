@@ -106,6 +106,12 @@ public class TeamController {
 		return "createTeamSuccess";
 	}
 	
+	@RequestMapping(path="/addTeamMember", method = RequestMethod.POST)
+	public String processAddTeamMember() {
+		
+		return "/teamLeaderDashboard";
+	}
+	
 	@RequestMapping(path="/teams/dummyDetail", method = RequestMethod.GET)
 	public String displayTeamDummyPage() {
 		
