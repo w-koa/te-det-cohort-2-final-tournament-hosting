@@ -198,7 +198,7 @@ public class TournamentController {
 			pairing.setTeamId2(tourneyParticipants.get(x-1).getId() + "");
 			pairing.setLocation("Pod "+ x);
 			pairing.setDate("1066-02-02");
-			pairing.setTime("8:00");
+			pairing.setTime("8:00pm");
 			pairing.setWinnerId("0");
 			pairing.setLoserId("0");
 			tourneyParticipants.remove(x);
@@ -214,4 +214,16 @@ public class TournamentController {
 		
 		return "redirect:/tournament/detail?tournamentId=" + tournamentId;
 	}
-}
+	
+	@RequestMapping (path="/declareWinner", method= RequestMethod.GET)
+	public String declareWinner (@RequestParam (name = "tournamentId") String tournamentId,
+				@RequestParam String winner, @RequestParam String matchupId) {
+			//pull a list of all participants
+			MatchUp matchup = matchUpDAO.getMatchByMatchUpId(matchupId);
+			boolean teamOneWon = matchup.getTeamId1().contentEquals(winner);
+			matchUpDAO.updateWinner(matchup, teamOneWon);
+		
+			
+			return "redirect:/tournament/detail?tournamentId=" + tournamentId;
+		}
+	}

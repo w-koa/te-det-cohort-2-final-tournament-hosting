@@ -174,7 +174,7 @@ String sql = "UPDATE match_up SET winner_id = ? , loser_id = ? WHERE match_up_id
 	String loser = isTeamOneWinning ? matchUp.getTeamId2() : matchUp.getTeamId1() ;
 	jdbcTemplate.update(sql, Integer.parseInt(winner), Integer.parseInt(loser), Integer.parseInt(matchUp.getMatchUpId() ));
 		
-		return false;
+		return true;
 	}
 
 	@Override
