@@ -94,7 +94,8 @@ public class TeamController {
 		newTeam.setCaptainId(captainId);
 		
 		teamDAO.createTeam(newTeam);
-		
+		Team createdTeam = teamDAO.getTeamByCaptainId(captainId);
+		teamDAO.addTeamMember(Integer.toString(captainId), Integer.toString(createdTeam.getId()));
 		
 		return "redirect:/createTeam/success";
 	}

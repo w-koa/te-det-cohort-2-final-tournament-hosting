@@ -20,7 +20,6 @@ public interface TeamDAO {
 	public List<User> getMembersByTeamId(int teamId);
 	public String idToName (String teamId);
 	public void updateTeam(Team team);
-	public int getTeamCount();
 	void deleteTeam(Team team);
 
 	
