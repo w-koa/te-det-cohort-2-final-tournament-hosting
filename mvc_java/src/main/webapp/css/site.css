@@ -114,6 +114,9 @@ ul li {
 ol li {
 	color: var(--site-white);
 }
+#searchBar {
+	margin-right: 10px;
+}
 
 #allTournamentInfoBlock {
 	display: flex;

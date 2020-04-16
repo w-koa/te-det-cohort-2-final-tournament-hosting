@@ -107,9 +107,10 @@ public class TeamController {
 	}
 	
 	@RequestMapping(path="/addTeamMember", method = RequestMethod.POST)
-	public String processAddTeamMember() {
-		
-		return "/teamLeaderDashboard";
+	public String processAddTeamMember(HttpSession session, @RequestParam String playerId, @RequestParam String teamId) {
+
+		teamDAO.addTeamMember(playerId, teamId);
+		return "redirect:/teamLeaderDashboard";
 	}
 	
 	@RequestMapping(path="/teams/dummyDetail", method = RequestMethod.GET)
