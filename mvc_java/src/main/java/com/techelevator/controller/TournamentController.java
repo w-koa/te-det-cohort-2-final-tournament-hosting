@@ -154,6 +154,7 @@ public class TournamentController {
 		return "joinTournament";
 	}
 
+	// As team, join tournament
 	@RequestMapping(path = "/tournaments/join", method = RequestMethod.POST)
 	public String processJoinTournament(HttpSession session, @RequestParam String tournamentId,
 			@RequestParam String teamId) {
@@ -167,6 +168,16 @@ public class TournamentController {
 	public String displayJoinTournamentSuccess(HttpSession session) {
 
 		return "joinTournamentSuccess";
+	}
+	
+	// As organizer, add team to tournament
+	@RequestMapping(path = "/tournaments/addTeam", method = RequestMethod.POST)
+	public String processAddTeamToOrganizerTournament(@RequestParam String tournamentId, 
+			@RequestParam String teamId) {
+		
+		tournamentDAO.joinTournament(tournamentId, teamId);
+		
+		return "redirect:/organizerDashboard";
 	}
 	
 	@RequestMapping (path="/matchPairing", method= RequestMethod.GET)

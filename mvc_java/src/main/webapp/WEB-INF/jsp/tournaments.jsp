@@ -21,7 +21,7 @@
 			<th>Type</th> <!-- this would refer to elimination type -->
 			<th>Location</th>
 			<th>Organizer</th>
-			<th>Status</th> <!-- Ongoing, Completed, Open for Registration? Can use to filter tournaments -->
+			<th>Date</th> <!-- Ongoing, Completed, Open for Registration? Can use to filter tournaments -->
 		</tr>
 		<c:forEach var="tournament" items="${tournaments}"> 
 			<tr>
@@ -37,18 +37,7 @@
 				<td><c:out value="${tournament.date}"/></td> 
 			</tr>
 		</c:forEach>
-	</table>
-</div>
-<div>
-	<table class="table table-hover table-striped">
-		<tr>
-			<th>Name</th>
-			<th>Game</th>
-			<th>Type</th> <!-- this would refer to elimination type -->
-			<th>Location</th>
-			<th>Organizer</th>
-			<th>Status</th> <!-- Ongoing, Completed, Open for Registration? Can use to filter tournaments -->
-		</tr>
+	
 		<c:forEach var="tournament" items="${matchingTournaments}"> 
 			<tr>
 				<c:url var="tournamentDetail" value="/tournament/detail">

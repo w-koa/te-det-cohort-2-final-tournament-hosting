@@ -2,7 +2,6 @@ package com.techelevator;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.techelevator.model.TeamModel.JDBCTeamDAO;
@@ -17,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class JdbcTeamDaoTest {
 
@@ -25,22 +23,21 @@ public class JdbcTeamDaoTest {
 
 	private static JDBCTeamDAO teamDAO;
 	private static JDBCUserDAO userDao;
+	@SuppressWarnings("unused")
 	private static JdbcTemplate jdbcTemplate;
 
 	private Team team_one = null;
 	private Team team = new Team();
-	private Team injectedTeam = new Team();
-	private User injectedUser = new User();
 	private User globalUser = null;
 
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-//		dataSource.setUsername("capstone_appuser");
-//		dataSource.setPassword("capstone_appuser1");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("postgres1");
+		dataSource.setUsername("capstone_appuser");
+		dataSource.setPassword("capstone_appuser1");
+//		dataSource.setUsername("postgres");
+//		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		teamDAO = new JDBCTeamDAO(dataSource);
@@ -133,8 +130,14 @@ public class JdbcTeamDaoTest {
 				captainThree = use;
 			}
 		}
+		assertTrue(captainOne.getUserName().equals(user.getUserName()));
+		assertTrue(captainOne.getUserID().equals(user.getUserID()));
 		
-		assertTrue(captainOne.getUserID().equals(nextUser.getUserName()));
+		assertTrue(captainTwo.getUserName().equals(userTwo.getUserName()));
+		assertTrue(captainTwo.getUserID().equals(userTwo.getUserID()));
+		
+		assertTrue(captainThree.getUserName().equals(globalUser.getUserName()));
+		assertTrue(captainThree.getUserID().equals(globalUser.getUserID()));
 	}
 
 	@Test
@@ -166,16 +169,6 @@ public class JdbcTeamDaoTest {
 		assertTrue(retrievedTeam.getName().equals("Fake Team"));
 	}
 
-	@Test
-	public void testMembersByTeamId() {
-		List<User> teamMembers = teamDAO.getMembersByTeamId(team_one.getId());
-		System.out.println("Size: " + teamMembers.size());
-		assertTrue(teamMembers.size() == 1);
-		for (User member : teamMembers) {
-			System.out.println("User: "+ member.getUserName());
-			assertTrue(member.getUserName().equals(globalUser.getUserName()));
-		}
-	}
 
 	@Test
 	public void testDeleteTeam() {

@@ -110,7 +110,10 @@
 					<c:forEach var="tournament" items="${organizerTournaments}">
 
 						<tr>
-							<td><c:out value="${tournament.name}" /></td>
+							<c:url var="tournamentDetailURL" value="/tournament/detail">
+							<c:param value="${tournament.id}" name="tournamentId"/>
+							</c:url>
+							<td><a href="${tournamentDetailURL}"><c:out value="${tournament.name}" /></a></td>
 							<td><c:out value="${tournament.game}" /></td>
 							<td><c:out value="${tournament.type}" /></td>
 							<td><c:out value="${tournament.location}" /></td>
@@ -131,8 +134,8 @@
 		<h2>Invite Teams to your tournaments!</h2>
 	</div>
 	<div class="form-group">
-		<c:url var="inviteTeamURL" value="/inviteTeam"/>
-		<form method="POST" action="${inviteTeamURL}" id="inviteTeamForm">
+		<c:url var="addTeamURL" value="/tournaments/addTeam"/>
+		<form method="POST" action="${addTeamURL}" id="inviteTeamForm">
 			<div>
 				<label for="tournamentName">Tournament: </label>
 				<select id="tournamentSelect" name="tournamentId" class="form-control">
@@ -143,8 +146,17 @@
 			</div>
 			<div>
 				<label for="teamName">Team: </label> 
-				<input type="text"
-					placeholder="Team name" id="teamName" class="form-control">
+				<select id="teamSelect" name="teamId" class="form-control">
+					<c:forEach var="team" items="${allTeams}">
+						<option value="${team.id}">${team.name}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div>
+				<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary">Add Team!</button>
 			</div>
 		</form>
 	</div>

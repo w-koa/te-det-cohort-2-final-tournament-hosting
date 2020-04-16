@@ -10,6 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.techelevator.model.TeamModel.JDBCTeamDAO;
+import com.techelevator.model.TeamModel.Team;
 import com.techelevator.model.TournamentModel.JDBCTournamentDAO;
 import com.techelevator.model.TournamentModel.Tournament;
 import com.techelevator.model.UserModel.User;
@@ -19,6 +21,8 @@ public class OrganizerController {
 	
 	@Autowired
 	private JDBCTournamentDAO tournamentDAO;
+	@Autowired
+	private JDBCTeamDAO teamDAO;
 
 	@RequestMapping(path="/organizerDashboard", method = RequestMethod.GET)
 	public String displayOrganizerDashboard(ModelMap map, ModelMap modelHolder, HttpSession session) {
@@ -44,6 +48,9 @@ public class OrganizerController {
 		
 		List<Tournament> organizerTournaments = tournamentDAO.getTournamentByOrganizer(currentUser.getUserID());
 		map.addAttribute("organizerTournaments", organizerTournaments);
+		
+		List<Team> allTeams = teamDAO.getAllTeams();
+		map.addAttribute("allTeams", allTeams);
 		return "organizerDashboard";
 	}
 }

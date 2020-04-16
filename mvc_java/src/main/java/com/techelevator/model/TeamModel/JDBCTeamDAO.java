@@ -171,14 +171,21 @@ public class JDBCTeamDAO implements TeamDAO {
 		return matchingTeams;
 	}
 
-	public int getTeamCount() {
-		String sqlGetTeamCount = "select count(team_id) as cnt from team";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetTeamCount);
-		int teamCount = 0;
-		if (results.next()) {
-			teamCount = results.getInt("cnt");
-		}
-		return teamCount;
+	// Player info
+	
+	public void updatePlayerTeam(String playerId, String teamId) {
+		String sqlUpdatePlayerTeam = "UPDATE player SET team_id = ? WHERE playerId = ?";
+		jdbcTemplate.update(sqlUpdatePlayerTeam, Integer.parseInt(teamId), Integer.parseInt(playerId));
+	}
+	
+	public void addTeamMember(String playerId, String teamId) {
+		String sqlAddTeamMember = "INSERT INTO player (player_id, team_id) VALUES (?, ?) ";
+		jdbcTemplate.update(sqlAddTeamMember, Integer.parseInt(playerId), Integer.parseInt(teamId));
+	}
+	
+	public void removeTeamMember(String playerId, String teamId) {
+		String sqlRemoveTeamMember = "DELETE FROM player WHERE player_id = ? AND teamid = ? ";
+		jdbcTemplate.update(sqlRemoveTeamMember, Integer.parseInt(playerId), Integer.parseInt(teamId));
 	}
 
 	@Override

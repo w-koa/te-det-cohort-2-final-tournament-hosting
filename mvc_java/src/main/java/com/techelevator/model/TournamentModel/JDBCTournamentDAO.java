@@ -146,23 +146,17 @@ public class JDBCTournamentDAO implements TournamentDAO {
 				+ "VALUES (?, ?)";
 		jdbcTemplate.update(sqlJoinTournament, Integer.parseInt(tournamentId), Integer.parseInt(teamId));
 	}
+	
+	public void removeTeamFromTournament(String tournamentId, String teamId) {
+		String sqlRemoveTeamFromTournament = "DELETE FROM team_tournament WHERE tournament_id= ? AND team_id = ?";
+		jdbcTemplate.update(sqlRemoveTeamFromTournament, Integer.parseInt(tournamentId), Integer.parseInt(teamId));
+	}
 
 	@Override
 	public boolean delete(String id) {
 		String sql = "DELETE FROM tournament WHERE tournament_id = ?";
 		jdbcTemplate.update(sql, Integer.parseInt(id));
 		return true;
-	}
-
-	@Override
-	public boolean update(Tournament tournament) {
-		return false;
-	}
-
-	@Override
-	public List<Tournament> topXTournamentsByPlayerCount(String limit) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

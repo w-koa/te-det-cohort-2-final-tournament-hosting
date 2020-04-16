@@ -36,10 +36,10 @@ public class JdbcMatchUpDaoTest {
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/capstone");
-//		dataSource.setUsername("capstone_appuser");
-//		dataSource.setPassword("capstone_appuser1");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("postgres1");
+		dataSource.setUsername("capstone_appuser");
+		dataSource.setPassword("capstone_appuser1");
+//		dataSource.setUsername("postgres");
+//		dataSource.setPassword("postgres1");
 		dataSource.setAutoCommit(false);
 		teamDao = new JDBCTeamDAO(dataSource);
 		matchUpDao = new JDBCMatchUpDAO(dataSource);
