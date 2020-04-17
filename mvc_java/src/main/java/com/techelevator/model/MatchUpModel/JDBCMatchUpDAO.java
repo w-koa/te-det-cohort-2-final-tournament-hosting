@@ -39,12 +39,14 @@ public class JDBCMatchUpDAO implements MatchUpDAO {
 		match.setWinnerId(row.getString("winner_id"));
 		match.setLoserId(row.getString("loser_id"));
 		Team teamOne = teamDao.getTeamById(row.getInt("team_id_1"));
+		Team teamTwo = new Team ();
 		match.setTeam1Name(teamOne.getName());
 		if (match.getTeamId2().equals("0")) {
 			match.setTeam2Name("BYE");
 		} else {
-		Team teamTwo = teamDao.getTeamById(row.getInt("team_id_2"));
-		match.setTeam2Name(teamTwo.getName());
+		teamTwo = teamDao.getTeamById(row.getInt("team_id_2"));
+		match.setTeam2Name(teamTwo.getName());}
+		if (!match.getWinnerId().equals("0")) {
 		Team winner = match.getWinnerId().equals(String.valueOf(teamOne.getId())) ? teamOne : teamTwo;
 		match.setWinnerName(winner.getName());
 		}

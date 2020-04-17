@@ -212,6 +212,7 @@ public class TournamentController {
 			pairing.setTime("8:00pm");
 			pairing.setWinnerId("0");
 			pairing.setLoserId("0");
+			pairing.setWinnerName("---");
 			tourneyParticipants.remove(x);
 			tourneyParticipants.remove(x-1);
 			

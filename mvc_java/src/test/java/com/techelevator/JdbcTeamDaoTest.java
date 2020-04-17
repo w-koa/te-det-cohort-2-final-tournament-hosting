@@ -81,14 +81,7 @@ public class JdbcTeamDaoTest {
 		assertTrue(team_one.getId() == check.getId());
 	}
 
-<<<<<<< HEAD
-//	@Test
-//	public void testGetAllTeams() {
-//		List<Team> teamList = teamDAO.getAllTeams();
-//		assertEquals(teamList.size(), teamDAO.getTeamCount());
-//	}
-=======
->>>>>>> c4f0ec0b2da3a591258b07e81d76bfae5488b4e8
+
 
 	@Test
 	public void testGetAllTeamCaptains() {

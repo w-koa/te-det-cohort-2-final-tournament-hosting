@@ -14,7 +14,7 @@ public class MatchUp {
 	private String loserId;
 	private String team1Name;
 	private String team2Name;
-	private String winnerName;
+	private String winnerName = "---";
 	
 	
 	

@@ -78,9 +78,9 @@
 								<td><c:out value="${matchup.location}" /></td>
 								<td><c:out value="${matchup.date}" /> @<c:out
 										value="${matchup.time}" /></td>
-								<td><c:if test="${matchup.winnerId} != 0">
+								<td>
 										<c:out value="${matchup.winnerName}" />
-									</c:if></td>
+									</td>
 								<td><c:if test="${currentUser.role == 3}">
 
 										<c:url var="oneWins" value="/declareWinner">
