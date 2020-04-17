@@ -26,7 +26,7 @@
 		<p>Are you a team leader? Organize your team and compete in tournaments!</p>
 		<p>Get started by signing up as a Team Captain!</p>
 		<c:url var="registerURL" value="/users/new"/>
-		<a href="${registerURL}"><button class="btn btn-primary">Sign Up!</button></a>
+		<a href="${registerURL}"><button class="btn btn-success">Sign Up!</button></a>
 	
 	</div>
 	<div>
@@ -35,7 +35,7 @@
 		</div>
 		<p>Organize and host your tournaments at Tourney Time!</p>
 		<p>Get started by signing up as an Organizer!</p>
-		<a href="${registerURL}"><button class="btn btn-primary">Sign Up!</button></a>
+		<a href="${registerURL}"><button class="btn btn-success">Sign Up!</button></a>
 	</div>
 </div>
 

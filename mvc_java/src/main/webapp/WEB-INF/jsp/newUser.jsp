@@ -76,7 +76,7 @@
 				<option	value="1">Fan</option>                                 
 			</form:select>
 			</div>
-			<button type="submit" class="btn btn-primary">Create User</button>
+			<button type="submit" class="btn btn-success">Create User</button>
 		</div>
 		
 		<div class="col-sm-4"></div>

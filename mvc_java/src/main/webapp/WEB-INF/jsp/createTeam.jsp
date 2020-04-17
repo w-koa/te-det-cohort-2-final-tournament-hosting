@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Create Team!</button>
+				<button type="submit" class="btn btn-success">Create Team!</button>
 			</div>
 		</form>
 	</div>

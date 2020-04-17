@@ -54,8 +54,8 @@
 					<td><a href="${tournamentURL}"><c:out value="${tournament.name}"/></a></td>
 					<td><c:out value="${tournament.game}"/></td> <%--Get actual game names --%>
 					<td><c:out value="${tournament.type}"/></td>
-					<td>Add location</td>
-					<td>Add Date</td>
+					<td>${tournament.location}</td>
+					<td>${tournament.date}</td>
 					<c:url var="organizerPageURL" value="/organizers/?id=${tournament.organizerId}"/>
 					<td><c:out value="${tournament.organizerId }"/></td>
 					

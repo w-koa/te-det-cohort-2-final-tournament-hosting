@@ -11,7 +11,7 @@
 		<c:when test="${currentUser.role != 2}">
 			<h2>You must be an team captain to manage the team!</h2>
 			<c:url var="newUserHref" value="/users/new" />
-			<a href="${newUserHref}"><button class="btn btn-primary">Register</button></a>
+			<a href="${newUserHref}"><button class="btn btn-success">Register</button></a>
 		</c:when>
 	</c:choose>
 </div>
@@ -60,7 +60,7 @@
 					</div>
 
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary">Join
+						<button type="submit" class="btn btn-success">Join
 							Tournament</button>
 					</div>
 				</form>
@@ -85,12 +85,17 @@
 			<c:if test="${userTeam.name == null}">
 				<h2>Create a team!</h2>
 				<c:url var="createTeamURL" value="/createTeam" />
-				<a href="${createTeamURL}"><button class="btn btn-primary">Create
+				<a href="${createTeamURL}"><button class="btn btn-success">Create
 						Team</button></a>
 
 			</c:if>
 		</div>
-		<h2>Manage ${userTeam.name}'s Team Members</h2>
+		<c:if test="${userTeam.name != null}">
+		<h2>${userTeam.name}'s Team Members</h2>
+		</c:if>
+		<c:if test="${userTeam.name == null}">
+		<p> <p>
+		</c:if>
 		<table class="table table-hover table-striped">
 			<tr>
 				<th>Name</th>
@@ -103,7 +108,7 @@
 		</table>
 	</div>
 	<div>
-		<h2>Manage Tournaments</h2>
+		<h2>Registered Tournaments</h2>
 		<table class="table table-hover table-striped">
 			<tr>
 				<th>Name</th>
@@ -139,7 +144,7 @@
 		</table>
 		<c:if test="${teamTournaments.size() == 0}">
 			<h2 class="text-center">No tournaments found.</h2>
-			<a href="#">Join a Tournament</a>
+			<p class="text-center"><a href="#">Join a Tournament</a></p>
 		</c:if>
 	</div>
 </div>
