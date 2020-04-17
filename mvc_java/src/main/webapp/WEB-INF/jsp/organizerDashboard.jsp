@@ -75,7 +75,7 @@
 					class="form-control" id="prizes">Describe your tournament prizes</textarea>
 			</div> 
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Register
+				<button type="submit" class="btn btn-success">Register
 					Tournament</button>
 			</div>
 		</form>
@@ -156,7 +156,7 @@
 				<input type="hidden" name="CSRF_TOKEN" value="${CSRF_TOKEN}" />
 			</div>
 			<div>
-				<button type="submit" class="btn btn-primary">Add Team!</button>
+				<button type="submit" class="btn btn-success">Add Team!</button>
 			</div>
 		</form>
 	</div>

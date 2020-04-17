@@ -40,7 +40,7 @@
 				<label for="password">Password: </label>
 				<input type="password" id="password" name="password" placeHolder="Password" class="form-control" />
 			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
+			<button type="submit" class="btn btn-success">Login</button>
 		</form>
 	</div>
 	<div class="col-sm-4"></div>

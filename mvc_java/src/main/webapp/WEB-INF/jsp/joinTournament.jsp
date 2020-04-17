@@ -24,7 +24,7 @@
 			</div>
 
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Join
+				<button type="submit" class="btn btn-success">Join
 					Tournament</button>
 			</div>
 		</form>
